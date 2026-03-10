@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản Trị – Tâm Linh Việt CMS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<div class="admin-layout">
+
+  <!-- ========== SIDEBAR ========== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-logo">⛩️</div>
+      <div class="sidebar-brand-text">
+        <h2>Tâm Linh Việt</h2>
+        <span>Admin CMS v1.0</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Tổng Quan</div>
+      <div class="nav-item active" onclick="showPage('dashboard')">
+        <span class="nav-icon">📊</span> Bảng Điều Khiển
+      </div>
+
+      <div class="nav-section-label">Nội Dung</div>
+      <div class="nav-item" onclick="showPage('locations')">
+        <span class="nav-icon">📍</span> Địa Điểm
+        <span class="nav-badge" id="badge-loc">0</span>
+      </div>
+      <div class="nav-item" onclick="showPage('festivals')">
+        <span class="nav-icon">🎋</span> Lễ Hội
+        <span class="nav-badge" id="badge-fest">0</span>
+      </div>
+      <div class="nav-item" onclick="showPage('rituals')">
+        <span class="nav-icon">📖</span> Nghi Lễ & Văn Khấn
+      </div>
+
+      <div class="nav-section-label">Hệ Thống</div>
+      <div class="nav-item" onclick="showPage('users')">
+        <span class="nav-icon">👥</span> Tài Khoản
+      </div>
+      <div class="nav-item" onclick="showPage('export')">
+        <span class="nav-icon">💾</span> Xuất / Nhập Dữ Liệu
+      </div>
+      <div class="nav-item" onclick="window.open('../index.html','_blank')">
+        <span class="nav-icon">🌐</span> Xem Website
+      </div>
+      <div class="nav-item" onclick="showPage('guide')">
+        <span class="nav-icon">📚</span> Hướng Dẫn Sử Dụng
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-info">
+        <div class="user-avatar" id="userAvatar">A</div>
+        <div>
+          <div class="user-name" id="userName">Admin</div>
+          <div class="user-role" id="userRole">Super Admin</div>
+        </div>
+      </div>
+      <button class="btn-logout" onclick="logout()">🚪 Đăng Xuất</button>
+    </div>
+  </aside>
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <div class="main-content">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <button class="topbar-btn btn-ghost" onclick="toggleSidebar()" style="display:none" id="menuBtn">☰</button>
+      <div class="topbar-title" id="topbarTitle">📊 Bảng Điều Khiển</div>
+      <div class="topbar-actions" id="topbarActions"></div>
+    </div>
+
+    <div class="page-content">
+
+      <!-- ===== DASHBOARD ===== -->
+      <div class="admin-page active" id="page-dashboard">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon red">📍</div>
+            <div>
+              <div class="stat-num" id="stat-loc">0</div>
+              <div class="stat-label">Địa Điểm</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon gold">🎋</div>
+            <div>
+              <div class="stat-num" id="stat-fest">0</div>
+              <div class="stat-label">Lễ Hội</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon green">🏮</div>
+            <div>
+              <div class="stat-num" id="stat-den">0</div>
+              <div class="stat-label">Đền / Miếu</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon blue">🪷</div>
+            <div>
+              <div class="stat-num" id="stat-chua">0</div>
+              <div class="stat-label">Chùa / Tịnh Xá</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="widget-grid">
+          <div class="widget">
+            <div class="widget-header">
+              <span class="widget-title">📋 Hoạt Động Gần Đây</span>
+            </div>
+            <div class="activity-list" id="activityList">
+              <div class="activity-item">
+                <div class="activity-dot" style="background:#27AE60"></div>
+                <div>
+                  <div class="activity-text">Hệ thống khởi động thành công</div>
+                  <div class="activity-time">Vừa xong</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="widget">
+            <div class="widget-header">
+              <span class="widget-title">⚡ Thao Tác Nhanh</span>
+            </div>
+            <div class="quick-links">
+              <div class="quick-link" onclick="showPage('locations'); openAddLocation()">
+                <span class="quick-link-icon">➕</span> Thêm địa điểm mới
+              </div>
+              <div class="quick-link" onclick="showPage('festivals'); openAddFestival()">
+                <span class="quick-link-icon">➕</span> Thêm lễ hội mới
+              </div>
+              <div class="quick-link" onclick="showPage('export')">
+                <span class="quick-link-icon">💾</span> Xuất dữ liệu JSON
+              </div>
+              <div class="quick-link" onclick="window.open('../index.html','_blank')">
+                <span class="quick-link-icon">🌐</span> Xem trang chủ
+              </div>
+              <div class="quick-link" onclick="showPage('guide')">
+                <span class="quick-link-icon">📚</span> Hướng dẫn sử dụng
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== LOCATIONS ===== -->
+      <div class="admin-page" id="page-locations">
+        <div class="table-card">
+          <div class="table-header">
+            <span class="table-title">📍 Danh Sách Địa Điểm</span>
+            <div class="table-controls">
+              <div class="search-wrap">
+                <input class="search-admin" type="text" id="searchLoc" placeholder="Tìm địa điểm..." oninput="renderLocations()">
+              </div>
+              <select class="filter-select" id="filterLocType" onchange="renderLocations()">
+                <option value="all">Tất cả loại</option>
+                <option value="den">Đền / Miếu</option>
+                <option value="chua">Chùa</option>
+                <option value="dinh">Đình</option>
+              </select>
+              <select class="filter-select" id="filterLocProv" onchange="renderLocations()">
+                <option value="all">Tất cả tỉnh</option>
+                <option value="hanoi">Hà Nội</option>
+                <option value="phutho">Phú Thọ</option>
+                <option value="bacninh">Bắc Ninh</option>
+                <option value="quangninh">Quảng Ninh</option>
+                <option value="haiphong">Hải Phòng</option>
+                <option value="hungyen">Hưng Yên</option>
+                <option value="langson">Lạng Sơn</option>
+                <option value="yenbai">Yên Bái</option>
+                <option value="namdinh">Nam Định</option>
+                <option value="ninhbinh">Ninh Bình</option>
+                <option value="thaibinh">Thái Bình</option>
+                <option value="thanhhoa">Thanh Hóa</option>
+                <option value="hanam">Hà Nam</option>
+              </select>
+              <button class="topbar-btn btn-primary" onclick="openAddLocation()">➕ Thêm Mới</button>
+            </div>
+          </div>
+          <div style="overflow-x:auto">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Ảnh</th>
+                  <th>Tên Địa Điểm</th>
+                  <th>Loại</th>
+                  <th>Tỉnh</th>
+                  <th>Địa Chỉ</th>
+                  <th>Giờ Mở Cửa</th>
+                  <th>Thao Tác</th>
+                </tr>
+              </thead>
+              <tbody id="locTableBody"></tbody>
+            </table>
+          </div>
+          <div class="table-footer">
+            <span id="locCount">0 địa điểm</span>
+            <span style="color:var(--text-muted);font-size:0.72rem;">Dữ liệu lưu trong trình duyệt</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== FESTIVALS ===== -->
+      <div class="admin-page" id="page-festivals">
+        <div class="table-card">
+          <div class="table-header">
+            <span class="table-title">🎋 Danh Sách Lễ Hội</span>
+            <div class="table-controls">
+              <div class="search-wrap">
+                <input class="search-admin" type="text" id="searchFest" placeholder="Tìm lễ hội..." oninput="renderFestivals()">
+              </div>
+              <select class="filter-select" id="filterFestProv" onchange="renderFestivals()">
+                <option value="all">Tất cả tỉnh</option>
+                <option value="hanoi">Hà Nội</option>
+                <option value="phutho">Phú Thọ</option>
+                <option value="bacninh">Bắc Ninh</option>
+                <option value="quangninh">Quảng Ninh</option>
+                <option value="haiphong">Hải Phòng</option>
+                <option value="hungyen">Hưng Yên</option>
+                <option value="langson">Lạng Sơn</option>
+                <option value="yenbai">Yên Bái</option>
+                <option value="namdinh">Nam Định</option>
+                <option value="ninhbinh">Ninh Bình</option>
+                <option value="thaibinh">Thái Bình</option>
+                <option value="thanhhoa">Thanh Hóa</option>
+                <option value="hanam">Hà Nam</option>
+              </select>
+              <button class="topbar-btn btn-primary" onclick="openAddFestival()">➕ Thêm Mới</button>
+            </div>
+          </div>
+          <div style="overflow-x:auto">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Ảnh</th>
+                  <th>Tên Lễ Hội</th>
+                  <th>Địa Điểm</th>
+                  <th>Thời Gian Âm Lịch</th>
+                  <th>Tỉnh</th>
+                  <th>Loại</th>
+                  <th>Nổi Bật</th>
+                  <th>Thao Tác</th>
+                </tr>
+              </thead>
+              <tbody id="festTableBody"></tbody>
+            </table>
+          </div>
+          <div class="table-footer">
+            <span id="festCount">0 lễ hội</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== RITUALS ===== -->
+      <div class="admin-page" id="page-rituals">
+        <div class="table-card">
+          <div class="table-header">
+            <span class="table-title">📖 Nghi Lễ & Văn Khấn</span>
+            <div class="table-controls">
+              <button class="topbar-btn btn-secondary" onclick="window.open('../huong-dan.html','_blank')">🌐 Xem Trang</button>
+            </div>
+          </div>
+          <div style="padding:1.5rem">
+            <div style="background:var(--bg-hover);border-radius:var(--radius);padding:1rem 1.2rem;margin-bottom:1rem;border:1px solid var(--border);">
+              <div style="font-size:0.82rem;color:var(--text-dim);margin-bottom:0.3rem;">ℹ️ Hướng Dẫn</div>
+              <div style="font-size:0.88rem;">Để chỉnh sửa nội dung nghi lễ và văn khấn, mở file <code style="background:rgba(255,255,255,0.08);padding:0.1rem 0.4rem;border-radius:4px;font-size:0.82rem;">huong-dan.html</code> bằng trình soạn thảo văn bản (VS Code, Notepad++) và chỉnh sửa trực tiếp nội dung HTML.</div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0.8rem;">
+              <div style="background:var(--bg-hover);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;cursor:pointer" onclick="window.open('../huong-dan.html#tet-nguyen-dan','_blank')">
+                <div style="font-size:1.5rem;margin-bottom:0.5rem">🧧</div>
+                <div style="font-size:0.88rem;font-weight:600;">Lễ Tết Nguyên Đán</div>
+                <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.2rem">Cúng ông Táo, Giao Thừa...</div>
+              </div>
+              <div style="background:var(--bg-hover);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;cursor:pointer" onclick="window.open('../huong-dan.html#vao-den','_blank')">
+                <div style="font-size:1.5rem;margin-bottom:0.5rem">🏮</div>
+                <div style="font-size:0.88rem;font-weight:600;">Vào Đền Thờ</div>
+                <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.2rem">Nghi lễ, lễ vật, văn khấn</div>
+              </div>
+              <div style="background:var(--bg-hover);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;cursor:pointer" onclick="window.open('../huong-dan.html#vao-chua','_blank')">
+                <div style="font-size:1.5rem;margin-bottom:0.5rem">🪷</div>
+                <div style="font-size:0.88rem;font-weight:600;">Vào Chùa Lễ Phật</div>
+                <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.2rem">Niệm Phật, cúng dường</div>
+              </div>
+              <div style="background:var(--bg-hover);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;cursor:pointer" onclick="window.open('../huong-dan.html#gio-chap','_blank')">
+                <div style="font-size:1.5rem;margin-bottom:0.5rem">🕯️</div>
+                <div style="font-size:0.88rem;font-weight:600;">Giỗ Chạp – Gia Tiên</div>
+                <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.2rem">Mâm cúng, văn khấn giỗ</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== USERS ===== -->
+      <div class="admin-page" id="page-users">
+        <div class="table-card">
+          <div class="table-header">
+            <span class="table-title">👥 Quản Lý Tài Khoản</span>
+          </div>
+          <div style="overflow-x:auto">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Tên Tài Khoản</th>
+                  <th>Họ Tên</th>
+                  <th>Mật Khẩu</th>
+                  <th>Vai Trò</th>
+                  <th>Quyền Hạn</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td><strong>admin</strong></td>
+                  <td>Super Admin</td>
+                  <td><code style="background:rgba(255,255,255,0.06);padding:0.15rem 0.5rem;border-radius:4px;font-size:0.78rem;">TamLinhViet@2026</code></td>
+                  <td><span class="type-badge badge-super">⭐ Super Admin</span></td>
+                  <td style="font-size:0.78rem;color:var(--text-dim)">Toàn quyền hệ thống</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td><strong>quantri</strong></td>
+                  <td>Quản Trị Viên</td>
+                  <td><code style="background:rgba(255,255,255,0.06);padding:0.15rem 0.5rem;border-radius:4px;font-size:0.78rem;">QuanTri@2026</code></td>
+                  <td><span class="type-badge badge-admin">🔴 Admin</span></td>
+                  <td style="font-size:0.78rem;color:var(--text-dim)">Thêm, sửa, xoá nội dung</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td><strong>thanhvien</strong></td>
+                  <td>Thành Viên</td>
+                  <td><code style="background:rgba(255,255,255,0.06);padding:0.15rem 0.5rem;border-radius:4px;font-size:0.78rem;">ThanhVien@2026</code></td>
+                  <td><span class="type-badge badge-editor">🔵 Editor</span></td>
+                  <td style="font-size:0.78rem;color:var(--text-dim)">Chỉ xem và sửa nội dung</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="padding:1rem 1.2rem;border-top:1px solid var(--border);font-size:0.78rem;color:var(--text-muted)">
+            ⚠️ Để bảo mật, hãy đổi mật khẩu mặc định trước khi đưa lên môi trường thực tế. Xem Hướng Dẫn để biết thêm chi tiết.
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== EXPORT / IMPORT ===== -->
+      <div class="admin-page" id="page-export">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+
+          <div class="table-card">
+            <div class="widget-header"><span class="widget-title">💾 Xuất Dữ Liệu</span></div>
+            <div style="padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;">
+              <p style="font-size:0.85rem;color:var(--text-dim);">Xuất toàn bộ dữ liệu địa điểm và lễ hội ra file JSON để sao lưu hoặc chia sẻ.</p>
+              <button class="topbar-btn btn-success" onclick="exportData('json')" style="width:100%;justify-content:center;padding:0.75rem;">
+                📥 Xuất file JSON (Địa Điểm + Lễ Hội)
+              </button>
+              <button class="topbar-btn btn-secondary" onclick="exportData('locations')" style="width:100%;justify-content:center;padding:0.75rem;">
+                📍 Xuất chỉ Địa Điểm
+              </button>
+              <button class="topbar-btn btn-secondary" onclick="exportData('festivals')" style="width:100%;justify-content:center;padding:0.75rem;">
+                🎋 Xuất chỉ Lễ Hội
+              </button>
+              <div style="border-top:1px solid var(--border);padding-top:0.8rem;">
+                <p style="font-size:0.82rem;color:var(--text-dim);margin-bottom:0.6rem;">Xuất mã JS để cập nhật website:</p>
+                <button class="topbar-btn btn-warning" onclick="exportJS()" style="width:100%;justify-content:center;padding:0.75rem;">
+                  📄 Xuất code JS (map.js + calendar.js)
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <div class="widget-header"><span class="widget-title">📤 Nhập Dữ Liệu</span></div>
+            <div style="padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;">
+              <p style="font-size:0.85rem;color:var(--text-dim);">Nhập dữ liệu từ file JSON đã xuất trước đó. Dữ liệu hiện tại sẽ được gộp hoặc thay thế.</p>
+              <div style="border:2px dashed var(--border);border-radius:var(--radius);padding:1.5rem;text-align:center;cursor:pointer" onclick="document.getElementById('importFile').click()">
+                <div style="font-size:2rem;margin-bottom:0.5rem">📁</div>
+                <div style="font-size:0.85rem;color:var(--text-dim)">Click để chọn file JSON</div>
+                <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
+              </div>
+              <button class="topbar-btn btn-danger" onclick="confirmReset()" style="width:100%;justify-content:center;padding:0.75rem;">
+                🗑️ Đặt Lại Dữ Liệu Gốc
+              </button>
+              <div style="font-size:0.75rem;color:var(--text-muted);background:rgba(255,255,255,0.03);border-radius:var(--radius);padding:0.6rem;">
+                ⚠️ "Đặt lại dữ liệu gốc" sẽ xoá mọi chỉnh sửa và khôi phục dữ liệu ban đầu từ file JS.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- JS Code Preview -->
+        <div class="table-card" style="margin-top:1rem;" id="jsExportCard" style="display:none">
+          <div class="widget-header">
+            <span class="widget-title">📄 Mã JS Xuất</span>
+            <button class="topbar-btn btn-secondary" onclick="copyExportedJS()">📋 Sao Chép</button>
+          </div>
+          <pre id="jsExportContent" style="padding:1.2rem;font-size:0.75rem;color:#81c784;overflow-x:auto;max-height:400px;background:#0d1117;border-radius:0 0 var(--radius-lg) var(--radius-lg);"></pre>
+        </div>
+      </div>
+
+      <!-- ===== GUIDE ===== -->
+      <div class="admin-page" id="page-guide">
+        <div class="table-card">
+          <div class="widget-header">
+            <span class="widget-title">📚 Hướng Dẫn Sử Dụng Hệ Thống</span>
+            <button class="topbar-btn btn-secondary" onclick="window.open('huong-dan-quantri.html','_blank')">📄 Mở Tài Liệu Đầy Đủ</button>
+          </div>
+          <div style="padding:1.5rem;max-width:800px">
+            <div style="display:flex;flex-direction:column;gap:1.2rem">
+
+              <div style="background:var(--bg-hover);border-radius:var(--radius);padding:1.2rem;border-left:3px solid var(--red)">
+                <div style="font-weight:700;margin-bottom:0.5rem">🔐 Đăng Nhập Hệ Thống</div>
+                <div style="font-size:0.85rem;color:var(--text-dim);line-height:1.7">
+                  Truy cập <code style="background:rgba(255,255,255,0.08);padding:0.1rem 0.4rem;border-radius:4px">admin/login.html</code> và dùng tài khoản được cấp. Phiên làm việc lưu trong trình duyệt và sẽ hết hạn khi đóng tab.
+                </div>
+              </div>
+
+              <div style="background:var(--bg-hover);border-radius:var(--radius);padding:1.2rem;border-left:3px solid var(--gold)">
+                <div style="font-weight:700;margin-bottom:0.5rem">📍 Quản Lý Địa Điểm</div>
+                <ol style="font-size:0.85rem;color:var(--text-dim);line-height:1.9;padding-left:1.2rem">
+                  <li>Vào menu <strong style="color:var(--text)">Địa Điểm</strong> ở sidebar trái</li>
+                  <li>Nhấn <strong style="color:var(--text)">➕ Thêm Mới</strong> để thêm địa điểm</li>
+                  <li>Điền đầy đủ thông tin: tên, loại, tỉnh, địa chỉ, tọa độ, giờ mở cửa, mô tả</li>
+                  <li>Dán URL ảnh từ Unsplash hoặc Google Photos vào ô "Ảnh đại diện"</li>
+                  <li>Nhấn <strong style="color:var(--text)">Lưu</strong> – dữ liệu tự động cập nhật trên trang bản đồ</li>
+                  <li>Nhấn ✏️ để sửa, 🗑️ để xoá địa điểm đã có</li>
+                </ol>
+              </div>
+
+              <div style="background:var(--bg-hover);border-radius:var(--radius);padding:1.2rem;border-left:3px solid var(--green)">
+                <div style="font-weight:700;margin-bottom:0.5rem">🎋 Quản Lý Lễ Hội</div>
+                <ol style="font-size:0.85rem;color:var(--text-dim);line-height:1.9;padding-left:1.2rem">
+                  <li>Vào menu <strong style="color:var(--text)">Lễ Hội</strong> ở sidebar trái</li>
+                  <li>Nhấn <strong style="color:var(--text)">➕ Thêm Mới</strong> để thêm lễ hội</li>
+                  <li>Điền: tên lễ hội, tỉnh, ngày âm lịch, ngày dương lịch 2026, thời gian tổ chức, mô tả</li>
+                  <li>Đánh dấu <strong style="color:var(--text)">Nổi bật</strong> nếu muốn lễ hội xuất hiện nổi bật trên trang chủ</li>
+                  <li>Nhấn <strong style="color:var(--text)">Lưu</strong> để cập nhật lịch lễ hội</li>
+                </ol>
+              </div>
+
+              <div style="background:var(--bg-hover);border-radius:var(--radius);padding:1.2rem;border-left:3px solid var(--blue)">
+                <div style="font-weight:700;margin-bottom:0.5rem">💾 Xuất & Cập Nhật Website</div>
+                <ol style="font-size:0.85rem;color:var(--text-dim);line-height:1.9;padding-left:1.2rem">
+                  <li>Sau khi chỉnh sửa xong, vào menu <strong style="color:var(--text)">Xuất / Nhập Dữ Liệu</strong></li>
+                  <li>Nhấn <strong style="color:var(--text)">Xuất code JS</strong> để lấy mã JavaScript đã cập nhật</li>
+                  <li>Sao chép nội dung và dán vào file <code style="background:rgba(255,255,255,0.08);padding:0.1rem 0.4rem;border-radius:4px">js/map.js</code> và <code style="background:rgba(255,255,255,0.08);padding:0.1rem 0.4rem;border-radius:4px">js/calendar.js</code></li>
+                  <li>Hoặc nhấn <strong style="color:var(--text)">Xuất file JSON</strong> để sao lưu dữ liệu</li>
+                </ol>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ========== MODAL: ADD/EDIT LOCATION ========== -->
+<div class="modal-overlay" id="modalLocation">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span class="modal-title" id="modalLocTitle">➕ Thêm Địa Điểm Mới</span>
+      <button class="modal-close" onclick="closeModal('modalLocation')">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="locId">
+      <div class="form-grid">
+        <div class="form-group full">
+          <label class="form-label">Tên Địa Điểm <span class="required">*</span></label>
+          <input class="form-input" type="text" id="locName" placeholder="Ví dụ: Đền Ngọc Sơn">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Loại <span class="required">*</span></label>
+          <select class="form-select" id="locType">
+            <option value="den">🏮 Đền / Miếu</option>
+            <option value="chua">🪷 Chùa</option>
+            <option value="dinh">🏛️ Đình</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tỉnh / Thành Phố <span class="required">*</span></label>
+          <select class="form-select" id="locProvince">
+            <option value="hanoi">Hà Nội</option>
+            <option value="phutho">Phú Thọ</option>
+            <option value="bacninh">Bắc Ninh</option>
+            <option value="quangninh">Quảng Ninh</option>
+            <option value="haiphong">Hải Phòng</option>
+            <option value="hungyen">Hưng Yên</option>
+            <option value="langson">Lạng Sơn</option>
+            <option value="yenbai">Yên Bái</option>
+            <option value="namdinh">Nam Định</option>
+            <option value="ninhbinh">Ninh Bình</option>
+            <option value="thaibinh">Thái Bình</option>
+            <option value="thanhhoa">Thanh Hóa</option>
+            <option value="hanam">Hà Nam</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Địa Chỉ <span class="required">*</span></label>
+          <input class="form-input" type="text" id="locAddress" placeholder="Số nhà, phường/xã, quận/huyện, tỉnh">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Vĩ Độ (Latitude) <span class="required">*</span></label>
+          <input class="form-input" type="number" step="0.0001" id="locLat" placeholder="Ví dụ: 21.0285">
+          <div class="form-hint">Tra cứu tại maps.google.com → chuột phải → "What's here?"</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Kinh Độ (Longitude) <span class="required">*</span></label>
+          <input class="form-input" type="number" step="0.0001" id="locLng" placeholder="Ví dụ: 105.8524">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Giờ Mở Cửa</label>
+          <input class="form-input" type="text" id="locHours" placeholder="Ví dụ: 6:00 – 18:00">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Link Google Maps</label>
+          <input class="form-input" type="text" id="locMapUrl" placeholder="https://maps.google.com/?q=...">
+        </div>
+        <div class="form-group full">
+          <label class="form-label">URL Ảnh Đại Diện</label>
+          <input class="form-input" type="text" id="locImg" placeholder="https://images.unsplash.com/..." oninput="previewImg('locImg','locImgPreview')">
+          <div class="img-preview-wrap">
+            <img class="img-preview" id="locImgPreview" alt="Preview">
+          </div>
+          <div class="form-hint">Dùng ảnh từ Unsplash, Google Drive (public link), hoặc URL ảnh trực tiếp.</div>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Mô Tả <span class="required">*</span></label>
+          <textarea class="form-textarea" id="locDesc" rows="4" placeholder="Mô tả lịch sử, ý nghĩa tâm linh, điểm nổi bật của địa điểm..."></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="topbar-btn btn-ghost" onclick="closeModal('modalLocation')">Huỷ</button>
+      <button class="topbar-btn btn-primary" onclick="saveLocation()">💾 Lưu Địa Điểm</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== MODAL: ADD/EDIT FESTIVAL ========== -->
+<div class="modal-overlay" id="modalFestival">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span class="modal-title" id="modalFestTitle">➕ Thêm Lễ Hội Mới</span>
+      <button class="modal-close" onclick="closeModal('modalFestival')">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="festId">
+      <div class="form-grid">
+        <div class="form-group full">
+          <label class="form-label">Tên Lễ Hội <span class="required">*</span></label>
+          <input class="form-input" type="text" id="festName" placeholder="Ví dụ: Lễ Hội Chùa Hương">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tỉnh / Thành Phố <span class="required">*</span></label>
+          <select class="form-select" id="festProvince">
+            <option value="hanoi">Hà Nội</option>
+            <option value="phutho">Phú Thọ</option>
+            <option value="bacninh">Bắc Ninh</option>
+            <option value="quangninh">Quảng Ninh</option>
+            <option value="haiphong">Hải Phòng</option>
+            <option value="hungyen">Hưng Yên</option>
+            <option value="langson">Lạng Sơn</option>
+            <option value="yenbai">Yên Bái</option>
+            <option value="namdinh">Nam Định</option>
+            <option value="ninhbinh">Ninh Bình</option>
+            <option value="thaibinh">Thái Bình</option>
+            <option value="thanhhoa">Thanh Hóa</option>
+            <option value="hanam">Hà Nam</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Loại Lễ Hội</label>
+          <input class="form-input" type="text" id="festType" placeholder="Ví dụ: Phật giáo, Dân gian, Quốc lễ">
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Địa Điểm Tổ Chức</label>
+          <input class="form-input" type="text" id="festLocation" placeholder="Ví dụ: Hương Sơn, Mỹ Đức, Hà Nội">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Ngày Âm Lịch</label>
+          <input class="form-input" type="number" min="1" max="30" id="festLunarDay" placeholder="Ngày (1-30)">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tháng Âm Lịch</label>
+          <input class="form-input" type="number" min="1" max="12" id="festLunarMonth" placeholder="Tháng (1-12)">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Ngày Dương Lịch 2026</label>
+          <input class="form-input" type="number" min="1" max="31" id="festSolarDay" placeholder="Ngày">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tháng Dương Lịch 2026</label>
+          <input class="form-input" type="number" min="1" max="12" id="festSolarMonth" placeholder="Tháng">
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Thời Gian Tổ Chức</label>
+          <input class="form-input" type="text" id="festDuration" placeholder="Ví dụ: Mùng 6 – 8 tháng Giêng âm lịch">
+        </div>
+        <div class="form-group full">
+          <label class="form-label">URL Ảnh Đại Diện</label>
+          <input class="form-input" type="text" id="festImg" placeholder="https://..." oninput="previewImg('festImg','festImgPreview')">
+          <div class="img-preview-wrap">
+            <img class="img-preview" id="festImgPreview" alt="Preview">
+          </div>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Mô Tả <span class="required">*</span></label>
+          <textarea class="form-textarea" id="festDesc" rows="4" placeholder="Mô tả ý nghĩa, lịch sử, hoạt động trong lễ hội..."></textarea>
+        </div>
+        <div class="form-group full">
+          <label style="display:flex;align-items:center;gap:0.6rem;cursor:pointer;font-size:0.85rem;color:var(--text-dim)">
+            <input type="checkbox" id="festHighlight" style="width:16px;height:16px;accent-color:var(--gold)">
+            <span>⭐ Đánh dấu là <strong style="color:var(--text)">Lễ Hội Nổi Bật</strong> (hiển thị trên trang chủ)</span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="topbar-btn btn-ghost" onclick="closeModal('modalFestival')">Huỷ</button>
+      <button class="topbar-btn btn-primary" onclick="saveFestival()">💾 Lưu Lễ Hội</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== CONFIRM DIALOG ========== -->
+<div class="confirm-overlay" id="confirmOverlay">
+  <div class="confirm-box">
+    <div class="confirm-icon" id="confirmIcon">⚠️</div>
+    <div class="confirm-title" id="confirmTitle">Xác Nhận</div>
+    <div class="confirm-msg" id="confirmMsg"></div>
+    <div class="confirm-btns">
+      <button onclick="closeConfirm()" style="background:var(--bg-hover);border:1px solid var(--border);color:var(--text-dim)">Huỷ</button>
+      <button id="confirmOkBtn" style="background:var(--red);color:#fff">Xác Nhận</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="js/admin.js"></script>
+</body>
+</html>

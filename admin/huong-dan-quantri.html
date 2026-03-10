@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hướng Dẫn Quản Trị Hệ Thống – Tâm Linh Việt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #C0392B; --red-dark: #922B21; --gold: #D4AF37;
+      --bg: #0f1117; --card: #1a1d27; --border: rgba(255,255,255,0.08);
+      --text: rgba(255,255,255,0.88); --dim: rgba(255,255,255,0.5); --muted: rgba(255,255,255,0.25);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+    a { color: var(--gold); }
+
+    /* LAYOUT */
+    .doc-layout { display: flex; min-height: 100vh; }
+    .doc-sidebar {
+      width: 260px; flex-shrink: 0; background: var(--card);
+      border-right: 1px solid var(--border); position: sticky; top: 0; height: 100vh;
+      overflow-y: auto; padding: 1.5rem 1rem;
+    }
+    .doc-main { flex: 1; max-width: 860px; padding: 2.5rem 3rem; }
+
+    .doc-sidebar h2 { font-size: 0.82rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 1rem; }
+    .doc-nav-item {
+      display: block; padding: 0.45rem 0.8rem; border-radius: 6px;
+      color: var(--dim); font-size: 0.85rem; text-decoration: none;
+      transition: all 0.15s; margin-bottom: 2px;
+    }
+    .doc-nav-item:hover { background: rgba(255,255,255,0.05); color: var(--text); }
+    .doc-nav-item.sub { padding-left: 1.5rem; font-size: 0.8rem; }
+    .doc-nav-sep { height: 1px; background: var(--border); margin: 0.8rem 0; }
+
+    /* CONTENT */
+    .doc-header { margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+    .doc-badge {
+      display: inline-block; background: rgba(212,175,55,0.15); border: 1px solid var(--gold);
+      color: var(--gold); padding: 0.25rem 0.8rem; border-radius: 12px; font-size: 0.75rem;
+      font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.8rem;
+    }
+    h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .doc-meta { color: var(--muted); font-size: 0.82rem; }
+
+    /* SECTIONS */
+    .doc-section { margin-bottom: 3rem; }
+    .doc-section h2 {
+      font-size: 1.3rem; font-weight: 700; color: var(--text);
+      margin-bottom: 1rem; padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--red);
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .doc-section h3 {
+      font-size: 1rem; font-weight: 600; color: rgba(255,255,255,0.8);
+      margin: 1.5rem 0 0.7rem;
+    }
+    p { font-size: 0.9rem; color: var(--dim); margin-bottom: 0.8rem; }
+
+    /* STEPS */
+    .steps { display: flex; flex-direction: column; gap: 0.6rem; margin: 1rem 0; }
+    .step {
+      display: flex; gap: 0.9rem; padding: 0.8rem 1rem;
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 8px;
+    }
+    .step-num {
+      width: 26px; height: 26px; border-radius: 50%; background: var(--red);
+      color: #fff; font-size: 0.8rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .step-body { font-size: 0.87rem; color: var(--dim); flex: 1; }
+    .step-body strong { color: var(--text); }
+
+    /* CALLOUTS */
+    .callout {
+      border-radius: 8px; padding: 0.9rem 1.1rem; margin: 1rem 0;
+      font-size: 0.87rem; display: flex; gap: 0.7rem; align-items: flex-start;
+    }
+    .callout-icon { flex-shrink: 0; font-size: 1rem; margin-top: 1px; }
+    .callout.info    { background: rgba(41,128,185,0.12); border-left: 3px solid #2980B9; color: #90caf9; }
+    .callout.warn    { background: rgba(230,126,34,0.12);  border-left: 3px solid #E67E22; color: #ffcc80; }
+    .callout.success { background: rgba(39,174,96,0.12);   border-left: 3px solid #27AE60; color: #a5d6a7; }
+    .callout.danger  { background: rgba(192,57,43,0.12);   border-left: 3px solid var(--red); color: #ef9a9a; }
+
+    /* CODE */
+    code {
+      background: rgba(255,255,255,0.07); padding: 0.15rem 0.45rem;
+      border-radius: 4px; font-size: 0.82rem; font-family: 'Courier New', monospace; color: #a5d6a7;
+    }
+    .code-block {
+      background: #0d1117; border: 1px solid var(--border); border-radius: 8px;
+      padding: 1rem 1.2rem; margin: 1rem 0; font-family: 'Courier New', monospace;
+      font-size: 0.82rem; color: #a5d6a7; overflow-x: auto; white-space: pre;
+    }
+
+    /* TABLE */
+    .doc-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
+    .doc-table th {
+      text-align: left; padding: 0.6rem 0.8rem; background: rgba(255,255,255,0.04);
+      color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .doc-table td { padding: 0.6rem 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--dim); }
+    .doc-table td strong { color: var(--text); }
+
+    /* ACCOUNT CARD */
+    .account-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+      padding: 1.2rem; margin: 0.6rem 0;
+    }
+    .account-card .role { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.4rem; }
+    .account-card .role.super { color: var(--gold); }
+    .account-card .role.admin { color: #e87070; }
+    .account-card .role.editor { color: #90caf9; }
+    .cred-row { display: flex; align-items: center; gap: 0.5rem; margin: 0.3rem 0; font-size: 0.85rem; }
+    .cred-label { color: var(--muted); min-width: 100px; font-size: 0.8rem; }
+    .cred-value { font-family: 'Courier New', monospace; background: rgba(255,255,255,0.06); padding: 0.2rem 0.6rem; border-radius: 4px; color: var(--text); font-size: 0.82rem; }
+
+    /* PRINT */
+    .print-btn {
+      position: fixed; bottom: 1.5rem; right: 1.5rem;
+      background: var(--red); color: #fff; padding: 0.65rem 1.2rem; border-radius: 8px;
+      font-size: 0.85rem; font-weight: 600; cursor: pointer; border: none;
+      box-shadow: 0 4px 16px rgba(192,57,43,0.4); transition: all 0.2s;
+    }
+    .print-btn:hover { background: var(--red-dark); }
+
+    @media (max-width: 768px) {
+      .doc-sidebar { display: none; }
+      .doc-main { padding: 1.5rem; }
+    }
+    @media print {
+      .doc-sidebar, .print-btn { display: none; }
+      body { background: white; color: black; }
+      .doc-main { padding: 0; max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+<div class="doc-layout">
+
+  <!-- Sidebar -->
+  <nav class="doc-sidebar">
+    <h2>Mục Lục</h2>
+    <a class="doc-nav-item" href="#gioi-thieu">1. Giới Thiệu Hệ Thống</a>
+    <a class="doc-nav-item" href="#tai-khoan">2. Tài Khoản & Quyền Hạn</a>
+    <a class="doc-nav-item sub" href="#dang-nhap">↳ Đăng Nhập</a>
+    <a class="doc-nav-item sub" href="#phan-quyen">↳ Phân Quyền</a>
+    <div class="doc-nav-sep"></div>
+    <a class="doc-nav-item" href="#dia-diem">3. Quản Lý Địa Điểm</a>
+    <a class="doc-nav-item sub" href="#them-dia-diem">↳ Thêm địa điểm</a>
+    <a class="doc-nav-item sub" href="#sua-dia-diem">↳ Sửa địa điểm</a>
+    <a class="doc-nav-item sub" href="#xoa-dia-diem">↳ Xoá địa điểm</a>
+    <a class="doc-nav-item sub" href="#tim-toa-do">↳ Tìm toạ độ</a>
+    <div class="doc-nav-sep"></div>
+    <a class="doc-nav-item" href="#le-hoi">4. Quản Lý Lễ Hội</a>
+    <a class="doc-nav-item sub" href="#them-le-hoi">↳ Thêm lễ hội</a>
+    <a class="doc-nav-item sub" href="#lich-am">↳ Lịch âm dương</a>
+    <div class="doc-nav-sep"></div>
+    <a class="doc-nav-item" href="#noi-dung">5. Sửa Nội Dung & Ảnh</a>
+    <a class="doc-nav-item sub" href="#doi-hinh">↳ Đổi hình ảnh</a>
+    <a class="doc-nav-item sub" href="#sua-van-khan">↳ Sửa văn khấn</a>
+    <div class="doc-nav-sep"></div>
+    <a class="doc-nav-item" href="#xuat-nhap">6. Xuất & Nhập Dữ Liệu</a>
+    <a class="doc-nav-item sub" href="#sao-luu">↳ Sao lưu</a>
+    <a class="doc-nav-item sub" href="#cap-nhat-js">↳ Cập nhật file JS</a>
+    <div class="doc-nav-sep"></div>
+    <a class="doc-nav-item" href="#bao-mat">7. Bảo Mật</a>
+    <a class="doc-nav-item" href="#faq">8. Câu Hỏi Thường Gặp</a>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="doc-main">
+
+    <div class="doc-header">
+      <div class="doc-badge">📚 Tài Liệu Hệ Thống</div>
+      <h1>Hướng Dẫn Quản Trị<br>Tâm Linh Việt CMS</h1>
+      <p class="doc-meta">Phiên bản 1.0 &nbsp;·&nbsp; Cập nhật: 03/2026 &nbsp;·&nbsp; Dành cho: Quản Trị Viên & Thành Viên</p>
+    </div>
+
+    <!-- 1. GIỚI THIỆU -->
+    <div class="doc-section" id="gioi-thieu">
+      <h2>⛩️ 1. Giới Thiệu Hệ Thống</h2>
+      <p>Hệ thống Quản Trị Nội Dung (CMS) Tâm Linh Việt cho phép các quản trị viên và thành viên cập nhật, chỉnh sửa thông tin về địa điểm đền chùa, lịch lễ hội và hướng dẫn nghi lễ trên website mà không cần kiến thức lập trình.</p>
+
+      <h3>Cấu trúc hệ thống</h3>
+      <div class="code-block">den-chua/
+├── admin/
+│   ├── login.html          ← Trang đăng nhập quản trị
+│   ├── index.html          ← Bảng điều khiển chính
+│   ├── huong-dan-quantri.html  ← Tài liệu này
+│   ├── css/admin.css
+│   └── js/admin.js
+├── index.html              ← Trang chủ website
+├── dia-diem.html           ← Bản đồ & danh sách đền chùa
+├── lich-le-hoi.html        ← Lịch lễ hội
+├── huong-dan.html          ← Hướng dẫn nghi lễ
+├── js/
+│   ├── map.js              ← Dữ liệu địa điểm gốc
+│   └── calendar.js         ← Dữ liệu lễ hội gốc
+└── css/style.css</div>
+
+      <div class="callout info">
+        <span class="callout-icon">ℹ️</span>
+        <span>Dữ liệu chỉnh sửa qua admin panel được lưu trong <strong>localStorage</strong> của trình duyệt và tự động hiển thị trên website. Để cập nhật vĩnh viễn vào file JS, dùng chức năng <strong>Xuất code JS</strong>.</span>
+      </div>
+    </div>
+
+    <!-- 2. TÀI KHOẢN -->
+    <div class="doc-section" id="tai-khoan">
+      <h2>🔐 2. Tài Khoản & Quyền Hạn</h2>
+
+      <div id="dang-nhap">
+        <h3>2.1 Đăng Nhập Hệ Thống</h3>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-body">Mở trình duyệt, truy cập file <code>admin/login.html</code></div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body">Nhập <strong>Tên đăng nhập</strong> và <strong>Mật khẩu</strong> theo tài khoản được cấp</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body">Nhấn <strong>Đăng Nhập Hệ Thống</strong> – hệ thống sẽ chuyển đến Bảng Điều Khiển</div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body">Khi kết thúc làm việc, nhấn <strong>🚪 Đăng Xuất</strong> ở góc dưới sidebar để bảo mật</div></div>
+        </div>
+
+        <div class="callout warn">
+          <span class="callout-icon">⚠️</span>
+          <span>Phiên đăng nhập chỉ tồn tại trong tab trình duyệt hiện tại. Đóng tab hoặc trình duyệt sẽ tự động đăng xuất.</span>
+        </div>
+      </div>
+
+      <div id="phan-quyen">
+        <h3>2.2 Danh Sách Tài Khoản</h3>
+
+        <div class="account-card">
+          <div class="role super">⭐ Super Admin – Toàn Quyền</div>
+          <div class="cred-row"><span class="cred-label">Tên đăng nhập:</span><span class="cred-value">admin</span></div>
+          <div class="cred-row"><span class="cred-label">Mật khẩu:</span><span class="cred-value">TamLinhViet@2026</span></div>
+          <p style="margin-top:0.5rem;font-size:0.82rem;">Toàn quyền: xem, thêm, sửa, xoá địa điểm và lễ hội, xuất nhập dữ liệu, quản lý tài khoản.</p>
+        </div>
+
+        <div class="account-card">
+          <div class="role admin">🔴 Admin – Quản Trị Viên</div>
+          <div class="cred-row"><span class="cred-label">Tên đăng nhập:</span><span class="cred-value">quantri</span></div>
+          <div class="cred-row"><span class="cred-label">Mật khẩu:</span><span class="cred-value">QuanTri@2026</span></div>
+          <p style="margin-top:0.5rem;font-size:0.82rem;">Quyền thêm, sửa, xoá toàn bộ nội dung. Xuất nhập dữ liệu.</p>
+        </div>
+
+        <div class="account-card">
+          <div class="role editor">🔵 Editor – Thành Viên</div>
+          <div class="cred-row"><span class="cred-label">Tên đăng nhập:</span><span class="cred-value">thanhvien</span></div>
+          <div class="cred-row"><span class="cred-label">Mật khẩu:</span><span class="cred-value">ThanhVien@2026</span></div>
+          <p style="margin-top:0.5rem;font-size:0.82rem;">Quyền xem và chỉnh sửa nội dung. Không xoá dữ liệu.</p>
+        </div>
+
+        <table class="doc-table" style="margin-top:1.5rem">
+          <thead><tr><th>Chức Năng</th><th>Super Admin</th><th>Admin</th><th>Editor</th></tr></thead>
+          <tbody>
+            <tr><td>Xem bảng điều khiển</td><td>✅</td><td>✅</td><td>✅</td></tr>
+            <tr><td>Thêm địa điểm / lễ hội</td><td>✅</td><td>✅</td><td>✅</td></tr>
+            <tr><td>Sửa địa điểm / lễ hội</td><td>✅</td><td>✅</td><td>✅</td></tr>
+            <tr><td>Xoá địa điểm / lễ hội</td><td>✅</td><td>✅</td><td>❌</td></tr>
+            <tr><td>Xuất / Nhập dữ liệu</td><td>✅</td><td>✅</td><td>❌</td></tr>
+            <tr><td>Quản lý tài khoản</td><td>✅</td><td>❌</td><td>❌</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 3. ĐỊA ĐIỂM -->
+    <div class="doc-section" id="dia-diem">
+      <h2>📍 3. Quản Lý Địa Điểm</h2>
+      <p>Phần này cho phép thêm, sửa, xoá thông tin các đền, đình, chùa hiển thị trên bản đồ trang <code>dia-diem.html</code>.</p>
+
+      <div id="them-dia-diem">
+        <h3>3.1 Thêm Địa Điểm Mới</h3>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-body">Nhấn <strong>📍 Địa Điểm</strong> ở sidebar trái để vào trang quản lý</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body">Nhấn nút <strong style="background:rgba(192,57,43,0.2);padding:0.1rem 0.5rem;border-radius:4px">➕ Thêm Mới</strong> ở góc trên bên phải bảng</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body">Điền thông tin vào form:
+            <ul style="margin-top:0.4rem;padding-left:1rem;font-size:0.82rem;color:rgba(255,255,255,0.45)">
+              <li><strong style="color:rgba(255,255,255,0.7)">Tên địa điểm</strong> – Tên đầy đủ (ví dụ: Đền Ngọc Sơn)</li>
+              <li><strong style="color:rgba(255,255,255,0.7)">Loại</strong> – Chọn: Đền/Miếu, Chùa, hoặc Đình</li>
+              <li><strong style="color:rgba(255,255,255,0.7)">Tỉnh/Thành</strong> – Chọn trong danh sách 8 tỉnh</li>
+              <li><strong style="color:rgba(255,255,255,0.7)">Địa chỉ</strong> – Địa chỉ chi tiết</li>
+              <li><strong style="color:rgba(255,255,255,0.7)">Vĩ độ / Kinh độ</strong> – Toạ độ GPS (xem hướng dẫn bên dưới)</li>
+              <li><strong style="color:rgba(255,255,255,0.7)">Giờ mở cửa</strong> – Ví dụ: 6:00 – 18:00</li>
+              <li><strong style="color:rgba(255,255,255,0.7)">URL Ảnh</strong> – Đường dẫn ảnh trực tiếp</li>
+              <li><strong style="color:rgba(255,255,255,0.7)">Mô tả</strong> – Giới thiệu lịch sử, ý nghĩa</li>
+            </ul>
+          </div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body">Nhấn <strong>💾 Lưu Địa Điểm</strong> – địa điểm sẽ xuất hiện ngay trên bản đồ</div></div>
+        </div>
+      </div>
+
+      <div id="sua-dia-diem">
+        <h3>3.2 Sửa Địa Điểm</h3>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-body">Tìm địa điểm cần sửa trong bảng (dùng ô tìm kiếm hoặc bộ lọc)</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body">Nhấn biểu tượng <strong>✏️</strong> ở cột Thao Tác</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body">Chỉnh sửa nội dung cần thay đổi trong form</div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body">Nhấn <strong>💾 Lưu Địa Điểm</strong> để lưu thay đổi</div></div>
+        </div>
+      </div>
+
+      <div id="xoa-dia-diem">
+        <h3>3.3 Xoá Địa Điểm</h3>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-body">Nhấn biểu tượng <strong>🗑️</strong> bên cạnh địa điểm cần xoá</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body">Hộp thoại xác nhận xuất hiện – nhấn <strong>Xác Nhận</strong> để xoá</div></div>
+        </div>
+        <div class="callout danger">
+          <span class="callout-icon">⚠️</span>
+          <span>Xoá địa điểm không thể hoàn tác. Hãy chắc chắn trước khi xoá. Nếu cần khôi phục, dùng chức năng Nhập dữ liệu từ file sao lưu.</span>
+        </div>
+      </div>
+
+      <div id="tim-toa-do">
+        <h3>3.4 Cách Tìm Toạ Độ (Vĩ Độ / Kinh Độ)</h3>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-body">Mở <strong>maps.google.com</strong> trong trình duyệt</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body">Tìm kiếm tên địa điểm (ví dụ: "Đền Ngọc Sơn Hà Nội")</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Chuột phải</strong> vào đúng vị trí trên bản đồ</div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body">Menu xuất hiện, nhấn vào dòng toạ độ đầu tiên (ví dụ: <code>21.0285, 105.8524</code>) để sao chép</div></div>
+          <div class="step"><div class="step-num">5</div><div class="step-body">Dán vào ô <strong>Vĩ Độ</strong> (số đầu tiên) và <strong>Kinh Độ</strong> (số thứ hai)</div></div>
+        </div>
+        <div class="callout success">
+          <span class="callout-icon">💡</span>
+          <span>Vĩ độ (Latitude) là số <strong>đầu tiên</strong>, thường từ 10-23 đối với Việt Nam. Kinh độ (Longitude) là số <strong>thứ hai</strong>, từ 102-109.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. LỄ HỘI -->
+    <div class="doc-section" id="le-hoi">
+      <h2>🎋 4. Quản Lý Lễ Hội</h2>
+
+      <div id="them-le-hoi">
+        <h3>4.1 Thêm Lễ Hội Mới</h3>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-body">Nhấn <strong>🎋 Lễ Hội</strong> ở sidebar trái</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body">Nhấn <strong>➕ Thêm Mới</strong></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body">Điền thông tin:
+            <ul style="margin-top:0.4rem;padding-left:1rem;font-size:0.82rem;color:rgba(255,255,255,0.45)">
+              <li><strong style="color:rgba(255,255,255,0.7)">Tên lễ hội</strong> – Tên đầy đủ</li>
+              <li><strong style="color:rgba(255,255,255,0.7)">Ngày/Tháng âm lịch</strong> – Theo lịch âm truyền thống</li>
+              <li><strong style="color:rgba(255,255,255,0.7)">Ngày/Tháng dương lịch 2026</strong> – Ngày tương ứng trong dương lịch năm 2026</li>
+              <li><strong style="color:rgba(255,255,255,0.7)">Thời gian tổ chức</strong> – Ví dụ: "Mùng 6 – 8 tháng Giêng âm lịch"</li>
+              <li><strong style="color:rgba(255,255,255,0.7)">Nổi bật</strong> – Tích vào nếu muốn hiển thị trên trang chủ</li>
+            </ul>
+          </div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body">Nhấn <strong>💾 Lưu Lễ Hội</strong></div></div>
+        </div>
+      </div>
+
+      <div id="lich-am">
+        <h3>4.2 Tra Cứu Ngày Âm Dương 2026</h3>
+        <p>Năm 2026 là năm <strong>Bính Ngọ</strong>. Tết Nguyên Đán 2026 rơi vào ngày <strong>17 tháng 2 dương lịch</strong>.</p>
+        <table class="doc-table">
+          <thead><tr><th>Tháng Âm Lịch</th><th>Bắt Đầu Dương Lịch</th><th>Ghi Chú</th></tr></thead>
+          <tbody>
+            <tr><td>Tháng Giêng (1)</td><td>17/02/2026</td><td>Tết Nguyên Đán</td></tr>
+            <tr><td>Tháng Hai (2)</td><td>19/03/2026</td><td></td></tr>
+            <tr><td>Tháng Ba (3)</td><td>17/04/2026</td><td></td></tr>
+            <tr><td>Tháng Tư (4)</td><td>17/05/2026</td><td></td></tr>
+            <tr><td>Tháng Năm (5)</td><td>15/06/2026</td><td></td></tr>
+            <tr><td>Tháng Sáu (6)</td><td>15/07/2026</td><td></td></tr>
+            <tr><td>Tháng Bảy (7)</td><td>13/08/2026</td><td></td></tr>
+            <tr><td>Tháng Tám (8)</td><td>12/09/2026</td><td>Tết Trung Thu: 12/10</td></tr>
+            <tr><td>Tháng Chín (9)</td><td>11/10/2026</td><td></td></tr>
+            <tr><td>Tháng Mười (10)</td><td>10/11/2026</td><td></td></tr>
+            <tr><td>Tháng Mười Một (11)</td><td>10/12/2026</td><td></td></tr>
+            <tr><td>Tháng Chạp (12)</td><td>09/01/2027</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 5. NỘI DUNG & ẢNH -->
+    <div class="doc-section" id="noi-dung">
+      <h2>🖼️ 5. Sửa Nội Dung & Hình Ảnh</h2>
+
+      <div id="doi-hinh">
+        <h3>5.1 Đổi Hình Ảnh Địa Điểm / Lễ Hội</h3>
+        <p>Hệ thống sử dụng URL ảnh trực tiếp từ internet. Cách lấy URL ảnh:</p>
+
+        <h3 style="font-size:0.9rem;color:var(--gold)">Cách 1: Dùng ảnh từ Unsplash (Miễn phí)</h3>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-body">Truy cập <strong>unsplash.com</strong> và tìm kiếm hình phù hợp (ví dụ: "temple Vietnam")</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body">Nhấn vào ảnh, nhấn nút <strong>Share</strong> → <strong>Copy link</strong></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body">Hoặc nhấn chuột phải vào ảnh → <strong>"Sao chép địa chỉ ảnh"</strong></div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body">Dán URL vào ô <strong>URL Ảnh Đại Diện</strong> trong form chỉnh sửa</div></div>
+        </div>
+
+        <h3 style="font-size:0.9rem;color:var(--gold)">Cách 2: Dùng Google Drive</h3>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-body">Upload ảnh lên Google Drive</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body">Chuột phải vào ảnh → <strong>Chia sẻ</strong> → Đặt quyền <strong>"Bất kỳ ai có đường liên kết"</strong></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body">Sao chép link, lấy phần ID (chuỗi ký tự sau <code>/d/</code>)</div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body">Dùng URL dạng: <code>https://drive.google.com/uc?id=FILE_ID</code></div></div>
+        </div>
+
+        <div class="callout info">
+          <span class="callout-icon">💡</span>
+          <span>Kích thước ảnh khuyến nghị: <strong>800×500px</strong> trở lên. Định dạng: JPG hoặc WebP. Ảnh quá nhỏ sẽ bị mờ trên màn hình lớn.</span>
+        </div>
+      </div>
+
+      <div id="sua-van-khan">
+        <h3>5.2 Sửa Nội Dung Nghi Lễ & Văn Khấn</h3>
+        <p>Nội dung nghi lễ được lưu trực tiếp trong file <code>huong-dan.html</code>. Để chỉnh sửa:</p>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-body">Mở file <code>huong-dan.html</code> bằng <strong>VS Code</strong>, Notepad++ hoặc bất kỳ trình soạn thảo văn bản nào</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body">Dùng chức năng <strong>Tìm kiếm</strong> (Ctrl+F) để tìm đoạn cần sửa (ví dụ: tìm "vanKhan1" để sửa văn khấn ông Táo)</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body">Chỉnh sửa nội dung văn bản <strong>giữa</strong> các thẻ HTML (không xoá thẻ)</div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body">Lưu file (Ctrl+S) và làm mới trang web để kiểm tra</div></div>
+        </div>
+
+        <div class="callout warn">
+          <span class="callout-icon">⚠️</span>
+          <span>Chỉ chỉnh sửa nội dung văn bản giữa các thẻ HTML. <strong>Không xoá hoặc thay đổi các thẻ HTML</strong> như <code>&lt;div&gt;</code>, <code>&lt;h4&gt;</code>, <code>&lt;button&gt;</code> nếu không có kiến thức về lập trình web.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. XUẤT NHẬP -->
+    <div class="doc-section" id="xuat-nhap">
+      <h2>💾 6. Xuất & Nhập Dữ Liệu</h2>
+
+      <div id="sao-luu">
+        <h3>6.1 Sao Lưu Dữ Liệu (Khuyến Nghị Hàng Tuần)</h3>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-body">Vào menu <strong>Xuất / Nhập Dữ Liệu</strong></div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body">Nhấn <strong>📥 Xuất file JSON (Địa Điểm + Lễ Hội)</strong></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body">File JSON sẽ tự tải về máy tính (ví dụ: <code>tamlinhviet-data-2026-03-06.json</code>)</div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body">Lưu file vào thư mục an toàn, có thể đặt tên theo ngày để dễ quản lý</div></div>
+        </div>
+      </div>
+
+      <div id="cap-nhat-js">
+        <h3>6.2 Cập Nhật Dữ Liệu Vào File JS (Vĩnh Viễn)</h3>
+        <p>Dữ liệu chỉnh sửa qua admin panel lưu trong localStorage – chỉ có trên máy tính hiện tại. Để cập nhật vào file gốc:</p>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-body">Vào <strong>Xuất / Nhập Dữ Liệu</strong> → nhấn <strong>📄 Xuất code JS</strong></div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body">Nhấn <strong>📋 Sao Chép</strong> để sao chép toàn bộ code</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body">Mở file <code>js/map.js</code> bằng VS Code hoặc Notepad++</div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body">Tìm dòng <code>const LOCATIONS = [</code>, xoá toàn bộ mảng và dán dữ liệu mới vào</div></div>
+          <div class="step"><div class="step-num">5</div><div class="step-body">Làm tương tự với <code>js/calendar.js</code> cho phần <code>const FESTIVALS = [</code></div></div>
+          <div class="step"><div class="step-num">6</div><div class="step-body">Lưu file và kiểm tra website để xác nhận</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. BẢO MẬT -->
+    <div class="doc-section" id="bao-mat">
+      <h2>🔒 7. Bảo Mật</h2>
+
+      <div class="callout danger">
+        <span class="callout-icon">🔴</span>
+        <span><strong>Quan trọng:</strong> Hệ thống CMS hiện tại là phiên bản tĩnh (static), mật khẩu được lưu trong file JS. Đây phù hợp cho môi trường nội bộ. Nếu triển khai public, cần bổ sung backend bảo mật.</span>
+      </div>
+
+      <h3>Nguyên tắc bảo mật</h3>
+      <ul style="padding-left:1.2rem;font-size:0.87rem;color:var(--dim);display:flex;flex-direction:column;gap:0.5rem;margin:0.8rem 0">
+        <li>✅ Đổi mật khẩu mặc định ngay sau khi triển khai</li>
+        <li>✅ Không chia sẻ thông tin tài khoản qua email không mã hoá</li>
+        <li>✅ Đăng xuất sau khi sử dụng xong trên máy tính công cộng</li>
+        <li>✅ Sao lưu dữ liệu định kỳ (ít nhất 1 lần/tuần)</li>
+        <li>❌ Không lưu mật khẩu vào trình duyệt trên máy công cộng</li>
+        <li>❌ Không chia sẻ tài khoản Super Admin</li>
+      </ul>
+
+      <h3>Đổi Mật Khẩu</h3>
+      <p>Mở file <code>admin/login.html</code> bằng trình soạn thảo, tìm đoạn:</p>
+      <div class="code-block">const ACCOUNTS = [
+  { username: 'admin',    password: 'TamLinhViet@2026', ... },
+  { username: 'quantri',  password: 'QuanTri@2026',     ... },
+  { username: 'thanhvien',password: 'ThanhVien@2026',   ... }
+];</div>
+      <p>Thay đổi giá trị <code>password</code> thành mật khẩu mới. Mật khẩu mạnh nên có ít nhất 12 ký tự, kết hợp chữ hoa, chữ thường, số và ký tự đặc biệt.</p>
+    </div>
+
+    <!-- 8. FAQ -->
+    <div class="doc-section" id="faq">
+      <h2>❓ 8. Câu Hỏi Thường Gặp</h2>
+
+      <h3>Q: Tôi thêm địa điểm nhưng không thấy trên bản đồ?</h3>
+      <p>Kiểm tra lại toạ độ (vĩ độ/kinh độ). Toạ độ sai sẽ đặt marker ra ngoài vùng nhìn thấy. Toạ độ Việt Nam: Vĩ độ 8–23, Kinh độ 102–110.</p>
+
+      <h3>Q: Ảnh tôi dán vào không hiển thị?</h3>
+      <p>URL ảnh phải là đường dẫn trực tiếp đến file ảnh (kết thúc bằng .jpg, .png, .webp). Nhiều trang web không cho phép nhúng ảnh từ domain của họ. Hãy dùng Unsplash hoặc upload lên Google Drive/ImgBB.</p>
+
+      <h3>Q: Dữ liệu tôi chỉnh sửa có bị mất khi xoá cache không?</h3>
+      <p>Có. Dữ liệu lưu trong localStorage sẽ mất nếu xoá dữ liệu trình duyệt. Hãy <strong>sao lưu JSON thường xuyên</strong> và cập nhật vào file JS gốc sau mỗi đợt chỉnh sửa lớn.</p>
+
+      <h3>Q: Làm sao khôi phục dữ liệu đã xoá?</h3>
+      <p>Vào <strong>Xuất / Nhập Dữ Liệu</strong> → <strong>Nhập dữ liệu</strong> → chọn file JSON đã sao lưu trước đó. Nếu không có file sao lưu, nhấn <strong>Đặt Lại Dữ Liệu Gốc</strong> để khôi phục dữ liệu từ file JS.</p>
+
+      <h3>Q: Tôi có thể thêm tỉnh mới ngoài 8 tỉnh hiện tại?</h3>
+      <p>Có. Mở file <code>admin/index.html</code>, tìm các thẻ <code>&lt;option&gt;</code> trong select tỉnh và thêm tỉnh mới. Đồng thời thêm vào bộ lọc tương ứng trong <code>dia-diem.html</code> và <code>lich-le-hoi.html</code>.</p>
+
+      <div class="callout success" style="margin-top:2rem">
+        <span class="callout-icon">💬</span>
+        <span>Cần hỗ trợ thêm? Liên hệ với quản trị viên hệ thống hoặc xem lại tài liệu này. Chúc bạn quản trị hệ thống hiệu quả! 🙏</span>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<button class="print-btn" onclick="window.print()">🖨️ In Tài Liệu</button>
+</body>
+</html>

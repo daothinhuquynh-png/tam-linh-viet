@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hướng Dẫn Nghi Lễ – Tâm Linh Việt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Noto+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Print styles */
+    @media print {
+      .navbar, .page-hero, .sidebar, .footer, .btn-copy, .print-btn,
+      .hamburger, .print-float-btn { display: none !important; }
+      .content-area { margin: 0; padding: 0; }
+      .main-layout { display: block; }
+      body { font-size: 11pt; color: #000; background: white; }
+      .van-khan-box { border: 1px solid #ccc; padding: 1rem; margin-bottom: 1rem; page-break-inside: avoid; }
+      .van-khan-title { font-weight: bold; margin-bottom: 0.5rem; }
+      .accordion-body { display: block !important; max-height: none !important; overflow: visible !important; }
+      h2, h3, h4 { page-break-after: avoid; }
+      .warning-box { border: 1px solid #C0392B; padding: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <nav class="navbar solid" id="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="nav-logo">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <circle cx="14" cy="14" r="13" stroke="#D4AF37" stroke-width="1.5"/>
+          <path d="M14 4L16.5 11.5H24L18 16L20.5 23.5L14 19L7.5 23.5L10 16L4 11.5H11.5Z" fill="#D4AF37" opacity="0.8"/>
+        </svg>
+        Tâm Linh <span>Việt</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Trang Chủ</a></li>
+        <li><a href="huong-dan.html" class="active">Nghi Lễ</a></li>
+        <li><a href="dia-diem.html">Địa Điểm</a></li>
+        <li><a href="lich-le-hoi.html">Lịch Lễ Hội</a></li>
+        <li><a href="tim-kiem.html">Tìm Kiếm</a></li>
+        <li><a href="dia-diem.html" class="nav-cta">Tìm Đền Chùa</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===================== PAGE HERO ===================== -->
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <h1>Hướng Dẫn Nghi Lễ</h1>
+      <p>Văn khấn, cách chuẩn bị lễ vật và quy trình thực hiện đầy đủ cho từng dịp thờ cúng</p>
+      <div class="breadcrumb">
+        <a href="index.html">Trang Chủ</a>
+        <span>›</span>
+        <span>Hướng Dẫn Nghi Lễ</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== MAIN CONTENT ===================== -->
+  <section class="section">
+    <div class="container">
+      <div class="sidebar-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+          <div class="sidebar-title">📖 Danh Mục Nghi Lễ</div>
+          <ul class="sidebar-menu">
+            <li>
+              <a href="#tet-nguyen-dan" class="active">
+                <span>🧧</span> Lễ Tết Nguyên Đán
+              </a>
+            </li>
+            <li>
+              <a href="#vao-den">
+                <span>🏮</span> Vào Đền Thờ
+              </a>
+            </li>
+            <li>
+              <a href="#vao-chua">
+                <span>🙏</span> Vào Chùa Lễ Phật
+              </a>
+            </li>
+            <li>
+              <a href="#cung-ram">
+                <span>🌕</span> Cúng Rằm & Mùng Một
+              </a>
+            </li>
+            <li>
+              <a href="#gio-chap">
+                <span>🕯️</span> Giỗ Chạp – Cúng Gia Tiên
+              </a>
+            </li>
+            <li>
+              <a href="#hanh-huong">
+                <span>🚶</span> Hành Hương – Tham Quan
+              </a>
+            </li>
+            <li>
+              <a href="#cung-dong">
+                <span>⛩️</span> Lên Đồng – Hầu Bóng
+              </a>
+            </li>
+          </ul>
+          <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--cream-dark);">
+            <div style="font-size: 0.8rem; color: var(--text-light); text-align: center; font-style: italic;">
+              💡 Mọi nghi lễ cần xuất phát từ lòng thành kính, không phụ thuộc vào lễ vật nhiều hay ít.
+            </div>
+          </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main>
+
+          <!-- ===== LỄ TẾT NGUYÊN ĐÁN ===== -->
+          <div id="tet-nguyen-dan" style="margin-bottom: 2.5rem;">
+            <h2 style="color: var(--red-dark); margin-bottom: 0.5rem; font-size: 1.6rem;">🧧 Lễ Tết Nguyên Đán</h2>
+            <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1.5rem; font-style: italic;">Những nghi lễ thờ cúng trong dịp Tết Nguyên Đán – dịp quan trọng nhất trong năm</p>
+            <div class="accordion">
+
+              <!-- Cúng ông Công ông Táo -->
+              <div class="accordion-item">
+                <button class="accordion-header" onclick="toggleAccordion(this)">
+                  <div class="accordion-title-wrap">
+                    <div class="accordion-icon-wrap">🔥</div>
+                    <div>
+                      <div class="accordion-title">Cúng Ông Công Ông Táo (23 tháng Chạp)</div>
+                      <div class="accordion-subtitle">Lễ tiễn Táo Quân về trời báo cáo thiên đình</div>
+                    </div>
+                  </div>
+                  <svg class="accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="accordion-body">
+                  <p style="margin-bottom: 1rem; color: var(--text-mid);">Ngày 23 tháng Chạp hàng năm, các gia đình Việt tiễn Táo Quân về trời. Theo phong tục, Táo Quân sẽ báo cáo mọi việc trong gia đình lên Ngọc Hoàng.</p>
+
+                  <h4 style="color: var(--red-dark); margin-bottom: 0.8rem;">Lễ Vật Cần Chuẩn Bị</h4>
+                  <div class="offering-grid">
+                    <div class="offering-item">🐟 Cá chép (thả sống)</div>
+                    <div class="offering-item">🍚 Xôi gấc</div>
+                    <div class="offering-item">🍗 Gà luộc</div>
+                    <div class="offering-item">🍬 Kẹo, bánh</div>
+                    <div class="offering-item">🕯️ Nến đỏ</div>
+                    <div class="offering-item">🌺 Hoa tươi</div>
+                    <div class="offering-item">🧧 Vàng mã</div>
+                    <div class="offering-item">🍊 Trái cây</div>
+                  </div>
+
+                  <h4 style="color: var(--red-dark); margin: 1rem 0 0.8rem;">Quy Trình Thực Hiện</h4>
+                  <div class="steps">
+                    <div class="step">
+                      <div class="step-num">1</div>
+                      <div class="step-content">Dọn dẹp sạch sẽ bàn thờ và khu vực cúng trước khi bày lễ</div>
+                    </div>
+                    <div class="step">
+                      <div class="step-num">2</div>
+                      <div class="step-content">Bày mâm lễ: xôi gấc, gà luộc, cá chép (còn sống trong chậu nước), hoa quả, vàng mã</div>
+                    </div>
+                    <div class="step">
+                      <div class="step-num">3</div>
+                      <div class="step-content">Thắp hương và đọc văn khấn với lòng thành kính</div>
+                    </div>
+                    <div class="step">
+                      <div class="step-num">4</div>
+                      <div class="step-content">Sau khi hương tàn, hóa vàng mã</div>
+                    </div>
+                    <div class="step">
+                      <div class="step-num">5</div>
+                      <div class="step-content">Mang cá chép ra sông, hồ, suối để thả – không được thả xuống cống rãnh</div>
+                    </div>
+                  </div>
+
+                  <h4 style="color: var(--red-dark); margin: 1rem 0 0.8rem;" id="van-khan">Văn Khấn Ông Công Ông Táo</h4>
+                  <div class="van-khan-box">
+                    <div class="van-khan-title">🕯️ Văn Khấn Táo Quân (Rút gọn)</div>
+                    <button class="btn-copy" onclick="copyText(this, 'vanKhan1')">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                      Sao chép
+                    </button>
+                    <button class="btn-copy print-btn" onclick="printVanKhan('vanKhan1','Văn Khấn Táo Quân')" style="background:rgba(93,64,55,0.1);color:var(--brown);margin-left:0.4rem;">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                      In PDF
+                    </button>
+                    <div id="vanKhan1">
+                      Nam mô A Di Đà Phật! (3 lần)<br><br>
+                      Con kính lạy Đông Trù Tư Mệnh Táo Phủ Thần Quân.<br>
+                      Tín chủ (chúng) con là: ............<br>
+                      Ngụ tại: ............<br><br>
+                      Hôm nay là ngày 23 tháng Chạp năm ............<br>
+                      Tín chủ chúng con thành tâm sắm sửa hương hoa, lễ vật, trân trọng tiến dâng trước án.<br>
+                      Cúi xin Táo Quân gia ân tấu bẩm, phù hộ cho toàn gia đình chúng con được bình an, vạn sự hanh thông.<br><br>
+                      Nam mô A Di Đà Phật! (3 lần)
+                    </div>
+                  </div>
+
+                  <div class="warning-box">
+                    <div class="warning-icon">⚠️</div>
+                    <div class="warning-text">
+                      <strong>Lưu ý:</strong> Cúng ông Táo nên tiến hành trước 12 giờ trưa ngày 23 tháng Chạp. Không cúng mặn tại bàn thờ Phật. Cá chép phải thả sống xuống nơi nước sạch.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cúng giao thừa -->
+              <div class="accordion-item">
+                <button class="accordion-header" onclick="toggleAccordion(this)">
+                  <div class="accordion-title-wrap">
+                    <div class="accordion-icon-wrap">🎆</div>
+                    <div>
+                      <div class="accordion-title">Cúng Giao Thừa (Đêm 30 Tết)</div>
+                      <div class="accordion-subtitle">Lễ đón năm mới, tiếp đón Tân Niên quan quân tiến về</div>
+                    </div>
+                  </div>
+                  <svg class="accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="accordion-body">
+                  <p style="margin-bottom: 1rem; color: var(--text-mid);">Lễ giao thừa là lễ trừ tịch, được cúng vào lúc chuyển giao giữa năm cũ và năm mới. Có hai mâm: một cúng ngoài trời và một cúng trong nhà.</p>
+
+                  <h4 style="color: var(--red-dark); margin-bottom: 0.8rem;">Lễ Vật (Mâm Ngoài Trời)</h4>
+                  <div class="offering-grid">
+                    <div class="offering-item">🐓 Gà trống luộc</div>
+                    <div class="offering-item">🍚 Xôi</div>
+                    <div class="offering-item">🍖 Thịt heo luộc</div>
+                    <div class="offering-item">🌸 Bánh chưng</div>
+                    <div class="offering-item">🍊 Trái cây 5 loại</div>
+                    <div class="offering-item">🌺 Hoa tươi</div>
+                    <div class="offering-item">🧧 Vàng mã</div>
+                    <div class="offering-item">🕯️ Đèn/nến</div>
+                  </div>
+
+                  <div class="warning-box">
+                    <div class="warning-icon">💡</div>
+                    <div class="warning-text">
+                      Cúng giao thừa phải bắt đầu đúng vào thời điểm giao thừa (0h00). Gia chủ đứng trước hương án, đốt hương, rót rượu và khấn vái.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ===== VÀO ĐỀN ===== -->
+          <div id="vao-den" style="margin-bottom: 2.5rem; padding-top: 1rem;">
+            <h2 style="color: var(--red-dark); margin-bottom: 0.5rem; font-size: 1.6rem;">🏮 Vào Đền Thờ</h2>
+            <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1.5rem; font-style: italic;">Nghi lễ và cách ứng xử khi đến tham lễ tại các đền</p>
+            <div class="accordion">
+
+              <div class="accordion-item">
+                <button class="accordion-header" onclick="toggleAccordion(this)">
+                  <div class="accordion-title-wrap">
+                    <div class="accordion-icon-wrap">🙏</div>
+                    <div>
+                      <div class="accordion-title">Cách Hành Lễ Tại Đền</div>
+                      <div class="accordion-subtitle">Quy trình từ khi vào đến khi ra khỏi đền</div>
+                    </div>
+                  </div>
+                  <svg class="accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="accordion-body">
+                  <div class="steps">
+                    <div class="step">
+                      <div class="step-num">1</div>
+                      <div class="step-content"><strong>Trang phục:</strong> Mặc quần áo dài, kín đáo, màu nhã nhặn. Không mặc quần đùi, váy ngắn, áo hở vai.</div>
+                    </div>
+                    <div class="step">
+                      <div class="step-num">2</div>
+                      <div class="step-content"><strong>Vào cổng:</strong> Bước vào bằng chân trái (cửa Tả), ra bằng chân phải (cửa Hữu). Không đi giữa cửa chính (thần môn).</div>
+                    </div>
+                    <div class="step">
+                      <div class="step-num">3</div>
+                      <div class="step-content"><strong>Bày lễ:</strong> Đặt lễ vật lên bàn dâng lễ tại sân đền, không tự ý đặt lên ban thờ chính.</div>
+                    </div>
+                    <div class="step">
+                      <div class="step-num">4</div>
+                      <div class="step-content"><strong>Thắp hương:</strong> Thắp 1 hoặc 3 nén hương, cắm thẳng đứng, cầm bằng hai tay khi khấn.</div>
+                    </div>
+                    <div class="step">
+                      <div class="step-num">5</div>
+                      <div class="step-content"><strong>Khấn nguyện:</strong> Đứng hoặc quỳ trước ban thờ, đọc văn khấn từ tốn, rõ ràng.</div>
+                    </div>
+                    <div class="step">
+                      <div class="step-num">6</div>
+                      <div class="step-content"><strong>Vái lạy:</strong> Vái 4 lạy 3 vái (theo truyền thống Bắc Bộ). Phụ nữ có thể chắp tay vái thay vì lạy đất.</div>
+                    </div>
+                    <div class="step">
+                      <div class="step-num">7</div>
+                      <div class="step-content"><strong>Nhận lộc:</strong> Đợi hương tàn bớt rồi hạ lễ. Lễ mặn mang về, lễ chay có thể hóa tại chỗ.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <button class="accordion-header" onclick="toggleAccordion(this)">
+                  <div class="accordion-title-wrap">
+                    <div class="accordion-icon-wrap">🎁</div>
+                    <div>
+                      <div class="accordion-title" id="le-vat">Chuẩn Bị Lễ Vật Đi Đền</div>
+                      <div class="accordion-subtitle">Các loại lễ vật phù hợp khi đi đền</div>
+                    </div>
+                  </div>
+                  <svg class="accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="accordion-body">
+                  <p style="margin-bottom: 1rem; color: var(--text-mid);">Lễ vật khi đến đền không nhất thiết phải cầu kỳ. Quan trọng nhất là lòng thành kính.</p>
+
+                  <h4 style="color: var(--red-dark); margin-bottom: 0.8rem;">Lễ Chay (Phổ biến và được khuyến khích)</h4>
+                  <div class="offering-grid">
+                    <div class="offering-item">🌺 Hoa tươi</div>
+                    <div class="offering-item">🍊 Trái cây</div>
+                    <div class="offering-item">🧧 Tiền vàng</div>
+                    <div class="offering-item">🕯️ Nến đỏ</div>
+                    <div class="offering-item">🍬 Xôi chè</div>
+                    <div class="offering-item">🌸 Bánh kẹo</div>
+                  </div>
+
+                  <h4 style="color: var(--red-dark); margin: 1rem 0 0.8rem;">Lễ Mặn (Tùy theo đền)</h4>
+                  <div class="offering-grid">
+                    <div class="offering-item">🐓 Gà luộc</div>
+                    <div class="offering-item">🍖 Giò chả</div>
+                    <div class="offering-item">🍚 Xôi gấc</div>
+                    <div class="offering-item">🐷 Thịt lợn</div>
+                  </div>
+
+                  <div class="warning-box">
+                    <div class="warning-icon">⚠️</div>
+                    <div class="warning-text">
+                      <strong>Không nên:</strong> Cúng thịt chó, thịt mèo, thịt bò tại các đền thờ Tứ Phủ. Không rải tiền thật lên ban thờ. Không đốt vàng mã quá nhiều gây ô nhiễm.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ===== VÀO CHÙA ===== -->
+          <div id="vao-chua" style="margin-bottom: 2.5rem; padding-top: 1rem;">
+            <h2 style="color: var(--green); margin-bottom: 0.5rem; font-size: 1.6rem;">🙏 Vào Chùa Lễ Phật</h2>
+            <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1.5rem; font-style: italic;">Cách hành lễ theo đúng nghi thức Phật giáo tại chùa</p>
+            <div class="accordion">
+
+              <div class="accordion-item">
+                <button class="accordion-header" onclick="toggleAccordion(this)">
+                  <div class="accordion-title-wrap">
+                    <div class="accordion-icon-wrap">🪷</div>
+                    <div>
+                      <div class="accordion-title">Nghi Lễ Lễ Phật Tại Chùa</div>
+                      <div class="accordion-subtitle">Quy trình cúng dường và lễ Phật đúng cách</div>
+                    </div>
+                  </div>
+                  <svg class="accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="accordion-body">
+                  <p style="margin-bottom: 1rem; color: var(--text-mid);">Tại chùa, không cúng đồ mặn. Chỉ dùng lễ chay, hoa tươi và hương để dâng Phật. Thái độ tôn kính, thanh tịnh là quan trọng nhất.</p>
+
+                  <div class="steps">
+                    <div class="step">
+                      <div class="step-num">1</div>
+                      <div class="step-content">Vào chùa bằng cổng phụ, không đi cổng giữa (dành cho tượng thần). Bỏ dép trước khi vào Tam Bảo.</div>
+                    </div>
+                    <div class="step">
+                      <div class="step-num">2</div>
+                      <div class="step-content">Chuẩn bị lễ vật chay: hoa sen/cúc, trái cây, nhang, đèn, có thể thêm xôi chè, bánh trái.</div>
+                    </div>
+                    <div class="step">
+                      <div class="step-num">3</div>
+                      <div class="step-content">Thắp nhang ở lư hương trước Tam Bảo (không thắp trong điện Phật).</div>
+                    </div>
+                    <div class="step">
+                      <div class="step-num">4</div>
+                      <div class="step-content">Vái lạy 3 lần trước tượng Phật, đọc kinh hoặc niệm Phật A Di Đà.</div>
+                    </div>
+                    <div class="step">
+                      <div class="step-num">5</div>
+                      <div class="step-content">Thăm viếng các điện thờ khác trong chùa theo thứ tự: Điện Phật → Điện Thánh → Nhà Thờ Tổ.</div>
+                    </div>
+                  </div>
+
+                  <h4 style="color: var(--green); margin: 1rem 0 0.8rem;">Niệm Phật Căn Bản</h4>
+                  <div class="van-khan-box" style="border-left-color: var(--green);">
+                    <div class="van-khan-title" style="color: var(--green);">🪷 Niệm Phật A Di Đà</div>
+                    <button class="btn-copy" onclick="copyText(this, 'vanKhan2')" style="background: var(--green); color: white;">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                      Sao chép
+                    </button>
+                    <button class="btn-copy print-btn" onclick="printVanKhan('vanKhan2','Niệm Phật A Di Đà')" style="background:rgba(46,125,50,0.1);color:var(--green);margin-left:0.4rem;">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                      In PDF
+                    </button>
+                    <div id="vanKhan2">
+                      Nam mô A Di Đà Phật (108 lần hoặc nhiều lần)<br><br>
+                      Nam mô Bổn Sư Thích Ca Mâu Ni Phật<br>
+                      Nam mô Dược Sư Lưu Ly Quang Vương Phật<br>
+                      Nam mô Đại Bi Quán Thế Âm Bồ Tát<br>
+                      Nam mô Đại Thế Chí Bồ Tát<br>
+                      Nam mô Địa Tạng Vương Bồ Tát
+                    </div>
+                  </div>
+
+                  <div class="warning-box">
+                    <div class="warning-icon">🚫</div>
+                    <div class="warning-text">
+                      <strong>Tuyệt đối không:</strong> Mang thịt cúng vào chùa. Không ăn mặc hở hang, không nói chuyện to, không chụp ảnh trực tiếp vào tượng Phật mà không xin phép.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ===== CÚNG RẰM ===== -->
+          <div id="cung-ram" style="margin-bottom: 2.5rem; padding-top: 1rem;">
+            <h2 style="color: var(--red-dark); margin-bottom: 0.5rem; font-size: 1.6rem;">🌕 Cúng Rằm & Mùng Một</h2>
+            <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1.5rem; font-style: italic;">Nghi lễ cúng vào ngày Rằm (15 âm lịch) và Mùng Một (1 âm lịch) hàng tháng</p>
+            <div class="accordion">
+
+              <div class="accordion-item">
+                <button class="accordion-header" onclick="toggleAccordion(this)">
+                  <div class="accordion-title-wrap">
+                    <div class="accordion-icon-wrap">🌕</div>
+                    <div>
+                      <div class="accordion-title">Cúng Rằm Tháng Giêng – Rằm Lớn Nhất</div>
+                      <div class="accordion-subtitle">Rằm tháng Giêng – ngày lễ quan trọng đầu năm</div>
+                    </div>
+                  </div>
+                  <svg class="accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="accordion-body">
+                  <p style="margin-bottom: 1rem; color: var(--text-mid);">"Lễ cả năm không bằng Rằm tháng Giêng" – đây là ngày lễ Phật quan trọng nhất trong năm, còn gọi là Tết Thượng Nguyên.</p>
+
+                  <div class="offering-grid">
+                    <div class="offering-item">🌸 Hoa tươi</div>
+                    <div class="offering-item">🍊 Ngũ quả</div>
+                    <div class="offering-item">🍬 Chè trôi nước</div>
+                    <div class="offering-item">🕯️ Đèn nến</div>
+                    <div class="offering-item">🧧 Vàng mã</div>
+                    <div class="offering-item">🍚 Xôi nếp</div>
+                  </div>
+
+                  <div class="warning-box">
+                    <div class="warning-icon">⏰</div>
+                    <div class="warning-text">
+                      Nên cúng vào buổi sáng, trước 12 giờ trưa của ngày Rằm. Cúng Thần Linh và Gia Tiên cùng ngày, thứ tự: Phật → Thần → Gia Tiên.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ===== GIỖ CHẠP ===== -->
+          <div id="gio-chap" style="margin-bottom: 2.5rem; padding-top: 1rem;">
+            <h2 style="color: var(--red-dark); margin-bottom: 0.5rem; font-size: 1.6rem;">🕯️ Giỗ Chạp – Cúng Gia Tiên</h2>
+            <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1.5rem; font-style: italic;">Nghi lễ tưởng nhớ và cúng giỗ tổ tiên, ông bà đã khuất</p>
+            <div class="accordion">
+
+              <div class="accordion-item">
+                <button class="accordion-header" onclick="toggleAccordion(this)">
+                  <div class="accordion-title-wrap">
+                    <div class="accordion-icon-wrap">🕯️</div>
+                    <div>
+                      <div class="accordion-title">Nghi Lễ Cúng Giỗ</div>
+                      <div class="accordion-subtitle">Cúng giỗ đúng ngày, đúng nghi thức</div>
+                    </div>
+                  </div>
+                  <svg class="accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="accordion-body">
+                  <p style="margin-bottom: 1rem; color: var(--text-mid);">Giỗ được cúng vào ngày mất theo âm lịch, thường vào buổi trưa. Mâm cỗ thể hiện lòng biết ơn và tưởng nhớ người đã khuất.</p>
+
+                  <h4 style="color: var(--red-dark); margin-bottom: 0.8rem;">Mâm Cúng Giỗ Thông Thường</h4>
+                  <div class="offering-grid">
+                    <div class="offering-item">🐓 Gà luộc</div>
+                    <div class="offering-item">🍖 Giò lụa</div>
+                    <div class="offering-item">🐟 Cá kho</div>
+                    <div class="offering-item">🥬 Rau xào</div>
+                    <div class="offering-item">🍜 Canh</div>
+                    <div class="offering-item">🍚 Cơm trắng</div>
+                    <div class="offering-item">🍊 Trái cây</div>
+                    <div class="offering-item">🌺 Hoa tươi</div>
+                  </div>
+
+                  <div class="van-khan-box">
+                    <div class="van-khan-title">🕯️ Văn Khấn Cúng Giỗ</div>
+                    <button class="btn-copy" onclick="copyText(this, 'vanKhan3')">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                      Sao chép
+                    </button>
+                    <button class="btn-copy print-btn" onclick="printVanKhan('vanKhan3','Văn Khấn Cúng Giỗ')" style="background:rgba(93,64,55,0.1);color:var(--brown);margin-left:0.4rem;">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                      In PDF
+                    </button>
+                    <div id="vanKhan3">
+                      Nam mô A Di Đà Phật! (3 lần)<br><br>
+                      Con kính lạy các vị Thần linh cai quản trong khu vực này.<br>
+                      Hôm nay là ngày .... tháng .... năm ....<br>
+                      Tín chủ con là: ............ ngụ tại: ............<br><br>
+                      Nhân ngày húy kỵ của: ............<br>
+                      Chúng con thành tâm sắm lễ, dâng hương hoa trà quả, cúng dâng trước linh vị.<br>
+                      Cúi xin ............, phù hộ độ trì cho con cháu mạnh khỏe, làm ăn phát đạt, gia đình hòa thuận.<br><br>
+                      Nam mô A Di Đà Phật! (3 lần)
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ===== HÀNH HƯƠNG ===== -->
+          <div id="hanh-huong" style="margin-bottom: 2.5rem; padding-top: 1rem;">
+            <h2 style="color: var(--red-dark); margin-bottom: 0.5rem; font-size: 1.6rem;">🚶 Hành Hương – Tham Quan</h2>
+            <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1.5rem; font-style: italic;">Cẩm nang chuẩn bị cho chuyến hành hương dài ngày</p>
+            <div class="accordion">
+
+              <div class="accordion-item">
+                <button class="accordion-header" onclick="toggleAccordion(this)">
+                  <div class="accordion-title-wrap">
+                    <div class="accordion-icon-wrap">🎒</div>
+                    <div>
+                      <div class="accordion-title">Chuẩn Bị Trước Khi Hành Hương</div>
+                      <div class="accordion-subtitle">Những điều cần làm để chuyến đi suôn sẻ</div>
+                    </div>
+                  </div>
+                  <svg class="accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="accordion-body">
+                  <div class="steps">
+                    <div class="step">
+                      <div class="step-num">1</div>
+                      <div class="step-content"><strong>Chọn ngày lành:</strong> Xem lịch âm dương, chọn ngày hoàng đạo, tránh ngày xung kỵ với tuổi.</div>
+                    </div>
+                    <div class="step">
+                      <div class="step-num">2</div>
+                      <div class="step-content"><strong>Tìm hiểu địa điểm:</strong> Nghiên cứu lịch sử, ý nghĩa của đền/chùa sẽ đến để hiểu rõ và có lòng thành hơn.</div>
+                    </div>
+                    <div class="step">
+                      <div class="step-num">3</div>
+                      <div class="step-content"><strong>Chuẩn bị trang phục:</strong> Quần áo dài, kín đáo, thoải mái để đi bộ nhiều. Mang thêm khăn che vai.</div>
+                    </div>
+                    <div class="step">
+                      <div class="step-num">4</div>
+                      <div class="step-content"><strong>Lễ vật:</strong> Mua sẵn hoặc mua tại chỗ. Hoa tươi, hương, vàng mã là đủ. Không cần cầu kỳ.</div>
+                    </div>
+                    <div class="step">
+                      <div class="step-num">5</div>
+                      <div class="step-content"><strong>Tâm thế:</strong> Giữ tâm thanh tịnh, tránh cãi cọ, nói xấu trên đường đi lễ.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </main>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🌟 Tâm Linh Việt</h3>
+        <p>Cổng thông tin hướng dẫn thực hành nghi lễ thờ cúng và hành hương tại các đền, đình, chùa vùng phía Bắc Việt Nam.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Nội Dung</h4>
+        <ul>
+          <li><a href="huong-dan.html">Hướng Dẫn Nghi Lễ</a></li>
+          <li><a href="huong-dan.html#van-khan">Văn Khấn</a></li>
+          <li><a href="huong-dan.html#le-vat">Chuẩn Bị Lễ Vật</a></li>
+          <li><a href="lich-le-hoi.html">Lịch Lễ Hội</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Địa Điểm</h4>
+        <ul>
+          <li><a href="dia-diem.html?tinh=hanoi">Hà Nội</a></li>
+          <li><a href="dia-diem.html?tinh=phutho">Phú Thọ</a></li>
+          <li><a href="dia-diem.html?tinh=quangninh">Quảng Ninh</a></li>
+          <li><a href="dia-diem.html?tinh=bacninh">Bắc Ninh</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Hỗ Trợ</h4>
+        <ul>
+          <li><a href="#">Về Chúng Tôi</a></li>
+          <li><a href="#">Liên Hệ</a></li>
+          <li><a href="#">Góp Ý</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Tâm Linh Việt. Bảo tồn giá trị văn hóa tâm linh Việt Nam.</span>
+      <span style="color: var(--gold-dark);">🕯️ Nguyện cầu bình an</span>
+    </div>
+  </footer>
+
+  <!-- Floating Print All Button -->
+  <button class="print-float-btn" onclick="printAllVanKhan()" title="In tất cả văn khấn">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+    In Văn Khấn
+  </button>
+
+  <script src="js/main.js"></script>
+  <script>
+    function toggleAccordion(btn) {
+      const body = btn.nextElementSibling;
+      const isOpen = btn.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.accordion-header.open').forEach(h => {
+        h.classList.remove('open');
+        h.nextElementSibling.classList.remove('open');
+      });
+      if (!isOpen) {
+        btn.classList.add('open');
+        body.classList.add('open');
+      }
+    }
+
+    function copyText(btn, id) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.classList.add('copied');
+        btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Đã sao chép';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Sao chép';
+        }, 2000);
+      });
+    }
+
+    function printVanKhan(id, title) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const content = el.innerHTML.replace(/<br>/g, '\n');
+      const printCSS = `
+        body { font-family: 'Times New Roman', serif; margin: 2cm; line-height: 2; font-size: 12pt; color: #000; }
+        h1 { font-size: 16pt; text-align: center; color: #8B0000; border-bottom: 2px solid #C0392B; padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        p { margin-bottom: 0.8rem; }
+        .footer-print { margin-top: 3rem; border-top: 1px solid #ccc; padding-top: 0.5rem; font-size: 9pt; color: #888; text-align: center; }
+        @page { margin: 2cm; size: A4; }
+      `;
+      const w = window.open('', 'PrintVanKhan', 'width=800,height=700');
+      w.document.write(`<!DOCTYPE html><html lang="vi"><head>
+        <meta charset="UTF-8"><title>${title} – Tâm Linh Việt</title>
+        <style>${printCSS}</style></head><body>
+        <h1>${title}</h1>
+        <div>${content}</div>
+        <div class="footer-print">Nguồn: Tâm Linh Việt – Hành Trình Tâm Linh Trọn Vẹn</div>
+        <script>window.onload=function(){window.print();setTimeout(()=>window.close(),800);}<\/script>
+        </body></html>`);
+      w.document.close();
+    }
+
+    function printAllVanKhan() {
+      const boxes = document.querySelectorAll('.van-khan-box');
+      let allContent = '';
+      boxes.forEach(box => {
+        const title = box.querySelector('.van-khan-title');
+        const body = box.lastElementChild;
+        allContent += `<div style="margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid #ddd;">
+          <h2 style="font-size:13pt;color:#8B0000;">${title ? title.innerText : ''}</h2>
+          <div style="line-height:2;">${body ? body.innerHTML : ''}</div>
+        </div>`;
+      });
+      const printCSS = `
+        body { font-family:'Times New Roman',serif; margin:2cm; font-size:12pt; color:#000; line-height:2; }
+        h1 { font-size:18pt; text-align:center; color:#8B0000; border-bottom:3px solid #C0392B; padding-bottom:0.5rem; margin-bottom:2rem; }
+        h2 { page-break-before: auto; }
+        .footer-print { margin-top:2rem; border-top:1px solid #ccc; padding-top:0.5rem; font-size:9pt; color:#888; text-align:center; }
+        @page { margin:2cm; size:A4; }
+      `;
+      const w = window.open('', 'PrintAllVanKhan', 'width=900,height=750');
+      w.document.write(`<!DOCTYPE html><html lang="vi"><head>
+        <meta charset="UTF-8"><title>Tổng Hợp Văn Khấn – Tâm Linh Việt</title>
+        <style>${printCSS}</style></head><body>
+        <h1>Tổng Hợp Văn Khấn</h1>
+        ${allContent}
+        <div class="footer-print">Nguồn: Tâm Linh Việt – Hành Trình Tâm Linh Trọn Vẹn © 2026</div>
+        <script>window.onload=function(){window.print();setTimeout(()=>window.close(),800);}<\/script>
+        </body></html>`);
+      w.document.close();
+    }
+
+    // Active sidebar link on scroll
+    const sections = document.querySelectorAll('[id]');
+    const sidebarLinks = document.querySelectorAll('.sidebar-menu a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 120) current = s.id;
+      });
+      sidebarLinks.forEach(a => {
+        a.classList.remove('active');
+        if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
