@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B5E20"/>
+      <stop offset="100%" style="stop-color:#33691E"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F0D060"/>
+      <stop offset="100%" style="stop-color:#D4AF37"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/>
+  <!-- Ruộng bậc thang Mù Cang Chải -->
+  <path d="M50,280 Q200,260 350,280" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.3"/>
+  <path d="M60,260 Q200,240 340,260" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.35"/>
+  <path d="M70,240 Q200,220 330,240" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.4"/>
+  <path d="M80,220 Q200,200 320,220" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.4"/>
+  <path d="M90,200 Q200,180 310,200" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.35"/>
+  <path d="M100,180 Q200,160 300,180" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.3"/>
+  <!-- Đền Đông Cuông trên đồi -->
+  <rect x="175" y="120" width="50" height="35" rx="2" fill="none" stroke="url(#gold)" stroke-width="2"/>
+  <path d="M160,120 Q200,95 240,120" fill="none" stroke="url(#gold)" stroke-width="2"/>
+  <path d="M168,95 Q200,78 232,95" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.7"/>
+  <!-- Cột -->
+  <line x1="188" y1="120" x2="188" y2="155" stroke="url(#gold)" stroke-width="1"/>
+  <line x1="212" y1="120" x2="212" y2="155" stroke="url(#gold)" stroke-width="1"/>
+  <!-- Mây núi -->
+  <path d="M40,100 Q65,90 90,100 Q115,110 140,100" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.2"/>
+  <path d="M260,90 Q285,80 310,90 Q335,100 360,90" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.2"/>
+</svg>

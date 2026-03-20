@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#5D4037"/>
+      <stop offset="100%" style="stop-color:#3E2723"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F0D060"/>
+      <stop offset="100%" style="stop-color:#D4AF37"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/>
+  <!-- Đình làng - mái cong rộng -->
+  <rect x="120" y="120" width="160" height="60" rx="3" fill="none" stroke="url(#gold)" stroke-width="2"/>
+  <path d="M100,120 Q200,70 300,120" fill="none" stroke="url(#gold)" stroke-width="2.5"/>
+  <!-- 4 cột -->
+  <line x1="145" y1="120" x2="145" y2="180" stroke="url(#gold)" stroke-width="1.5"/>
+  <line x1="195" y1="120" x2="195" y2="180" stroke="url(#gold)" stroke-width="1.5"/>
+  <line x1="205" y1="120" x2="205" y2="180" stroke="url(#gold)" stroke-width="1.5"/>
+  <line x1="255" y1="120" x2="255" y2="180" stroke="url(#gold)" stroke-width="1.5"/>
+  <!-- Sân đình -->
+  <rect x="110" y="180" width="180" height="8" rx="1" fill="none" stroke="url(#gold)" stroke-width="1.5"/>
+  <!-- Cây đa -->
+  <line x1="60" y1="250" x2="60" y2="160" stroke="url(#gold)" stroke-width="2" opacity="0.4"/>
+  <circle cx="55" cy="150" r="25" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.3"/>
+  <circle cx="68" cy="145" r="20" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.25"/>
+  <!-- Giếng làng -->
+  <ellipse cx="340" cy="230" rx="20" ry="8" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.4"/>
+  <!-- Trống đồng nhỏ -->
+  <circle cx="200" cy="240" r="18" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.2"/>
+  <circle cx="200" cy="240" r="10" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.15"/>
+</svg>

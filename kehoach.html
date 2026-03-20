@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kế Hoạch Phát Triển – Tâm Linh Việt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Noto+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #C0392B; --red-dark: #922B21; --gold: #D4AF37; --gold-light: #F0D060;
+      --brown: #5D4037; --cream: #FDF6E3; --cream-dark: #F5E6C8;
+      --green: #2E7D32; --text-dark: #2C1810; --text-mid: #5D4037; --text-light: #8D6E63;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Serif', serif; background: var(--cream); color: var(--text-dark); line-height: 1.8; }
+
+    /* Header */
+    .plan-header {
+      background: linear-gradient(135deg, var(--red-dark) 0%, #6B1E1E 40%, var(--brown) 100%);
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .plan-header::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L35 25H55L40 37L45 57L30 45L15 57L20 37L5 25H25Z' fill='none' stroke='rgba(212,175,55,0.08)' stroke-width='1'/%3E%3C/svg%3E") repeat;
+    }
+    .plan-header h1 { font-family: 'Playfair Display', serif; color: var(--gold-light); font-size: 2.4rem; position: relative; }
+    .plan-header p { color: rgba(255,255,255,0.7); font-size: 1rem; margin-top: 0.5rem; position: relative; }
+    .plan-header .version { display: inline-block; background: var(--gold); color: var(--red-dark); padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 700; margin-top: 1rem; position: relative; }
+
+    /* Navigation */
+    .plan-nav {
+      background: white;
+      border-bottom: 2px solid var(--gold);
+      padding: 0.8rem 2rem;
+      position: sticky; top: 0; z-index: 100;
+      display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;
+    }
+    .plan-nav a {
+      color: var(--text-mid); text-decoration: none; font-size: 0.82rem; font-weight: 600;
+      padding: 0.4rem 0.8rem; border-radius: 20px; transition: all 0.2s;
+      text-transform: uppercase; letter-spacing: 0.3px;
+    }
+    .plan-nav a:hover, .plan-nav a.active { background: var(--red); color: white; }
+
+    /* Main */
+    .plan-body { max-width: 1000px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+    /* Section */
+    .plan-section { margin-bottom: 3rem; }
+    .plan-section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; color: var(--red-dark);
+      display: flex; align-items: center; gap: 0.6rem;
+      padding-bottom: 0.6rem; border-bottom: 3px solid var(--gold);
+      margin-bottom: 1.5rem; text-transform: uppercase; font-weight: 700;
+    }
+    .plan-section-title .num {
+      background: var(--red); color: white; width: 36px; height: 36px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; font-weight: 700; flex-shrink: 0;
+    }
+
+    /* Cards */
+    .plan-card {
+      background: white; border-radius: 12px; padding: 1.5rem;
+      border: 1px solid var(--cream-dark); margin-bottom: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .plan-card h4 {
+      color: var(--red-dark); font-size: 1rem; margin-bottom: 0.5rem;
+      text-transform: uppercase; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .plan-card p { font-size: 0.9rem; color: var(--text-mid); }
+    .plan-card .tag {
+      display: inline-block; padding: 0.15rem 0.6rem; border-radius: 10px;
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase; margin-right: 0.3rem;
+    }
+    .tag-new { background: rgba(46,125,50,0.12); color: var(--green); }
+    .tag-exist { background: rgba(212,175,55,0.15); color: var(--gold-dark, #A07820); }
+    .tag-admin { background: rgba(192,57,43,0.1); color: var(--red); }
+    .tag-phase1 { background: rgba(93,64,55,0.1); color: var(--brown); }
+    .tag-phase2 { background: rgba(33,150,243,0.1); color: #1976D2; }
+
+    /* Feature grid */
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+
+    /* Table */
+    .plan-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .plan-table th {
+      background: var(--red-dark); color: white; padding: 0.7rem 1rem;
+      text-align: left; font-size: 0.82rem; text-transform: uppercase; font-weight: 700;
+    }
+    .plan-table td { padding: 0.7rem 1rem; border-bottom: 1px solid var(--cream-dark); font-size: 0.88rem; }
+    .plan-table tr:last-child td { border-bottom: none; }
+    .plan-table tr:hover td { background: rgba(212,175,55,0.06); }
+
+    /* Status */
+    .status { padding: 0.2rem 0.6rem; border-radius: 10px; font-size: 0.72rem; font-weight: 700; }
+    .status-done { background: rgba(46,125,50,0.12); color: var(--green); }
+    .status-progress { background: rgba(212,175,55,0.15); color: #A07820; }
+    .status-plan { background: rgba(93,64,55,0.1); color: var(--brown); }
+
+    /* Flow diagram */
+    .flow { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; justify-content: center; margin: 1.5rem 0; }
+    .flow-item {
+      background: white; border: 2px solid var(--gold); border-radius: 10px;
+      padding: 0.6rem 1.2rem; font-size: 0.85rem; font-weight: 700;
+      color: var(--red-dark); text-align: center; min-width: 140px;
+      text-transform: uppercase;
+    }
+    .flow-arrow { color: var(--gold); font-size: 1.4rem; font-weight: 700; }
+
+    /* User persona */
+    .persona-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+    .persona-card {
+      background: white; border-radius: 12px; padding: 1.2rem; text-align: center;
+      border: 1px solid var(--cream-dark); box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .persona-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .persona-name { font-weight: 700; color: var(--red-dark); text-transform: uppercase; margin-bottom: 0.3rem; }
+    .persona-desc { font-size: 0.82rem; color: var(--text-light); }
+
+    /* Sitemap tree */
+    .sitemap { background: white; border-radius: 12px; padding: 1.5rem; border: 1px solid var(--cream-dark); }
+    .sitemap ul { list-style: none; padding-left: 1.5rem; }
+    .sitemap > ul { padding-left: 0; }
+    .sitemap li { position: relative; padding: 0.3rem 0; font-size: 0.9rem; }
+    .sitemap li::before { content: ''; position: absolute; left: -1rem; top: 0; bottom: 0; width: 1px; background: var(--cream-dark); }
+    .sitemap li::after { content: ''; position: absolute; left: -1rem; top: 0.9rem; width: 0.8rem; height: 1px; background: var(--cream-dark); }
+    .sitemap > ul > li::before, .sitemap > ul > li::after { display: none; }
+    .sitemap .file { color: var(--red-dark); font-weight: 700; }
+    .sitemap .desc { color: var(--text-light); font-size: 0.8rem; }
+    .sitemap .new-badge { background: var(--green); color: white; padding: 0.1rem 0.4rem; border-radius: 6px; font-size: 0.65rem; font-weight: 700; margin-left: 0.3rem; }
+
+    /* Print */
+    .print-btn {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 900;
+      background: var(--brown); color: white; border: none; border-radius: 50px;
+      padding: 0.7rem 1.2rem; font-size: 0.85rem; font-weight: 600;
+      cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      display: flex; align-items: center; gap: 0.5rem; font-family: inherit;
+    }
+    .print-btn:hover { background: var(--red-dark); }
+
+    @media print {
+      .plan-nav, .print-btn { display: none !important; }
+      .plan-header { padding: 2rem; }
+      body { font-size: 10pt; }
+    }
+    @media (max-width: 600px) {
+      .plan-header h1 { font-size: 1.6rem; }
+      .feature-grid, .persona-grid { grid-template-columns: 1fr; }
+      .flow { flex-direction: column; }
+      .flow-arrow { transform: rotate(90deg); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="plan-header">
+  <h1>KẾ HOẠCH PHÁT TRIỂN PHẦN MỀM</h1>
+  <p>Hệ thống thông tin hướng dẫn hành hương và thờ cúng – Tâm Linh Việt</p>
+  <div class="version">Phiên bản 2.0 – Tháng 3/2026</div>
+</div>
+
+<nav class="plan-nav">
+  <a href="#tamNhin">TẦM NHÌN</a>
+  <a href="#doiTuong">ĐỐI TƯỢNG</a>
+  <a href="#tinhNang">TÍNH NĂNG</a>
+  <a href="#tinhNangMoi">TÍNH NĂNG MỚI</a>
+  <a href="#quanTri">QUẢN TRỊ</a>
+  <a href="#cauTruc">CẤU TRÚC</a>
+  <a href="#loTrinh">LỘ TRÌNH</a>
+  <a href="#congNghe">CÔNG NGHỆ</a>
+</nav>
+
+<div class="plan-body">
+
+  <!-- 1. TẦM NHÌN -->
+  <section class="plan-section" id="tamNhin">
+    <div class="plan-section-title">
+      <span class="num">1</span>
+      TẦM NHÌN VÀ MỤC TIÊU
+    </div>
+    <div class="plan-card">
+      <h4>TẦM NHÌN</h4>
+      <p>Xây dựng nền tảng số hàng đầu hỗ trợ người dân Việt Nam trong hành trình tâm linh – từ chuẩn bị lễ vật, tìm hiểu nghi lễ, tra cứu địa điểm đến lập kế hoạch hành hương hoàn chỉnh.</p>
+    </div>
+    <div class="plan-card">
+      <h4>NGUYÊN TẮC THIẾT KẾ</h4>
+      <p><strong>Người đi lễ là trung tâm.</strong> Mọi tính năng đều được thiết kế để phục vụ nhu cầu thực tế của người đi lễ, đi chùa, đi đền – từ người mới bắt đầu đến người đã có kinh nghiệm. Phần mềm phải dễ sử dụng, thông tin chính xác, giao diện mang đậm bản sắc lễ hội truyền thống Việt Nam.</p>
+    </div>
+    <div class="plan-card">
+      <h4>MỤC TIÊU CỤ THỂ</h4>
+      <p>
+        1. Cung cấp hướng dẫn nghi lễ đầy đủ, chính xác cho <strong>6 loại nghi lễ phổ biến</strong><br>
+        2. Xây dựng cơ sở dữ liệu <strong>40+ địa điểm</strong> tại <strong>13 tỉnh miền Bắc</strong> với bản đồ tương tác<br>
+        3. Lịch lễ hội <strong>30+ sự kiện</strong> với quy đổi âm – dương lịch chính xác năm 2026<br>
+        4. Công cụ <strong>CHUẨN BỊ HÀNH TRANG</strong> giúp người đi lễ không bỏ sót lễ vật<br>
+        5. Tính năng <strong>XEM NGÀY TỐT</strong> tra cứu ngày lành tháng tốt đi lễ<br>
+        6. <strong>SỔ CẦU NGUYỆN</strong> cá nhân lưu địa điểm yêu thích và ghi chú lời nguyện<br>
+        7. Hệ thống quản trị nội dung cho phép cập nhật không cần lập trình
+      </p>
+    </div>
+  </section>
+
+  <!-- 2. ĐỐI TƯỢNG -->
+  <section class="plan-section" id="doiTuong">
+    <div class="plan-section-title">
+      <span class="num">2</span>
+      ĐỐI TƯỢNG SỬ DỤNG
+    </div>
+    <div class="persona-grid">
+      <div class="persona-card">
+        <div class="persona-icon">👵</div>
+        <div class="persona-name">NGƯỜI CAO TUỔI</div>
+        <div class="persona-desc">Đi lễ thường xuyên, cần văn khấn chuẩn, giao diện chữ to dễ đọc</div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-icon">👨‍👩‍👧</div>
+        <div class="persona-name">GIA ĐÌNH TRẺ</div>
+        <div class="persona-desc">Lần đầu đi lễ, cần hướng dẫn từ A đến Z, checklist đầy đủ</div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-icon">🎒</div>
+        <div class="persona-name">KHÁCH HÀNH HƯƠNG</div>
+        <div class="persona-desc">Đi nhiều đền chùa, cần bản đồ, lộ trình, lịch lễ hội</div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-icon">📱</div>
+        <div class="persona-name">NGƯỜI TRA CỨU</div>
+        <div class="persona-desc">Tra nhanh văn khấn, ngày tốt, cách sắm lễ trên điện thoại</div>
+      </div>
+    </div>
+
+    <div class="plan-card" style="margin-top: 1rem;">
+      <h4>HÀNH TRÌNH NGƯỜI DÙNG (USER JOURNEY)</h4>
+      <div class="flow">
+        <div class="flow-item">TÌM HIỂU<br><span style="font-size:0.7rem;font-weight:400;">nghi lễ, văn khấn</span></div>
+        <span class="flow-arrow">&#10132;</span>
+        <div class="flow-item">XEM NGÀY TỐT<br><span style="font-size:0.7rem;font-weight:400;">chọn ngày đi lễ</span></div>
+        <span class="flow-arrow">&#10132;</span>
+        <div class="flow-item">CHUẨN BỊ<br><span style="font-size:0.7rem;font-weight:400;">lễ vật, hành trang</span></div>
+        <span class="flow-arrow">&#10132;</span>
+        <div class="flow-item">TÌM ĐỊA ĐIỂM<br><span style="font-size:0.7rem;font-weight:400;">bản đồ, lộ trình</span></div>
+        <span class="flow-arrow">&#10132;</span>
+        <div class="flow-item">ĐI LỄ<br><span style="font-size:0.7rem;font-weight:400;">thực hành nghi lễ</span></div>
+        <span class="flow-arrow">&#10132;</span>
+        <div class="flow-item">GHI CHÉP<br><span style="font-size:0.7rem;font-weight:400;">sổ cầu nguyện</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. TÍNH NĂNG CỐT LÕI (ĐÃ CÓ) -->
+  <section class="plan-section" id="tinhNang">
+    <div class="plan-section-title">
+      <span class="num">3</span>
+      TÍNH NĂNG CỐT LÕI (ĐÃ HOÀN THÀNH)
+    </div>
+    <div class="feature-grid">
+      <div class="plan-card">
+        <h4><span class="tag tag-exist">Đã có</span> HƯỚNG DẪN NGHI LỄ</h4>
+        <p>6 loại nghi lễ: Tết, Vào Đền, Vào Chùa, Cúng Rằm, Giỗ Chạp, Hành Hương. Văn khấn có nút sao chép và in PDF.</p>
+      </div>
+      <div class="plan-card">
+        <h4><span class="tag tag-exist">Đã có</span> BẢN ĐỒ ĐỊA ĐIỂM</h4>
+        <p>40 địa điểm tại 13 tỉnh. Bản đồ Leaflet tương tác, bộ lọc theo loại hình và tỉnh thành, chi tiết từng địa điểm.</p>
+      </div>
+      <div class="plan-card">
+        <h4><span class="tag tag-exist">Đã có</span> LỊCH LỄ HỘI</h4>
+        <p>30 lễ hội với lịch âm – dương 2026. Chế độ xem danh sách và lịch tháng, bộ lọc theo tỉnh và tháng.</p>
+      </div>
+      <div class="plan-card">
+        <h4><span class="tag tag-exist">Đã có</span> TÌM KIẾM TOÀN HỆ THỐNG</h4>
+        <p>Tìm kiếm đồng thời trên địa điểm, lễ hội và nghi lễ. Gợi ý từ khóa nhanh, kết quả phân nhóm rõ ràng.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. TÍNH NĂNG MỚI -->
+  <section class="plan-section" id="tinhNangMoi">
+    <div class="plan-section-title">
+      <span class="num">4</span>
+      TÍNH NĂNG MỚI – LẤY NGƯỜI ĐI LỄ LÀM TRUNG TÂM
+    </div>
+
+    <div class="plan-card" style="border-left: 4px solid var(--green);">
+      <h4><span class="tag tag-new">Mới</span> CHUẨN BỊ HÀNH TRANG</h4>
+      <p><strong>Trang: chuan-bi.html</strong></p>
+      <p>Công cụ tương tác giúp người đi lễ chuẩn bị đầy đủ trước khi đến đền, chùa:</p>
+      <p>
+        - Chọn loại hình (đi đền / đi chùa / cúng giỗ / cúng Rằm)<br>
+        - Hệ thống tự động gợi ý danh sách lễ vật phù hợp<br>
+        - Checklist tích chọn từng mục, đánh dấu đã chuẩn bị<br>
+        - Lưu danh sách vào điện thoại để xem khi đi mua sắm<br>
+        - Mẹo và lưu ý quan trọng cho từng loại lễ
+      </p>
+    </div>
+
+    <div class="plan-card" style="border-left: 4px solid var(--green);">
+      <h4><span class="tag tag-new">Mới</span> XEM NGÀY TỐT</h4>
+      <p><strong>Trang: xem-ngay.html</strong></p>
+      <p>Tiện ích tra cứu ngày lành tháng tốt cho người đi lễ:</p>
+      <p>
+        - Lịch tháng hiển thị ngày tốt / ngày xấu theo âm lịch<br>
+        - Chọn mục đích: khai trương, cầu tài, cầu an, hành hương, giỗ chạp<br>
+        - Hiển thị thông tin: ngày âm lịch, giờ hoàng đạo, hướng xuất hành tốt<br>
+        - Đánh dấu các ngày lễ lớn, ngày vía Phật, ngày Rằm, mùng Một<br>
+        - Gợi ý đền chùa phù hợp cho ngày đó
+      </p>
+    </div>
+
+    <div class="plan-card" style="border-left: 4px solid var(--green);">
+      <h4><span class="tag tag-new">Mới</span> SỔ CẦU NGUYỆN</h4>
+      <p><strong>Trang: so-nguyen.html</strong></p>
+      <p>Sổ tay cá nhân cho người đi lễ lưu trữ hành trình tâm linh:</p>
+      <p>
+        - Lưu địa điểm yêu thích (đánh dấu sao)<br>
+        - Ghi chép lời nguyện, mong ước khi đi lễ<br>
+        - Nhật ký hành hương: ngày đi, địa điểm, ghi chú<br>
+        - Đếm số lần đi lễ trong năm<br>
+        - Dữ liệu lưu trên trình duyệt, bảo mật riêng tư
+      </p>
+    </div>
+  </section>
+
+  <!-- 5. QUẢN TRỊ -->
+  <section class="plan-section" id="quanTri">
+    <div class="plan-section-title">
+      <span class="num">5</span>
+      HỆ THỐNG QUẢN TRỊ NỘI DUNG
+    </div>
+    <div class="feature-grid">
+      <div class="plan-card">
+        <h4><span class="tag tag-admin">Quản trị</span> QUẢN LÝ ĐỊA ĐIỂM</h4>
+        <p>Thêm, sửa, xoá địa điểm đền chùa. Cập nhật toạ độ GPS, hình ảnh, giờ mở cửa, mô tả.</p>
+      </div>
+      <div class="plan-card">
+        <h4><span class="tag tag-admin">Quản trị</span> QUẢN LÝ LỄ HỘI</h4>
+        <p>Quản lý lịch lễ hội, ngày âm – dương, đánh dấu lễ hội nổi bật trên trang chủ.</p>
+      </div>
+      <div class="plan-card">
+        <h4><span class="tag tag-admin">Quản trị</span> XUẤT / NHẬP DỮ LIỆU</h4>
+        <p>Xuất dữ liệu JSON để sao lưu, nhập JSON để khôi phục. Xuất mã JS để cập nhật vĩnh viễn.</p>
+      </div>
+      <div class="plan-card">
+        <h4><span class="tag tag-admin">Quản trị</span> PHÂN QUYỀN TÀI KHOẢN</h4>
+        <p>3 cấp: Super Admin (toàn quyền), Quản trị viên (thêm/sửa), Thành viên (chỉ xem).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. CẤU TRÚC -->
+  <section class="plan-section" id="cauTruc">
+    <div class="plan-section-title">
+      <span class="num">6</span>
+      CẤU TRÚC THƯ MỤC VÀ TẬP TIN
+    </div>
+    <div class="sitemap">
+      <ul>
+        <li>
+          <span class="file">den-chua/</span> <span class="desc">– Thư mục gốc</span>
+          <ul>
+            <li><span class="file">index.html</span> <span class="desc">– Trang chủ</span></li>
+            <li><span class="file">huong-dan.html</span> <span class="desc">– Hướng dẫn nghi lễ + văn khấn</span></li>
+            <li><span class="file">dia-diem.html</span> <span class="desc">– Bản đồ địa điểm</span></li>
+            <li><span class="file">lich-le-hoi.html</span> <span class="desc">– Lịch lễ hội</span></li>
+            <li><span class="file">tim-kiem.html</span> <span class="desc">– Tìm kiếm toàn hệ thống</span></li>
+            <li><span class="file">chuan-bi.html</span> <span class="desc">– Chuẩn bị hành trang</span> <span class="new-badge">MỚI</span></li>
+            <li><span class="file">xem-ngay.html</span> <span class="desc">– Xem ngày tốt</span> <span class="new-badge">MỚI</span></li>
+            <li><span class="file">so-nguyen.html</span> <span class="desc">– Sổ cầu nguyện</span> <span class="new-badge">MỚI</span></li>
+            <li><span class="file">kehoach.html</span> <span class="desc">– Kế hoạch phát triển</span></li>
+            <li><span class="file">sale.html</span> <span class="desc">– Giới thiệu phần mềm (trình chiếu)</span> <span class="new-badge">MỚI</span></li>
+            <li><span class="file">hdsd.html</span> <span class="desc">– Hướng dẫn sử dụng cho quản trị</span> <span class="new-badge">MỚI</span></li>
+            <li>
+              <span class="file">css/</span>
+              <ul>
+                <li><span class="file">style.css</span> <span class="desc">– Hệ thống thiết kế chung</span></li>
+              </ul>
+            </li>
+            <li>
+              <span class="file">js/</span>
+              <ul>
+                <li><span class="file">main.js</span> <span class="desc">– Thanh điều hướng, hiệu ứng cuộn</span></li>
+                <li><span class="file">map.js</span> <span class="desc">– Dữ liệu + logic bản đồ (40 địa điểm)</span></li>
+                <li><span class="file">calendar.js</span> <span class="desc">– Dữ liệu + logic lịch (30 lễ hội)</span></li>
+              </ul>
+            </li>
+            <li>
+              <span class="file">admin/</span> <span class="desc">– Hệ thống quản trị</span>
+              <ul>
+                <li><span class="file">login.html</span> <span class="desc">– Đăng nhập quản trị</span></li>
+                <li><span class="file">index.html</span> <span class="desc">– Bảng điều khiển + CRUD</span></li>
+                <li><span class="file">huong-dan-quantri.html</span> <span class="desc">– Hướng dẫn quản trị (cũ)</span></li>
+                <li><span class="file">css/admin.css</span> <span class="desc">– Giao diện quản trị</span></li>
+                <li><span class="file">js/admin.js</span> <span class="desc">– Logic quản trị</span></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 7. LỘ TRÌNH -->
+  <section class="plan-section" id="loTrinh">
+    <div class="plan-section-title">
+      <span class="num">7</span>
+      LỘ TRÌNH PHÁT TRIỂN
+    </div>
+    <table class="plan-table">
+      <thead>
+        <tr>
+          <th style="width:80px;">Giai Đoạn</th>
+          <th>Nội Dung</th>
+          <th style="width:120px;">Tập Tin</th>
+          <th style="width:100px;">Trạng Thái</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="5"><strong>Giai đoạn 1</strong><br><span style="font-size:0.75rem;color:var(--text-light);">Nền tảng</span></td>
+          <td><strong>TRANG CHỦ</strong> – Giới thiệu, điều hướng</td>
+          <td>index.html</td>
+          <td><span class="status status-done">HOÀN THÀNH</span></td>
+        </tr>
+        <tr>
+          <td><strong>HƯỚNG DẪN NGHI LỄ</strong> – Văn khấn, lễ vật, quy trình</td>
+          <td>huong-dan.html</td>
+          <td><span class="status status-done">HOÀN THÀNH</span></td>
+        </tr>
+        <tr>
+          <td><strong>BẢN ĐỒ ĐỊA ĐIỂM</strong> – 40 địa điểm, 13 tỉnh</td>
+          <td>dia-diem.html</td>
+          <td><span class="status status-done">HOÀN THÀNH</span></td>
+        </tr>
+        <tr>
+          <td><strong>LỊCH LỄ HỘI</strong> – 30 lễ hội, lịch âm dương</td>
+          <td>lich-le-hoi.html</td>
+          <td><span class="status status-done">HOÀN THÀNH</span></td>
+        </tr>
+        <tr>
+          <td><strong>TÌM KIẾM</strong> – Tìm toàn hệ thống</td>
+          <td>tim-kiem.html</td>
+          <td><span class="status status-done">HOÀN THÀNH</span></td>
+        </tr>
+        <tr>
+          <td rowspan="3"><strong>Giai đoạn 2</strong><br><span style="font-size:0.75rem;color:var(--text-light);">Tiện ích</span></td>
+          <td><strong>CHUẨN BỊ HÀNH TRANG</strong> – Checklist lễ vật tương tác</td>
+          <td>chuan-bi.html</td>
+          <td><span class="status status-progress">ĐANG LÀM</span></td>
+        </tr>
+        <tr>
+          <td><strong>XEM NGÀY TỐT</strong> – Tra cứu ngày lành tháng tốt</td>
+          <td>xem-ngay.html</td>
+          <td><span class="status status-progress">ĐANG LÀM</span></td>
+        </tr>
+        <tr>
+          <td><strong>SỔ CẦU NGUYỆN</strong> – Nhật ký hành hương cá nhân</td>
+          <td>so-nguyen.html</td>
+          <td><span class="status status-progress">ĐANG LÀM</span></td>
+        </tr>
+        <tr>
+          <td rowspan="2"><strong>Giai đoạn 3</strong><br><span style="font-size:0.75rem;color:var(--text-light);">Quản trị</span></td>
+          <td><strong>HỆ THỐNG QUẢN TRỊ</strong> – CRUD, Xuất nhập dữ liệu</td>
+          <td>admin/*</td>
+          <td><span class="status status-done">HOÀN THÀNH</span></td>
+        </tr>
+        <tr>
+          <td><strong>HƯỚNG DẪN SỬ DỤNG</strong> – Tài liệu cho quản trị viên</td>
+          <td>hdsd.html</td>
+          <td><span class="status status-progress">ĐANG LÀM</span></td>
+        </tr>
+        <tr>
+          <td><strong>Giai đoạn 4</strong><br><span style="font-size:0.75rem;color:var(--text-light);">Giới thiệu</span></td>
+          <td><strong>TRÌNH CHIẾU GIỚI THIỆU</strong> – Bài thuyết trình bán hàng</td>
+          <td>sale.html</td>
+          <td><span class="status status-progress">ĐANG LÀM</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 8. CÔNG NGHỆ -->
+  <section class="plan-section" id="congNghe">
+    <div class="plan-section-title">
+      <span class="num">8</span>
+      CÔNG NGHỆ SỬ DỤNG
+    </div>
+    <table class="plan-table">
+      <thead>
+        <tr>
+          <th>Thành Phần</th>
+          <th>Công Nghệ</th>
+          <th>Ghi Chú</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>GIAO DIỆN</strong></td>
+          <td>HTML5, CSS3, JavaScript ES6+</td>
+          <td>Không cần công cụ xây dựng (build tools)</td>
+        </tr>
+        <tr>
+          <td><strong>PHÔNG CHỮ</strong></td>
+          <td>Playfair Display + Noto Serif</td>
+          <td>Google Fonts, hỗ trợ tiếng Việt đầy đủ</td>
+        </tr>
+        <tr>
+          <td><strong>BẢN ĐỒ</strong></td>
+          <td>Leaflet.js + OpenStreetMap</td>
+          <td>Miễn phí, mã nguồn mở</td>
+        </tr>
+        <tr>
+          <td><strong>LƯU TRỮ</strong></td>
+          <td>localStorage</td>
+          <td>Lưu dữ liệu quản trị và sổ cầu nguyện</td>
+        </tr>
+        <tr>
+          <td><strong>MÀU SẮC</strong></td>
+          <td>Đỏ lễ hội (#C0392B), Vàng (#D4AF37), Nâu (#5D4037)</td>
+          <td>Màu sắc lễ hội truyền thống Việt Nam</td>
+        </tr>
+        <tr>
+          <td><strong>TRIỂN KHAI</strong></td>
+          <td>Mở trực tiếp bằng trình duyệt (file://)</td>
+          <td>Hoặc đặt lên máy chủ web bất kỳ</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+</div>
+
+<button class="print-btn" onclick="window.print()">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+  IN KẾ HOẠCH
+</button>
+
+<footer style="background: var(--red-dark); color: var(--cream); padding: 2rem; text-align: center; margin-top: 3rem;">
+  <div style="margin-bottom: 1rem;">
+    <a href="index.html" style="color: var(--gold-light); margin: 0 0.8rem; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; text-decoration: none;">TRANG CHỦ</a>
+    <a href="sale.html" style="color: var(--gold-light); margin: 0 0.8rem; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; text-decoration: none;">GIỚI THIỆU</a>
+    <a href="hdsd.html" style="color: var(--gold-light); margin: 0 0.8rem; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; text-decoration: none;">HƯỚNG DẪN SỬ DỤNG</a>
+    <a href="admin/login.html" style="color: var(--gold-light); margin: 0 0.8rem; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; text-decoration: none;">QUẢN TRỊ</a>
+  </div>
+  <p style="font-size: 0.8rem; color: rgba(255,255,255,0.5);">© 2026 Tâm Linh Việt. Bảo tồn giá trị văn hoá tâm linh Việt Nam.</p>
+</footer>
+
+</body>
+</html>

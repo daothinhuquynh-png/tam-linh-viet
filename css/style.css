@@ -68,6 +68,9 @@ h4 { font-size: 1.2rem; }
   text-align: center;
   margin-bottom: 0.5rem;
   color: var(--red-dark);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.03em;
 }
 
 .section-subtitle {
@@ -168,14 +171,16 @@ h4 { font-size: 1.2rem; }
 
 .nav-links {
   display: flex;
-  gap: 2rem;
+  gap: 1.2rem;
   align-items: center;
 }
 
 .nav-links a {
   color: rgba(255,255,255,0.9);
-  font-size: 0.95rem;
-  font-weight: 500;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
   transition: var(--transition);
   position: relative;
   padding-bottom: 2px;
@@ -244,7 +249,7 @@ h4 { font-size: 1.2rem; }
   inset: 0;
   background:
     linear-gradient(135deg, rgba(144, 0, 0, 0.75) 0%, rgba(60, 30, 10, 0.8) 100%),
-    url('https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1600&q=80') center/cover no-repeat;
+    url('assets/hero-bg.svg') center/cover no-repeat;
 }
 
 .hero-overlay {
@@ -1140,6 +1145,15 @@ h4 { font-size: 1.2rem; }
   color: var(--text-light);
   margin-bottom: 0.3rem;
 }
+
+.lunar-num {
+  font-size: 0.65rem;
+  color: var(--text-light);
+  margin-bottom: 0.2rem;
+  margin-top: -0.15rem;
+}
+.cal-day.other-month .lunar-num { color: #ddd; }
+.cal-day.has-event { background: rgba(192,57,43,0.04); border-color: rgba(192,57,43,0.15); }
 
 .cal-event {
   font-size: 0.7rem;

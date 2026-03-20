@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#283593"/>
+      <stop offset="100%" style="stop-color:#1a1a3e"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F0D060"/>
+      <stop offset="100%" style="stop-color:#D4AF37"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/>
+  <!-- Đền Nghè - mái đình cong -->
+  <rect x="160" y="120" width="80" height="55" rx="2" fill="none" stroke="url(#gold)" stroke-width="2"/>
+  <path d="M140,120 Q200,85 260,120" fill="none" stroke="url(#gold)" stroke-width="2.5"/>
+  <path d="M150,85 Q200,65 250,85" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.7"/>
+  <!-- Cột -->
+  <line x1="175" y1="120" x2="175" y2="175" stroke="url(#gold)" stroke-width="1.5"/>
+  <line x1="225" y1="120" x2="225" y2="175" stroke="url(#gold)" stroke-width="1.5"/>
+  <!-- Bệ -->
+  <rect x="150" y="175" width="100" height="8" rx="1" fill="none" stroke="url(#gold)" stroke-width="1.5"/>
+  <!-- Sóng biển -->
+  <path d="M0,230 Q40,220 80,230 Q120,240 160,230 Q200,220 240,230 Q280,240 320,230 Q360,220 400,225" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.4"/>
+  <path d="M0,250 Q50,240 100,250 Q150,260 200,250 Q250,240 300,250 Q350,260 400,250" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.25"/>
+  <path d="M0,268 Q60,258 120,268 Q180,278 240,268 Q300,258 360,268 Q390,275 400,270" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.15"/>
+  <!-- Thuyền -->
+  <path d="M80,215 Q95,208 110,215" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.5"/>
+  <line x1="95" y1="215" x2="95" y2="200" stroke="url(#gold)" stroke-width="1" opacity="0.5"/>
+</svg>

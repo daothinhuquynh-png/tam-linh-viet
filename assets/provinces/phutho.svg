@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#5D4037"/>
+      <stop offset="100%" style="stop-color:#3E2723"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F0D060"/>
+      <stop offset="100%" style="stop-color:#D4AF37"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/>
+  <!-- Trống đồng Đông Sơn - biểu tượng Đền Hùng -->
+  <circle cx="200" cy="140" r="80" fill="none" stroke="url(#gold)" stroke-width="2.5"/>
+  <circle cx="200" cy="140" r="60" fill="none" stroke="url(#gold)" stroke-width="2"/>
+  <circle cx="200" cy="140" r="40" fill="none" stroke="url(#gold)" stroke-width="1.5"/>
+  <circle cx="200" cy="140" r="20" fill="none" stroke="url(#gold)" stroke-width="1.5"/>
+  <!-- Mặt trời trống đồng -->
+  <circle cx="200" cy="140" r="8" fill="url(#gold)" opacity="0.6"/>
+  <!-- Tia sáng -->
+  <line x1="200" y1="125" x2="200" y2="115" stroke="url(#gold)" stroke-width="1.5" opacity="0.5"/>
+  <line x1="210" y1="127" x2="215" y2="118" stroke="url(#gold)" stroke-width="1.5" opacity="0.5"/>
+  <line x1="213" y1="135" x2="222" y2="130" stroke="url(#gold)" stroke-width="1.5" opacity="0.5"/>
+  <line x1="213" y1="145" x2="222" y2="150" stroke="url(#gold)" stroke-width="1.5" opacity="0.5"/>
+  <line x1="200" y1="155" x2="200" y2="165" stroke="url(#gold)" stroke-width="1.5" opacity="0.5"/>
+  <line x1="190" y1="153" x2="185" y2="162" stroke="url(#gold)" stroke-width="1.5" opacity="0.5"/>
+  <line x1="187" y1="145" x2="178" y2="150" stroke="url(#gold)" stroke-width="1.5" opacity="0.5"/>
+  <line x1="187" y1="135" x2="178" y2="130" stroke="url(#gold)" stroke-width="1.5" opacity="0.5"/>
+  <line x1="190" y1="127" x2="185" y2="118" stroke="url(#gold)" stroke-width="1.5" opacity="0.5"/>
+  <line x1="210" y1="153" x2="215" y2="162" stroke="url(#gold)" stroke-width="1.5" opacity="0.5"/>
+  <!-- Núi Nghĩa Lĩnh -->
+  <polygon points="100,260 170,200 240,260" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.3"/>
+  <polygon points="180,260 250,195 320,260" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.25"/>
+  <!-- Chim Lạc -->
+  <path d="M280,100 Q290,85 310,90 Q305,95 300,90" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.5"/>
+  <path d="M120,110 Q130,95 150,100 Q145,105 140,100" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.5"/>
+</svg>

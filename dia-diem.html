@@ -136,11 +136,14 @@
         Tâm Linh Việt
       </a>
       <nav class="top-bar-nav">
-        <a href="index.html">Trang Chủ</a>
-        <a href="huong-dan.html">Nghi Lễ</a>
-        <a href="dia-diem.html" class="active">Địa Điểm</a>
-        <a href="lich-le-hoi.html">Lịch Lễ Hội</a>
-        <a href="tim-kiem.html">Tìm Kiếm</a>
+        <a href="index.html">TRANG CHỦ</a>
+        <a href="huong-dan.html">NGHI LỄ</a>
+        <a href="dia-diem.html" class="active">ĐỊA ĐIỂM</a>
+        <a href="lich-le-hoi.html">LỊCH LỄ HỘI</a>
+        <a href="chuan-bi.html">HÀNH TRANG</a>
+        <a href="xem-ngay.html">NGÀY TỐT</a>
+        <a href="so-nguyen.html">SỔ NGUYỆN</a>
+        <a href="tim-kiem.html">TÌM KIẾM</a>
       </nav>
     </div>
 
@@ -160,22 +163,13 @@
             <span class="chip-sm" data-type="den" onclick="setTypeFilter(this, 'den')">🏮 Đền</span>
             <span class="chip-sm green" data-type="chua" onclick="setTypeFilter(this, 'chua')">🪷 Chùa</span>
             <span class="chip-sm brown" data-type="dinh" onclick="setTypeFilter(this, 'dinh')">🏛️ Đình</span>
+            <span class="chip-sm" data-type="phu" onclick="setTypeFilter(this, 'phu')" style="border-color:rgba(142,36,170,0.3);">⛩️ Phủ</span>
           </div>
-          <div class="chip-row" id="provinceFilter" style="margin-top: 0.5rem;">
-            <span class="chip-sm active" data-p="all" onclick="setProvinceFilter(this, 'all')">Tất cả tỉnh</span>
-            <span class="chip-sm" data-p="hanoi" onclick="setProvinceFilter(this, 'hanoi')">Hà Nội</span>
-            <span class="chip-sm" data-p="phutho" onclick="setProvinceFilter(this, 'phutho')">Phú Thọ</span>
-            <span class="chip-sm" data-p="bacninh" onclick="setProvinceFilter(this, 'bacninh')">Bắc Ninh</span>
-            <span class="chip-sm" data-p="quangninh" onclick="setProvinceFilter(this, 'quangninh')">Quảng Ninh</span>
-            <span class="chip-sm" data-p="haiphong" onclick="setProvinceFilter(this, 'haiphong')">Hải Phòng</span>
-            <span class="chip-sm" data-p="hungyen" onclick="setProvinceFilter(this, 'hungyen')">Hưng Yên</span>
-            <span class="chip-sm" data-p="langson" onclick="setProvinceFilter(this, 'langson')">Lạng Sơn</span>
-            <span class="chip-sm" data-p="yenbai" onclick="setProvinceFilter(this, 'yenbai')">Yên Bái</span>
-            <span class="chip-sm" data-p="namdinh" onclick="setProvinceFilter(this, 'namdinh')">Nam Định</span>
-            <span class="chip-sm" data-p="ninhbinh" onclick="setProvinceFilter(this, 'ninhbinh')">Ninh Bình</span>
-            <span class="chip-sm" data-p="thaibinh" onclick="setProvinceFilter(this, 'thaibinh')">Thái Bình</span>
-            <span class="chip-sm" data-p="thanhhoa" onclick="setProvinceFilter(this, 'thanhhoa')">Thanh Hóa</span>
-            <span class="chip-sm" data-p="hanam" onclick="setProvinceFilter(this, 'hanam')">Hà Nam</span>
+          <div style="margin-top: 0.5rem;">
+            <select id="provinceSelect" onchange="onProvinceSelect(this.value)" style="width:100%;padding:0.45rem 0.7rem;border:1px solid var(--cream-dark);border-radius:12px;font-size:0.82rem;font-family:inherit;background:white;color:var(--text-dark);cursor:pointer;">
+              <option value="all">📍 Tất cả tỉnh/thành phố</option>
+              <!-- Tự động sinh từ LOCATIONS trong map.js -->
+            </select>
           </div>
         </div>
         <div class="result-header">
@@ -194,6 +188,7 @@
             <div class="legend-item"><div class="legend-dot" style="background:#C0392B"></div><span>Đền</span></div>
             <div class="legend-item"><div class="legend-dot" style="background:#2E7D32"></div><span>Chùa</span></div>
             <div class="legend-item"><div class="legend-dot" style="background:#5D4037"></div><span>Đình</span></div>
+            <div class="legend-item"><div class="legend-dot" style="background:#D4AF37;border:2px solid #C0392B;"></div><span>Chủ quyền VN</span></div>
           </div>
         </div>
       </div>
@@ -212,12 +207,13 @@
         <h2 class="modal-h1" id="modalTitle"></h2>
         <div class="modal-meta-row" id="modalMeta"></div>
         <p class="modal-desc-text" id="modalDesc"></p>
+        <div id="modalFestivals"></div>
         <div class="modal-btn-row">
           <a id="modalMapBtn" href="#" class="mbtn mbtn-red" target="_blank">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
             Xem trên Google Maps
           </a>
-          <a href="huong-dan.html#vao-den" class="mbtn mbtn-gold">
+          <a id="modalGuideBtn" href="huong-dan.html#vao-den" class="mbtn mbtn-gold">
             📖 Hướng dẫn lễ
           </a>
           <button class="mbtn mbtn-outline" onclick="closeModalBtn()">Đóng</button>
@@ -227,6 +223,7 @@
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/calendar.js"></script>
   <script src="js/map.js"></script>
 </body>
 </html>

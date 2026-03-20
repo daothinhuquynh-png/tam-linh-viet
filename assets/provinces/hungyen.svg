@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B5E20"/>
+      <stop offset="100%" style="stop-color:#2E7D32"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F0D060"/>
+      <stop offset="100%" style="stop-color:#D4AF37"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/>
+  <!-- Phố Hiến - cổng thành cổ -->
+  <rect x="155" y="100" width="90" height="80" rx="3" fill="none" stroke="url(#gold)" stroke-width="2"/>
+  <path d="M140,100 Q200,60 260,100" fill="none" stroke="url(#gold)" stroke-width="2.5"/>
+  <!-- Cổng vòm -->
+  <path d="M180,180 Q200,150 220,180" fill="none" stroke="url(#gold)" stroke-width="2"/>
+  <!-- Cột -->
+  <line x1="165" y1="100" x2="165" y2="180" stroke="url(#gold)" stroke-width="1.5" opacity="0.5"/>
+  <line x1="235" y1="100" x2="235" y2="180" stroke="url(#gold)" stroke-width="1.5" opacity="0.5"/>
+  <!-- Hoa sen đầm -->
+  <ellipse cx="100" cy="230" rx="25" ry="12" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.5"/>
+  <path d="M88,230 Q100,205 112,230" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.5"/>
+  <path d="M82,230 Q100,200 118,230" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.4"/>
+  <ellipse cx="310" cy="240" rx="22" ry="10" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.5"/>
+  <path d="M298,240 Q310,218 322,240" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.5"/>
+  <!-- Sóng sông Hồng -->
+  <path d="M0,270 Q50,260 100,270 Q150,280 200,270 Q250,260 300,270 Q350,280 400,270" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.3"/>
+</svg>

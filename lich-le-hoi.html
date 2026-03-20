@@ -22,12 +22,14 @@
         Tâm Linh <span>Việt</span>
       </a>
       <ul class="nav-links" id="navLinks">
-        <li><a href="index.html">Trang Chủ</a></li>
-        <li><a href="huong-dan.html">Nghi Lễ</a></li>
-        <li><a href="dia-diem.html">Địa Điểm</a></li>
-        <li><a href="lich-le-hoi.html" class="active">Lịch Lễ Hội</a></li>
-        <li><a href="tim-kiem.html">Tìm Kiếm</a></li>
-        <li><a href="dia-diem.html" class="nav-cta">Tìm Đền Chùa</a></li>
+        <li><a href="index.html">TRANG CHỦ</a></li>
+        <li><a href="huong-dan.html">NGHI LỄ</a></li>
+        <li><a href="dia-diem.html">ĐỊA ĐIỂM</a></li>
+        <li><a href="lich-le-hoi.html" class="active">LỊCH LỄ HỘI</a></li>
+        <li><a href="chuan-bi.html">HÀNH TRANG</a></li>
+        <li><a href="xem-ngay.html">NGÀY TỐT</a></li>
+        <li><a href="so-nguyen.html">SỔ NGUYỆN</a></li>
+        <li><a href="tim-kiem.html" class="nav-cta">TÌM KIẾM</a></li>
       </ul>
       <button class="hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -39,7 +41,7 @@
   <div class="page-hero">
     <div class="page-hero-content">
       <h1>Lịch Lễ Hội</h1>
-      <p>Lịch các lễ hội truyền thống, ngày vía, ngày khai hội tại các tỉnh phía Bắc năm 2026</p>
+      <p>Lịch các lễ hội truyền thống, ngày vía, ngày khai hội trên cả nước – sắp xếp theo 12 tháng âm lịch năm 2026</p>
       <div class="breadcrumb">
         <a href="index.html">Trang Chủ</a>
         <span>›</span>
@@ -67,29 +69,80 @@
 
         <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
           <select id="filterProvince" onchange="filterFestivals()" style="padding: 0.45rem 0.8rem; border: 1px solid var(--cream-dark); border-radius: 16px; font-size: 0.82rem; font-family: inherit; background: white; color: var(--text-dark); cursor: pointer;">
-            <option value="all">Tất cả tỉnh</option>
-            <option value="hanoi">Hà Nội</option>
-            <option value="phutho">Phú Thọ</option>
-            <option value="bacninh">Bắc Ninh</option>
-            <option value="quangninh">Quảng Ninh</option>
-            <option value="haiphong">Hải Phòng</option>
-            <option value="hungyen">Hưng Yên</option>
-            <option value="langson">Lạng Sơn</option>
-            <option value="yenbai">Yên Bái</option>
-            <option value="namdinh">Nam Định</option>
-            <option value="ninhbinh">Ninh Bình</option>
-            <option value="thaibinh">Thái Bình</option>
-            <option value="thanhhoa">Thanh Hóa</option>
-            <option value="hanam">Hà Nam</option>
+            <option value="all">Tất cả tỉnh/TP</option>
+            <optgroup label="── Miền Bắc ──">
+              <option value="hanoi">Hà Nội</option>
+              <option value="phutho">Phú Thọ</option>
+              <option value="bacninh">Bắc Ninh</option>
+              <option value="bacgiang">Bắc Giang</option>
+              <option value="quangninh">Quảng Ninh</option>
+              <option value="haiphong">Hải Phòng</option>
+              <option value="haiduong">Hải Dương</option>
+              <option value="hungyen">Hưng Yên</option>
+              <option value="vinhphuc">Vĩnh Phúc</option>
+              <option value="thainguyen">Thái Nguyên</option>
+              <option value="langson">Lạng Sơn</option>
+              <option value="laocai">Lào Cai</option>
+              <option value="yenbai">Yên Bái</option>
+              <option value="hagiang">Hà Giang</option>
+              <option value="tuyenquang">Tuyên Quang</option>
+              <option value="dienbien">Điện Biên</option>
+              <option value="laichau">Lai Châu</option>
+              <option value="namdinh">Nam Định</option>
+              <option value="ninhbinh">Ninh Bình</option>
+              <option value="thaibinh">Thái Bình</option>
+              <option value="hanam">Hà Nam</option>
+              <option value="thanhhoa">Thanh Hóa</option>
+            </optgroup>
+            <optgroup label="── Miền Trung ──">
+              <option value="nghean">Nghệ An</option>
+              <option value="hatinh">Hà Tĩnh</option>
+              <option value="quangbinh">Quảng Bình</option>
+              <option value="hue">Thừa Thiên Huế</option>
+              <option value="danang">Đà Nẵng</option>
+              <option value="quangnam">Quảng Nam</option>
+              <option value="quangngai">Quảng Ngãi</option>
+              <option value="binhdinh">Bình Định</option>
+              <option value="phuyen">Phú Yên</option>
+              <option value="khanhhoa">Khánh Hòa</option>
+              <option value="ninhthuan">Ninh Thuận</option>
+              <option value="binhthuan">Bình Thuận</option>
+            </optgroup>
+            <optgroup label="── Tây Nguyên ──">
+              <option value="gialai">Gia Lai</option>
+              <option value="daklak">Đắk Lắk</option>
+              <option value="lamdong">Lâm Đồng</option>
+            </optgroup>
+            <optgroup label="── Miền Nam ──">
+              <option value="hcm">TP. Hồ Chí Minh</option>
+              <option value="tayninh">Tây Ninh</option>
+              <option value="binhduong">Bình Dương</option>
+              <option value="dongnai">Đồng Nai</option>
+              <option value="angiang">An Giang</option>
+              <option value="cantho">Cần Thơ</option>
+              <option value="soctrang">Sóc Trăng</option>
+              <option value="travinh">Trà Vinh</option>
+              <option value="dongthap">Đồng Tháp</option>
+              <option value="bentre">Bến Tre</option>
+            </optgroup>
+            <optgroup label="── Toàn quốc ──">
+              <option value="all">Lễ hội toàn quốc</option>
+            </optgroup>
           </select>
           <select id="filterMonth" onchange="filterFestivals()" style="padding: 0.45rem 0.8rem; border: 1px solid var(--cream-dark); border-radius: 16px; font-size: 0.82rem; font-family: inherit; background: white; color: var(--text-dark); cursor: pointer;">
             <option value="all">Tất cả tháng</option>
-            <option value="1">Tháng 1 AL</option>
-            <option value="2">Tháng 2 AL</option>
-            <option value="3">Tháng 3 AL</option>
-            <option value="4">Tháng 4 AL</option>
-            <option value="8">Tháng 8 AL</option>
-            <option value="9">Tháng 9 AL</option>
+            <option value="1">Tháng Giêng</option>
+            <option value="2">Tháng Hai</option>
+            <option value="3">Tháng Ba</option>
+            <option value="4">Tháng Tư</option>
+            <option value="5">Tháng Năm</option>
+            <option value="6">Tháng Sáu</option>
+            <option value="7">Tháng Bảy</option>
+            <option value="8">Tháng Tám</option>
+            <option value="9">Tháng Chín</option>
+            <option value="10">Tháng Mười</option>
+            <option value="11">Tháng Mười Một</option>
+            <option value="12">Tháng Chạp</option>
           </select>
         </div>
 
@@ -132,38 +185,39 @@
   <footer>
     <div class="footer-grid">
       <div class="footer-brand">
-        <h3>🌟 Tâm Linh Việt</h3>
-        <p>Cổng thông tin hướng dẫn thực hành nghi lễ thờ cúng và hành hương tại các đền, đình, chùa vùng phía Bắc Việt Nam.</p>
+        <h3>Tâm Linh Việt</h3>
+        <p>Cổng thông tin hướng dẫn thực hành nghi lễ thờ cúng và hành hương tại các đền, đình, chùa trên cả nước Việt Nam.</p>
       </div>
       <div class="footer-col">
-        <h4>Nội Dung</h4>
+        <h4>NỘI DUNG</h4>
         <ul>
-          <li><a href="huong-dan.html">Hướng Dẫn Nghi Lễ</a></li>
-          <li><a href="huong-dan.html#van-khan">Văn Khấn</a></li>
-          <li><a href="lich-le-hoi.html">Lịch Lễ Hội</a></li>
+          <li><a href="huong-dan.html">NGHI LỄ & VĂN KHẤN</a></li>
+          <li><a href="dia-diem.html">ĐỊA ĐIỂM ĐỀN CHÙA</a></li>
+          <li><a href="lich-le-hoi.html">LỊCH LỄ HỘI</a></li>
+          <li><a href="tim-kiem.html">TÌM KIẾM</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Địa Điểm</h4>
+        <h4>TIỆN ÍCH</h4>
         <ul>
-          <li><a href="dia-diem.html?tinh=hanoi">Hà Nội</a></li>
-          <li><a href="dia-diem.html?tinh=phutho">Phú Thọ</a></li>
-          <li><a href="dia-diem.html?tinh=quangninh">Quảng Ninh</a></li>
-          <li><a href="dia-diem.html?tinh=bacninh">Bắc Ninh</a></li>
+          <li><a href="chuan-bi.html">CHUẨN BỊ HÀNH TRANG</a></li>
+          <li><a href="xem-ngay.html">XEM NGÀY TỐT</a></li>
+          <li><a href="so-nguyen.html">SỔ CẦU NGUYỆN</a></li>
+          <li><a href="admin/login.html">QUẢN TRỊ NỘI DUNG</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Hỗ Trợ</h4>
+        <h4>TÀI LIỆU</h4>
         <ul>
-          <li><a href="#">Về Chúng Tôi</a></li>
-          <li><a href="#">Liên Hệ</a></li>
-          <li><a href="#">Góp Ý</a></li>
+          <li><a href="kehoach.html">KẾ HOẠCH PHÁT TRIỂN</a></li>
+          <li><a href="sale.html">GIỚI THIỆU PHẦN MỀM</a></li>
+          <li><a href="hdsd.html">HƯỚNG DẪN SỬ DỤNG</a></li>
+          <li><a href="gioithieu.html">VỀ CHÚNG TÔI</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Tâm Linh Việt.</span>
-      <span style="color: var(--gold-dark);">🕯️ Nguyện cầu bình an</span>
+      <span>© 2026 Tâm Linh Việt. Bảo tồn giá trị văn hoá tâm linh Việt Nam.</span>
     </div>
   </footer>
 

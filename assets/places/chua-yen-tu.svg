@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B5E20"/>
+      <stop offset="100%" style="stop-color:#2E7D32"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F0D060"/>
+      <stop offset="100%" style="stop-color:#D4AF37"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#bg)"/>
+  <!-- Dãy núi Yên Tử -->
+  <polygon points="200,360 300,80 400,360" fill="none" stroke="url(#gold)" stroke-width="2" opacity="0.4"/>
+  <polygon points="50,360 160,160 270,360" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.25"/>
+  <polygon points="340,360 460,140 580,360" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.25"/>
+  <!-- Chùa Đồng trên đỉnh -->
+  <rect x="278" y="75" width="44" height="28" rx="2" fill="none" stroke="url(#gold)" stroke-width="2"/>
+  <path d="M265,75 Q300,52 335,75" fill="none" stroke="url(#gold)" stroke-width="2"/>
+  <path d="M273,52 Q300,38 327,52" fill="none" stroke="url(#gold)" stroke-width="1.5"/>
+  <!-- Tượng Phật -->
+  <circle cx="300" cy="88" r="5" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.6"/>
+  <path d="M293,95 Q300,92 307,95" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.5"/>
+  <!-- Đường lên núi (bậc thang) -->
+  <line x1="290" y1="115" x2="310" y2="115" stroke="url(#gold)" stroke-width="1" opacity="0.3"/>
+  <line x1="285" y1="135" x2="315" y2="135" stroke="url(#gold)" stroke-width="1" opacity="0.3"/>
+  <line x1="280" y1="155" x2="320" y2="155" stroke="url(#gold)" stroke-width="1" opacity="0.3"/>
+  <line x1="275" y1="175" x2="325" y2="175" stroke="url(#gold)" stroke-width="1" opacity="0.25"/>
+  <line x1="270" y1="195" x2="330" y2="195" stroke="url(#gold)" stroke-width="1" opacity="0.2"/>
+  <!-- Mây -->
+  <path d="M60,140 Q100,125 140,140 Q180,155 220,140" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.2"/>
+  <path d="M380,120 Q420,105 460,120 Q500,135 540,120" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.2"/>
+  <path d="M100,200 Q130,190 160,200 Q190,210 220,200" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.15"/>
+  <!-- Hoa sen Phật giáo -->
+  <ellipse cx="480" cy="310" rx="25" ry="12" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.5"/>
+  <path d="M465,310 Q480,285 495,310" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.5"/>
+  <path d="M458,310 Q480,280 502,310" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.35"/>
+  <path d="M452,310 Q480,275 508,310" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.25"/>
+  <!-- Cây tùng -->
+  <line x1="120" y1="300" x2="120" y2="260" stroke="url(#gold)" stroke-width="1.5" opacity="0.4"/>
+  <path d="M105,280 Q120,260 135,280" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.4"/>
+  <path d="M108,265 Q120,248 132,265" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.35"/>
+</svg>

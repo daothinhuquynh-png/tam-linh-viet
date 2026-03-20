@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giới Thiệu Phần Mềm – Tâm Linh Việt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Noto+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; }
+    body {
+      font-family: 'Noto Serif', serif;
+      background: #1a0a0a;
+      color: #FDF6E3;
+    }
+
+    /* ===== SLIDESHOW CONTAINER ===== */
+    .slideshow { position: relative; width: 100vw; height: 100vh; }
+
+    .slide {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 4rem 3rem;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.7s ease, visibility 0.7s ease;
+      text-align: center;
+    }
+    .slide.active { opacity: 1; visibility: visible; }
+
+    /* Slide backgrounds */
+    .slide-1 { background: linear-gradient(135deg, #922B21 0%, #5D1A14 40%, #2C1810 100%); }
+    .slide-2 { background: linear-gradient(135deg, #1a2e1a 0%, #2E7D32 50%, #1a3a1a 100%); }
+    .slide-3 { background: linear-gradient(135deg, #2C1810 0%, #5D4037 50%, #3E2723 100%); }
+    .slide-4 { background: linear-gradient(135deg, #922B21 0%, #C0392B 50%, #6B1E1E 100%); }
+    .slide-5 { background: linear-gradient(135deg, #1a1a3e 0%, #283593 50%, #1a1a2e 100%); }
+    .slide-6 { background: linear-gradient(135deg, #3E2723 0%, #5D4037 50%, #2C1810 100%); }
+    .slide-7 { background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 50%, #1a2e1a 100%); }
+    .slide-8 { background: linear-gradient(135deg, #922B21 0%, #C0392B 30%, #D4AF37 100%); }
+
+    /* Decorative pattern overlay */
+    .slide::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='0.04'%3E%3Ccircle cx='40' cy='40' r='30'/%3E%3Ccircle cx='40' cy='40' r='15'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .slide-content { position: relative; z-index: 1; max-width: 900px; }
+
+    /* Typography */
+    .slide-badge {
+      display: inline-block;
+      font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #D4AF37; border: 1px solid rgba(212,175,55,0.4);
+      padding: 0.4rem 1.5rem; border-radius: 20px;
+      margin-bottom: 1.5rem;
+    }
+    .slide-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700; color: #F0D060;
+      margin-bottom: 1rem; line-height: 1.2;
+      text-transform: uppercase;
+    }
+    .slide-subtitle {
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      color: rgba(253,246,227,0.8);
+      margin-bottom: 2rem; line-height: 1.7;
+      max-width: 700px; margin-left: auto; margin-right: auto;
+    }
+
+    /* Feature grid on slides */
+    .feat-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem; text-align: left; margin-top: 2rem;
+    }
+    .feat-item {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 12px; padding: 1.5rem;
+      transition: transform 0.3s, background 0.3s;
+    }
+    .feat-item:hover { transform: translateY(-4px); background: rgba(255,255,255,0.12); }
+    .feat-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .feat-name { font-weight: 700; color: #F0D060; margin-bottom: 0.3rem; text-transform: uppercase; font-size: 0.9rem; }
+    .feat-desc { font-size: 0.85rem; color: rgba(253,246,227,0.7); line-height: 1.5; }
+
+    /* Stats row */
+    .stats-row {
+      display: flex; gap: 2rem; justify-content: center;
+      flex-wrap: wrap; margin-top: 2rem;
+    }
+    .stat-box { text-align: center; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem; font-weight: 700; color: #F0D060; line-height: 1;
+    }
+    .stat-label { font-size: 0.8rem; color: rgba(253,246,227,0.6); margin-top: 0.3rem; text-transform: uppercase; }
+
+    /* List style */
+    .check-list { text-align: left; max-width: 600px; margin: 1.5rem auto 0; }
+    .check-list li {
+      padding: 0.6rem 0; font-size: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .check-list li::before {
+      content: ''; width: 20px; height: 20px; flex-shrink: 0;
+      background: #2E7D32; border-radius: 50%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+      background-size: 12px; background-position: center; background-repeat: no-repeat;
+    }
+
+    /* Price / CTA */
+    .cta-box {
+      background: rgba(255,255,255,0.1);
+      border: 2px solid #D4AF37;
+      border-radius: 16px; padding: 2rem 3rem;
+      margin-top: 2rem; display: inline-block;
+    }
+    .cta-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 700; color: #F0D060;
+    }
+    .cta-note { font-size: 0.85rem; color: rgba(253,246,227,0.6); margin-top: 0.3rem; }
+    .cta-btn {
+      display: inline-block; margin-top: 1rem;
+      background: #D4AF37; color: #2C1810;
+      font-weight: 700; font-size: 1rem; text-transform: uppercase;
+      padding: 0.8rem 2.5rem; border-radius: 30px;
+      text-decoration: none; transition: all 0.3s;
+      letter-spacing: 0.05em;
+    }
+    .cta-btn:hover { background: #F0D060; transform: scale(1.05); }
+
+    /* ===== CONTROLS ===== */
+    .controls {
+      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      z-index: 100; display: flex; align-items: center; gap: 1rem;
+      background: rgba(0,0,0,0.6); backdrop-filter: blur(10px);
+      padding: 0.6rem 1.5rem; border-radius: 30px;
+      border: 1px solid rgba(212,175,55,0.3);
+    }
+    .ctrl-btn {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: white; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.2s; font-size: 0;
+    }
+    .ctrl-btn:hover { background: #D4AF37; color: #2C1810; border-color: #D4AF37; }
+    .ctrl-btn svg { width: 16px; height: 16px; }
+
+    .dots { display: flex; gap: 0.4rem; }
+    .dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: rgba(255,255,255,0.25); cursor: pointer;
+      transition: all 0.3s;
+    }
+    .dot.active { background: #D4AF37; transform: scale(1.3); }
+
+    .slide-counter {
+      font-size: 0.75rem; color: rgba(255,255,255,0.5);
+      min-width: 40px; text-align: center;
+    }
+
+    /* Top bar */
+    .pres-top {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 2rem;
+      background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, transparent 100%);
+    }
+    .pres-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700; color: #D4AF37;
+    }
+    .pres-exit {
+      font-size: 0.8rem; color: rgba(255,255,255,0.6);
+      text-decoration: none; padding: 0.4rem 1rem;
+      border: 1px solid rgba(255,255,255,0.2); border-radius: 20px;
+      transition: all 0.2s;
+    }
+    .pres-exit:hover { color: white; border-color: white; }
+
+    /* Progress bar */
+    .progress-bar {
+      position: fixed; top: 0; left: 0; height: 3px; z-index: 200;
+      background: #D4AF37; transition: width 0.5s ease;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .slide { padding: 3rem 1.5rem 5rem; }
+      .feat-grid { grid-template-columns: 1fr; }
+      .stats-row { gap: 1.5rem; }
+      .cta-box { padding: 1.5rem 2rem; }
+      .controls { bottom: 1rem; padding: 0.5rem 1rem; }
+    }
+
+    /* Keyboard hint */
+    .key-hint {
+      position: fixed; bottom: 5rem; right: 2rem;
+      font-size: 0.7rem; color: rgba(255,255,255,0.3);
+      z-index: 100;
+    }
+    .key-hint kbd {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+      padding: 0.1rem 0.4rem; border-radius: 3px; font-family: inherit;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- TOP BAR -->
+  <div class="pres-top">
+    <div class="pres-logo">TÂM LINH VIỆT</div>
+    <a href="index.html" class="pres-exit">Thoát trình chiếu</a>
+  </div>
+
+  <!-- ===== SLIDESHOW ===== -->
+  <div class="slideshow" id="slideshow">
+
+    <!-- SLIDE 1: Trang bìa -->
+    <div class="slide slide-1 active">
+      <div class="slide-content">
+        <div class="slide-badge">Giới Thiệu Phần Mềm</div>
+        <div style="font-size: 4rem; margin-bottom: 1rem;">🏛️</div>
+        <h1 class="slide-title">TÂM LINH VIỆT</h1>
+        <p class="slide-subtitle">
+          Phần mềm hướng dẫn thờ cúng và hành hương toàn diện – lấy người đi lễ làm trung tâm.
+          Nền tảng số hoá văn hoá tín ngưỡng truyền thống Việt Nam.
+        </p>
+        <div class="stats-row">
+          <div class="stat-box">
+            <div class="stat-num">45+</div>
+            <div class="stat-label">Tỉnh thành</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">40+</div>
+            <div class="stat-label">Đền, Đình, Chùa</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">90+</div>
+            <div class="stat-label">Lễ hội</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">6</div>
+            <div class="stat-label">Tiện ích chính</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: Vấn đề & giải pháp -->
+    <div class="slide slide-2">
+      <div class="slide-content">
+        <div class="slide-badge">Vấn Đề & Giải Pháp</div>
+        <h2 class="slide-title">TẠI SAO CẦN TÂM LINH VIỆT?</h2>
+        <p class="slide-subtitle">Người đi lễ gặp nhiều khó khăn khi thiếu thông tin chính xác và đáng tin cậy</p>
+        <div class="feat-grid">
+          <div class="feat-item">
+            <div class="feat-icon">❌</div>
+            <div class="feat-name">THIẾU THÔNG TIN</div>
+            <div class="feat-desc">Không biết chuẩn bị lễ vật gì, mặc trang phục ra sao, văn khấn thế nào cho đúng</div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon">❌</div>
+            <div class="feat-name">THÔNG TIN SAI LỆCH</div>
+            <div class="feat-desc">Mạng xã hội lan truyền nhiều thông tin mê tín, sai quy cách, gây hoang mang</div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon">❌</div>
+            <div class="feat-name">KHÓ TÌM NGÀY TỐT</div>
+            <div class="feat-desc">Tra cứu lịch âm, ngày lành phức tạp, nhiều nguồn cho kết quả khác nhau</div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon">✅</div>
+            <div class="feat-name">GIẢI PHÁP TÂM LINH VIỆT</div>
+            <div class="feat-desc">Cung cấp thông tin chuẩn xác, đầy đủ, dễ tra cứu – mọi lúc, mọi nơi trên điện thoại</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: 6 tính năng chính -->
+    <div class="slide slide-3">
+      <div class="slide-content">
+        <div class="slide-badge">Tính Năng Cốt Lõi</div>
+        <h2 class="slide-title">6 TIỆN ÍCH CHÍNH</h2>
+        <p class="slide-subtitle">Mọi thứ người đi lễ cần – gói gọn trong một phần mềm duy nhất</p>
+        <div class="feat-grid">
+          <div class="feat-item">
+            <div class="feat-icon">🙏</div>
+            <div class="feat-name">HƯỚNG DẪN NGHI LỄ</div>
+            <div class="feat-desc">Văn khấn, lễ vật, quy trình cho mọi dịp cúng lễ</div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon">🗺️</div>
+            <div class="feat-name">BẢN ĐỒ ĐỊA ĐIỂM</div>
+            <div class="feat-desc">Đền chùa trên cả nước với bản đồ tương tác, thông tin chi tiết</div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon">📅</div>
+            <div class="feat-name">LỊCH LỄ HỘI</div>
+            <div class="feat-desc">90+ lễ hội toàn quốc theo 12 tháng âm lịch, lọc theo tỉnh và vùng miền</div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon">🎒</div>
+            <div class="feat-name">CHUẨN BỊ HÀNH TRANG</div>
+            <div class="feat-desc">Checklist tương tác cho 4 loại hình cúng lễ</div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon">🌙</div>
+            <div class="feat-name">XEM NGÀY TỐT</div>
+            <div class="feat-desc">Tra ngày lành, giờ hoàng đạo, Can Chi năm 2026</div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon">📿</div>
+            <div class="feat-name">SỔ CẦU NGUYỆN</div>
+            <div class="feat-desc">Nhật ký hành hương cá nhân, lưu lời nguyện</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: Đối tượng người dùng -->
+    <div class="slide slide-4">
+      <div class="slide-content">
+        <div class="slide-badge">Đối Tượng Sử Dụng</div>
+        <h2 class="slide-title">AI CẦN TÂM LINH VIỆT?</h2>
+        <p class="slide-subtitle">Phần mềm phục vụ mọi lứa tuổi và nhu cầu tâm linh</p>
+        <div class="feat-grid">
+          <div class="feat-item">
+            <div class="feat-icon">👵</div>
+            <div class="feat-name">NGƯỜI CAO TUỔI</div>
+            <div class="feat-desc">Giao diện chữ to, dễ đọc. Tra cứu văn khấn nhanh chóng thay vì nhớ hay mang theo giấy</div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon">👨‍👩‍👧</div>
+            <div class="feat-name">GIA ĐÌNH TRẺ</div>
+            <div class="feat-desc">Học cách thờ cúng đúng cách từ hướng dẫn chi tiết. Dạy con giữ gìn văn hoá truyền thống</div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon">🚶</div>
+            <div class="feat-name">NGƯỜI HÀNH HƯƠNG</div>
+            <div class="feat-desc">Tìm đường đến đền chùa, xem ngày tốt, chuẩn bị hành trang đầy đủ trước chuyến đi</div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon">📱</div>
+            <div class="feat-name">NGƯỜI DÙNG DI ĐỘNG</div>
+            <div class="feat-desc">Truy cập mọi lúc mọi nơi. Giao diện tối ưu cho điện thoại, không cần cài đặt ứng dụng</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: Công nghệ -->
+    <div class="slide slide-5">
+      <div class="slide-content">
+        <div class="slide-badge">Công Nghệ</div>
+        <h2 class="slide-title">NỀN TẢNG KỸ THUẬT</h2>
+        <p class="slide-subtitle">Thiết kế đơn giản, hiệu quả, dễ triển khai</p>
+        <div class="feat-grid">
+          <div class="feat-item">
+            <div class="feat-icon">⚡</div>
+            <div class="feat-name">TẢI TRANG NHANH</div>
+            <div class="feat-desc">HTML/CSS/JS thuần – không framework nặng. Mở trang trong dưới 2 giây</div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon">📱</div>
+            <div class="feat-name">RESPONSIVE</div>
+            <div class="feat-desc">Tự động thích ứng mọi kích thước màn hình: điện thoại, máy tính bảng, máy tính</div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon">🗺️</div>
+            <div class="feat-name">BẢN ĐỒ TƯƠNG TÁC</div>
+            <div class="feat-desc">Leaflet.js + OpenStreetMap miễn phí bản quyền. Marker tuỳ chỉnh theo loại công trình</div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon">🔒</div>
+            <div class="feat-name">BẢO MẬT DỮ LIỆU</div>
+            <div class="feat-desc">Dữ liệu cá nhân lưu ngay trên trình duyệt (localStorage). Không gửi lên máy chủ</div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon">🛠️</div>
+            <div class="feat-name">QUẢN TRỊ DỄ DÀNG</div>
+            <div class="feat-desc">Trang quản trị CMS cho admin cập nhật địa điểm, lễ hội, nội dung không cần lập trình</div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon">🖨️</div>
+            <div class="feat-name">IN ẤN & PDF</div>
+            <div class="feat-desc">In văn khấn, checklist hành trang ra giấy hoặc lưu PDF để mang theo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: Phạm vi địa lý -->
+    <div class="slide slide-6">
+      <div class="slide-content">
+        <div class="slide-badge">Phạm Vi Triển Khai</div>
+        <h2 class="slide-title">TOÀN QUỐC – 4 VÙNG MIỀN</h2>
+        <p class="slide-subtitle">Phủ sóng lễ hội và địa điểm tâm linh từ Bắc vào Nam</p>
+        <div class="feat-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+          <div class="feat-item">
+            <div class="feat-icon">🏛️</div>
+            <div class="feat-name">MIỀN BẮC</div>
+            <div class="feat-desc">Hà Nội, Phú Thọ, Bắc Ninh, Quảng Ninh, Hải Phòng, Hải Dương, Hưng Yên, Vĩnh Phúc, Thái Nguyên, Lạng Sơn, Lào Cai, Yên Bái, Hà Giang, Tuyên Quang, Điện Biên, Lai Châu, Nam Định, Ninh Bình, Thái Bình, Hà Nam, Thanh Hóa, Bắc Giang</div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon">🏯</div>
+            <div class="feat-name">MIỀN TRUNG</div>
+            <div class="feat-desc">Nghệ An, Hà Tĩnh, Quảng Bình, Thừa Thiên Huế, Đà Nẵng, Quảng Nam, Quảng Ngãi, Bình Định, Phú Yên, Khánh Hòa, Ninh Thuận, Bình Thuận</div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon">⛰️</div>
+            <div class="feat-name">TÂY NGUYÊN</div>
+            <div class="feat-desc">Gia Lai, Đắk Lắk, Lâm Đồng – Cồng chiêng, lễ hội dân tộc bản địa</div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon">🌴</div>
+            <div class="feat-name">MIỀN NAM</div>
+            <div class="feat-desc">TP.HCM, Tây Ninh, Bình Dương, Đồng Nai, An Giang, Cần Thơ, Sóc Trăng, Trà Vinh, Đồng Tháp, Bến Tre</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 7: Ưu điểm -->
+    <div class="slide slide-7">
+      <div class="slide-content">
+        <div class="slide-badge">Ưu Điểm Nổi Bật</div>
+        <h2 class="slide-title">VÌ SAO CHỌN TÂM LINH VIỆT?</h2>
+        <p class="slide-subtitle">Phần mềm duy nhất kết hợp đầy đủ tất cả tiện ích cho người đi lễ</p>
+        <ul class="check-list">
+          <li>Nội dung chuẩn xác, biên soạn kỹ lưỡng theo phong tục truyền thống</li>
+          <li>Giao diện đẹp mắt, mang đậm bản sắc văn hoá Việt Nam</li>
+          <li>Miễn phí trọn đời – không quảng cáo, không thu phí ẩn</li>
+          <li>Hoạt động không cần Internet sau lần tải đầu tiên</li>
+          <li>Dữ liệu cá nhân không bị thu thập – bảo mật tuyệt đối</li>
+          <li>Cập nhật liên tục – mở rộng thêm tỉnh thành và địa điểm</li>
+          <li>Hệ thống quản trị dễ dùng cho người không biết lập trình</li>
+          <li>Hỗ trợ in ấn văn khấn và checklist ra giấy hoặc PDF</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SLIDE 8: Liên hệ / CTA -->
+    <div class="slide slide-8">
+      <div class="slide-content">
+        <div class="slide-badge">Liên Hệ Hợp Tác</div>
+        <div style="font-size: 4rem; margin-bottom: 1rem;">🤝</div>
+        <h2 class="slide-title">BẮT ĐẦU NGAY HÔM NAY</h2>
+        <p class="slide-subtitle">
+          Hãy cùng chúng tôi số hoá và bảo tồn văn hoá tín ngưỡng truyền thống Việt Nam.
+          Phần mềm sẵn sàng triển khai cho đơn vị, tổ chức, ban quản lý di tích.
+        </p>
+        <div class="cta-box">
+          <div class="cta-price">SẴN SÀNG TRIỂN KHAI</div>
+          <div class="cta-note">Tuỳ chỉnh theo nhu cầu đơn vị</div>
+          <a href="index.html" class="cta-btn">TRẢI NGHIỆM NGAY</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CONTROLS -->
+  <div class="controls">
+    <button class="ctrl-btn" id="btnPrev" aria-label="Slide trước">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <div class="dots" id="dots"></div>
+    <span class="slide-counter" id="counter">1 / 8</span>
+    <button class="ctrl-btn" id="btnNext" aria-label="Slide tiếp">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+  </div>
+
+  <div class="key-hint">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> hoặc <kbd>Space</kbd> để chuyển slide
+  </div>
+
+  <script>
+    (function() {
+      const SLIDES = document.querySelectorAll('.slide');
+      const TOTAL = SLIDES.length;
+      const DOTS_EL = document.getElementById('dots');
+      const COUNTER = document.getElementById('counter');
+      const PROGRESS = document.getElementById('progressBar');
+      let current = 0;
+
+      /* Build dots */
+      for (let i = 0; i < TOTAL; i++) {
+        const d = document.createElement('span');
+        d.className = 'dot' + (i === 0 ? ' active' : '');
+        d.addEventListener('click', () => GO_TO(i));
+        DOTS_EL.appendChild(d);
+      }
+
+      function UPDATE_UI() {
+        SLIDES.forEach((s, i) => s.classList.toggle('active', i === current));
+        DOTS_EL.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+        COUNTER.textContent = (current + 1) + ' / ' + TOTAL;
+        PROGRESS.style.width = ((current + 1) / TOTAL * 100) + '%';
+      }
+
+      function GO_TO(idx) {
+        current = Math.max(0, Math.min(TOTAL - 1, idx));
+        UPDATE_UI();
+      }
+
+      function NEXT_SLIDE() { GO_TO(current + 1); }
+      function PREV_SLIDE() { GO_TO(current - 1); }
+
+      document.getElementById('btnNext').addEventListener('click', NEXT_SLIDE);
+      document.getElementById('btnPrev').addEventListener('click', PREV_SLIDE);
+
+      /* Keyboard navigation */
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); NEXT_SLIDE(); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); PREV_SLIDE(); }
+        if (e.key === 'Home') { e.preventDefault(); GO_TO(0); }
+        if (e.key === 'End') { e.preventDefault(); GO_TO(TOTAL - 1); }
+      });
+
+      /* Touch swipe */
+      let touchX = 0;
+      document.addEventListener('touchstart', function(e) { touchX = e.touches[0].clientX; });
+      document.addEventListener('touchend', function(e) {
+        const diff = touchX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) { diff > 0 ? NEXT_SLIDE() : PREV_SLIDE(); }
+      });
+
+      UPDATE_UI();
+    })();
+  </script>
+
+</body>
+</html>

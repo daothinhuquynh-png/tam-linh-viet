@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xem Ngày Tốt – Tâm Linh Việt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Noto+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .xn-main { max-width: 960px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+
+    /* Calendar navigation */
+    .cal-nav {
+      display: flex; align-items: center; justify-content: center; gap: 1.5rem;
+      margin-bottom: 2rem; flex-wrap: wrap;
+    }
+    .cal-nav-btn {
+      width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--cream-dark);
+      background: white; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.2s; color: var(--text-mid);
+    }
+    .cal-nav-btn:hover { background: var(--red); color: white; border-color: var(--red); }
+    .cal-nav-title {
+      font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--red-dark);
+      min-width: 220px; text-align: center; text-transform: uppercase; font-weight: 700;
+    }
+
+    /* Calendar grid */
+    .xn-cal {
+      background: white; border-radius: 16px; overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid var(--cream-dark);
+      margin-bottom: 2rem;
+    }
+    .xn-cal-header {
+      display: grid; grid-template-columns: repeat(7, 1fr);
+      background: linear-gradient(135deg, var(--red-dark), #6B1E1E);
+    }
+    .xn-cal-header span {
+      text-align: center; padding: 0.7rem 0.5rem; color: white;
+      font-size: 0.82rem; font-weight: 700; text-transform: uppercase;
+    }
+    .xn-cal-body { display: grid; grid-template-columns: repeat(7, 1fr); }
+    .xn-day {
+      min-height: 80px; padding: 0.4rem; border: 1px solid rgba(0,0,0,0.04);
+      cursor: pointer; transition: background 0.15s; position: relative;
+    }
+    .xn-day:hover { background: rgba(212,175,55,0.08); }
+    .xn-day.today { background: rgba(192,57,43,0.06); }
+    .xn-day.empty { background: rgba(0,0,0,0.02); cursor: default; }
+    .xn-day.selected { background: rgba(192,57,43,0.12); outline: 2px solid var(--red); outline-offset: -2px; }
+    .xn-day-num { font-size: 0.95rem; font-weight: 700; color: var(--text-dark); }
+    .xn-day-lunar { font-size: 0.68rem; color: var(--text-light); }
+    .xn-day.sunday .xn-day-num { color: var(--red); }
+    .xn-dot-good { position: absolute; top: 0.3rem; right: 0.3rem; width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+    .xn-dot-bad { position: absolute; top: 0.3rem; right: 0.3rem; width: 8px; height: 8px; border-radius: 50%; background: #E74C3C; }
+    .xn-dot-fest { position: absolute; bottom: 0.3rem; left: 50%; transform: translateX(-50%); background: var(--gold); color: var(--red-dark); font-size: 0.55rem; font-weight: 700; padding: 0 0.3rem; border-radius: 4px; white-space: nowrap; max-width: 90%; overflow: hidden; text-overflow: ellipsis; }
+
+    /* Legend */
+    .legend {
+      display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center;
+      margin-bottom: 2rem; font-size: 0.82rem; color: var(--text-mid);
+    }
+    .legend-item { display: flex; align-items: center; gap: 0.4rem; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+    /* Day detail */
+    .day-detail {
+      background: white; border-radius: 16px; padding: 1.5rem;
+      border: 1px solid var(--cream-dark); box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      display: none;
+    }
+    .day-detail.active { display: block; }
+    .dd-header {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;
+      padding-bottom: 1rem; border-bottom: 2px solid var(--gold-light);
+    }
+    .dd-date-box {
+      width: 70px; height: 70px; background: var(--red); color: white;
+      border-radius: 12px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .dd-date-box .dd-num { font-size: 1.6rem; font-weight: 700; line-height: 1; }
+    .dd-date-box .dd-month { font-size: 0.7rem; margin-top: 0.2rem; text-transform: uppercase; }
+    .dd-info h3 { font-family: 'Playfair Display', serif; color: var(--red-dark); font-size: 1.1rem; text-transform: uppercase; font-weight: 700; }
+    .dd-info p { font-size: 0.85rem; color: var(--text-light); }
+
+    .dd-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem; }
+    .dd-card {
+      background: var(--cream); border-radius: 10px; padding: 1rem;
+      text-align: center;
+    }
+    .dd-card-icon { font-size: 1.5rem; margin-bottom: 0.3rem; }
+    .dd-card-label { font-size: 0.75rem; color: var(--text-light); text-transform: uppercase; font-weight: 700; margin-bottom: 0.3rem; }
+    .dd-card-value { font-size: 0.9rem; color: var(--text-dark); font-weight: 600; }
+    .dd-card-value.good { color: var(--green); }
+    .dd-card-value.bad { color: #E74C3C; }
+
+    .dd-section { margin-top: 1.2rem; }
+    .dd-section-title { font-weight: 700; color: var(--red-dark); text-transform: uppercase; font-size: 0.88rem; margin-bottom: 0.5rem; }
+    .dd-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .dd-tag {
+      padding: 0.3rem 0.7rem; border-radius: 15px; font-size: 0.78rem; font-weight: 600;
+    }
+    .dd-tag-good { background: rgba(46,125,50,0.1); color: var(--green); }
+    .dd-tag-bad { background: rgba(231,76,60,0.1); color: #E74C3C; }
+    .dd-tag-note { background: rgba(212,175,55,0.12); color: #A07820; }
+
+    @media (max-width: 600px) {
+      .xn-day { min-height: 55px; }
+      .xn-day-num { font-size: 0.8rem; }
+      .xn-dot-fest { display: none; }
+      .dd-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar solid" id="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="nav-logo">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" stroke="#D4AF37" stroke-width="1.5"/><path d="M14 4L16.5 11.5H24L18 16L20.5 23.5L14 19L7.5 23.5L10 16L4 11.5H11.5Z" fill="#D4AF37" opacity="0.8"/></svg>
+        Tâm Linh <span>Việt</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">TRANG CHỦ</a></li>
+        <li><a href="huong-dan.html">NGHI LỄ</a></li>
+        <li><a href="dia-diem.html">ĐỊA ĐIỂM</a></li>
+        <li><a href="lich-le-hoi.html">LỊCH LỄ HỘI</a></li>
+        <li><a href="chuan-bi.html">HÀNH TRANG</a></li>
+        <li><a href="xem-ngay.html" class="active">NGÀY TỐT</a></li>
+        <li><a href="so-nguyen.html">SỔ NGUYỆN</a></li>
+        <li><a href="tim-kiem.html" class="nav-cta">TÌM KIẾM</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <h1>XEM NGÀY TỐT</h1>
+      <p>Tra cứu ngày lành tháng tốt cho hành hương, cầu an, khai trương theo lịch âm dương 2026</p>
+      <div class="breadcrumb"><a href="index.html">Trang Chủ</a><span>&#8250;</span><span>Xem Ngày Tốt</span></div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="xn-main">
+    <!-- Calendar Nav -->
+    <div class="cal-nav">
+      <button class="cal-nav-btn" onclick="changeXnMonth(-1)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="cal-nav-title" id="xnMonthTitle"></div>
+      <button class="cal-nav-btn" onclick="changeXnMonth(1)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+
+    <!-- Legend -->
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--green);"></div> Ngày tốt</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#E74C3C;"></div> Ngày xấu</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--gold);"></div> Có lễ hội</div>
+      <div class="legend-item"><div class="legend-dot" style="background:rgba(192,57,43,0.2);width:20px;height:10px;border-radius:3px;"></div> Hôm nay</div>
+    </div>
+
+    <!-- Calendar -->
+    <div class="xn-cal">
+      <div class="xn-cal-header">
+        <span>CN</span><span>T2</span><span>T3</span><span>T4</span><span>T5</span><span>T6</span><span>T7</span>
+      </div>
+      <div class="xn-cal-body" id="xnCalBody"></div>
+    </div>
+
+    <!-- Day Detail -->
+    <div class="day-detail" id="dayDetail"></div>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Tâm Linh Việt</h3>
+        <p>Hành trình tâm linh trọn vẹn cùng người Việt. Bảo tồn và phát huy giá trị văn hoá tâm linh truyền thống.</p>
+      </div>
+      <div class="footer-col">
+        <h4>NỘI DUNG</h4>
+        <ul>
+          <li><a href="huong-dan.html">NGHI LỄ & VĂN KHẤN</a></li>
+          <li><a href="dia-diem.html">ĐỊA ĐIỂM ĐỀN CHÙA</a></li>
+          <li><a href="lich-le-hoi.html">LỊCH LỄ HỘI</a></li>
+          <li><a href="tim-kiem.html">TÌM KIẾM</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>TIỆN ÍCH</h4>
+        <ul>
+          <li><a href="chuan-bi.html">CHUẨN BỊ HÀNH TRANG</a></li>
+          <li><a href="xem-ngay.html">XEM NGÀY TỐT</a></li>
+          <li><a href="so-nguyen.html">SỔ CẦU NGUYỆN</a></li>
+          <li><a href="admin/login.html">QUẢN TRỊ NỘI DUNG</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>TÀI LIỆU</h4>
+        <ul>
+          <li><a href="kehoach.html">KẾ HOẠCH PHÁT TRIỂN</a></li>
+          <li><a href="sale.html">GIỚI THIỆU PHẦN MỀM</a></li>
+          <li><a href="hdsd.html">HƯỚNG DẪN SỬ DỤNG</a></li>
+          <li><a href="gioithieu.html">VỀ CHÚNG TÔI</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Tâm Linh Việt. Bảo tồn giá trị văn hoá tâm linh Việt Nam.</span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/calendar.js"></script>
+  <script>
+    // =====================================================================
+    //  LUNAR CALENDAR – dùng solarToLunar() từ calendar.js
+    //  Wrapper để tương thích với code cũ
+    // =====================================================================
+    function getLunarDate(solarDate) {
+      const result = solarToLunar(
+        solarDate.getFullYear(),
+        solarDate.getMonth() + 1,
+        solarDate.getDate()
+      );
+      if (result) return { day: result.lunarDay, month: result.lunarMonth };
+      return null;
+    }
+
+    // Ngày tốt: 1,2,4,6,8,10,14,16,18,20,24,26,28 âm lịch (dựa theo truyền thống)
+    const GOOD_LUNAR_DAYS = [1,2,4,6,8,10,14,16,18,20,24,26,28];
+    // Ngày xấu: 5,7,13,14,23 (tuỳ theo nguồn tham khảo) — đơn giản hoá
+    const BAD_LUNAR_DAYS = [5,7,13,23];
+
+    // Chi ngày (12 chi)
+    const CHI = ['Tý','Sửu','Dần','Mão','Thìn','Tỵ','Ngọ','Mùi','Thân','Dậu','Tuất','Hợi'];
+    const CAN = ['Giáp','Ất','Bính','Đinh','Mậu','Kỷ','Canh','Tân','Nhâm','Quý'];
+
+    function getCanChi(date) {
+      // Simplified: offset from a known can chi day (01/01/2026 = Mậu Tý based on approx.)
+      const base = new Date(2026, 0, 1);
+      const diff = Math.floor((date - base) / 86400000);
+      const canIdx = (4 + diff) % 10; // Mậu = index 4
+      const chiIdx = (0 + diff) % 12; // Tý = index 0
+      return CAN[(canIdx + 10) % 10] + ' ' + CHI[(chiIdx + 12) % 12];
+    }
+
+    // Giờ hoàng đạo (simplified by day's chi)
+    const HOANG_DAO = {
+      'Tý': 'Tý (23-1h), Sửu (1-3h), Mão (5-7h), Ngọ (11-13h), Thân (15-17h), Dậu (17-19h)',
+      'Sửu': 'Dần (3-5h), Mão (5-7h), Tỵ (9-11h), Thân (15-17h), Tuất (19-21h), Hợi (21-23h)',
+      'Dần': 'Tý (23-1h), Sửu (1-3h), Thìn (7-9h), Tỵ (9-11h), Mùi (13-15h), Tuất (19-21h)',
+      'Mão': 'Tý (23-1h), Dần (3-5h), Mão (5-7h), Ngọ (11-13h), Mùi (13-15h), Dậu (17-19h)',
+      'Thìn': 'Dần (3-5h), Thìn (7-9h), Tỵ (9-11h), Thân (15-17h), Dậu (17-19h), Hợi (21-23h)',
+      'Tỵ': 'Sửu (1-3h), Thìn (7-9h), Ngọ (11-13h), Mùi (13-15h), Tuất (19-21h), Hợi (21-23h)',
+      'Ngọ': 'Tý (23-1h), Sửu (1-3h), Mão (5-7h), Ngọ (11-13h), Thân (15-17h), Dậu (17-19h)',
+      'Mùi': 'Dần (3-5h), Mão (5-7h), Tỵ (9-11h), Thân (15-17h), Tuất (19-21h), Hợi (21-23h)',
+      'Thân': 'Tý (23-1h), Sửu (1-3h), Thìn (7-9h), Tỵ (9-11h), Mùi (13-15h), Tuất (19-21h)',
+      'Dậu': 'Tý (23-1h), Dần (3-5h), Mão (5-7h), Ngọ (11-13h), Mùi (13-15h), Dậu (17-19h)',
+      'Tuất': 'Dần (3-5h), Thìn (7-9h), Tỵ (9-11h), Thân (15-17h), Dậu (17-19h), Hợi (21-23h)',
+      'Hợi': 'Sửu (1-3h), Thìn (7-9h), Ngọ (11-13h), Mùi (13-15h), Tuất (19-21h), Hợi (21-23h)',
+    };
+
+    const HUONG = ['Đông','Đông Nam','Nam','Tây Nam','Tây','Tây Bắc','Bắc','Đông Bắc'];
+
+    // Lấy lễ hội tự động từ FESTIVALS (calendar.js)
+    function getFestivalsForDate(year, month1, day) {
+      if (typeof FESTIVALS === 'undefined') return [];
+      return FESTIVALS.filter(f => f.solarYear === year && f.solarMonth === month1 && f.solarDay === day);
+    }
+    function getFestivalsForMonth(year, month1) {
+      if (typeof FESTIVALS === 'undefined') return [];
+      return FESTIVALS.filter(f => f.solarYear === year && f.solarMonth === month1);
+    }
+
+    const GOOD_FOR = ['Cầu an','Hành hương','Khai trương','Cầu tài lộc','Giải hạn','Cúng dường'];
+    const BAD_FOR = ['Khởi công','Xuất hành xa','Khai trương'];
+
+    // =====================================================================
+    //  CALENDAR RENDER
+    // =====================================================================
+    let xnDate = new Date(2026, 0, 1);
+    const today = new Date();
+
+    const MONTH_NAMES = ['Tháng 1','Tháng 2','Tháng 3','Tháng 4','Tháng 5','Tháng 6',
+                         'Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12'];
+
+    function renderXnCalendar() {
+      const year = xnDate.getFullYear();
+      const month = xnDate.getMonth();
+      document.getElementById('xnMonthTitle').textContent = MONTH_NAMES[month] + ', ' + year;
+
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      // Pre-fetch all festivals for this month
+      const monthFests = getFestivalsForMonth(year, month + 1);
+
+      let html = '';
+      for (let i = 0; i < firstDay; i++) html += '<div class="xn-day empty"></div>';
+
+      for (let d = 1; d <= daysInMonth; d++) {
+        const date = new Date(year, month, d);
+        const lunar = getLunarDate(date);
+        const isToday = date.toDateString() === today.toDateString();
+        const isSunday = date.getDay() === 0;
+        const dayFests = monthFests.filter(f => f.solarDay === d);
+
+        let dotHtml = '';
+        let cls = 'xn-day';
+        if (isToday) cls += ' today';
+        if (isSunday) cls += ' sunday';
+
+        if (lunar) {
+          if (GOOD_LUNAR_DAYS.includes(lunar.day)) dotHtml += '<div class="xn-dot-good"></div>';
+          if (BAD_LUNAR_DAYS.includes(lunar.day)) dotHtml += '<div class="xn-dot-bad"></div>';
+        }
+        if (dayFests.length) {
+          const label = dayFests.length === 1 ? dayFests[0].name : `${dayFests.length} lễ hội`;
+          dotHtml += `<div class="xn-dot-fest">${label}</div>`;
+        }
+
+        const lunarText = lunar ? `${lunar.day}/${lunar.month}` : '';
+        html += `<div class="${cls}" onclick="selectDay(${year},${month},${d})">
+          <div class="xn-day-num">${d}</div>
+          <div class="xn-day-lunar">${lunarText}</div>
+          ${dotHtml}
+        </div>`;
+      }
+
+      document.getElementById('xnCalBody').innerHTML = html;
+    }
+
+    function changeXnMonth(delta) {
+      xnDate.setMonth(xnDate.getMonth() + delta);
+      renderXnCalendar();
+      document.getElementById('dayDetail').classList.remove('active');
+    }
+
+    function selectDay(y, m, d) {
+      document.querySelectorAll('.xn-day').forEach(el => el.classList.remove('selected'));
+      const days = document.querySelectorAll('.xn-day:not(.empty)');
+      if (days[d - 1]) days[d - 1].classList.add('selected');
+
+      const date = new Date(y, m, d);
+      const lunar = getLunarDate(date);
+      const canChi = getCanChi(date);
+      const chi = canChi.split(' ')[1];
+      const hoangDao = HOANG_DAO[chi] || 'Đang cập nhật';
+      const huong = HUONG[d % 8];
+      const dayFests = getFestivalsForDate(y, m + 1, d);
+
+      let isGood = false, isBad = false;
+      if (lunar) {
+        isGood = GOOD_LUNAR_DAYS.includes(lunar.day);
+        isBad = BAD_LUNAR_DAYS.includes(lunar.day);
+      }
+
+      const dayNames = ['Chủ Nhật','Thứ Hai','Thứ Ba','Thứ Tư','Thứ Năm','Thứ Sáu','Thứ Bảy'];
+      const lunarMonthNames = ['','Giêng','Hai','Ba','Tư','Năm','Sáu','Bảy','Tám','Chín','Mười','Mười Một','Chạp'];
+
+      let html = `
+        <div class="dd-header">
+          <div class="dd-date-box">
+            <div class="dd-num">${d}</div>
+            <div class="dd-month">Th ${m+1}</div>
+          </div>
+          <div class="dd-info">
+            <h3>${dayNames[date.getDay()]}, NGÀY ${d} THÁNG ${m+1} NĂM ${y}</h3>
+            <p>Âm lịch: ${lunar ? `Ngày ${lunar.day} tháng ${lunarMonthNames[lunar.month]}` : 'Ngoài phạm vi'} · Can Chi: ${canChi}</p>
+          </div>
+        </div>
+        <div class="dd-grid">
+          <div class="dd-card">
+            <div class="dd-card-icon">${isGood ? '✅' : isBad ? '❌' : '➖'}</div>
+            <div class="dd-card-label">ĐÁNH GIÁ</div>
+            <div class="dd-card-value ${isGood ? 'good' : isBad ? 'bad' : ''}">${isGood ? 'NGÀY TỐT' : isBad ? 'NGÀY XẤU' : 'BÌNH THƯỜNG'}</div>
+          </div>
+          <div class="dd-card">
+            <div class="dd-card-icon">🧭</div>
+            <div class="dd-card-label">HƯỚNG XUẤT HÀNH</div>
+            <div class="dd-card-value good">${huong}</div>
+          </div>
+          <div class="dd-card">
+            <div class="dd-card-icon">📅</div>
+            <div class="dd-card-label">ÂM LỊCH</div>
+            <div class="dd-card-value">${lunar ? `${lunar.day}/${lunar.month}` : '—'}</div>
+          </div>
+          <div class="dd-card">
+            <div class="dd-card-icon">🐴</div>
+            <div class="dd-card-label">CAN CHI</div>
+            <div class="dd-card-value">${canChi}</div>
+          </div>
+        </div>
+
+        <div class="dd-section">
+          <div class="dd-section-title">⏰ GIỜ HOÀNG ĐẠO</div>
+          <p style="font-size:0.88rem;color:var(--text-mid);">${hoangDao}</p>
+        </div>
+      `;
+
+      if (isGood) {
+        html += `<div class="dd-section">
+          <div class="dd-section-title">NÊN LÀM</div>
+          <div class="dd-tags">${GOOD_FOR.map(g => `<span class="dd-tag dd-tag-good">${g}</span>`).join('')}</div>
+        </div>`;
+      }
+      if (isBad) {
+        html += `<div class="dd-section">
+          <div class="dd-section-title">KHÔNG NÊN</div>
+          <div class="dd-tags">${BAD_FOR.map(b => `<span class="dd-tag dd-tag-bad">${b}</span>`).join('')}</div>
+        </div>`;
+      }
+
+      // Lễ hội từ FESTIVALS (calendar.js) – tự động
+      if (dayFests.length) {
+        html += `<div class="dd-section">
+          <div class="dd-section-title">🎊 LỄ HỘI NGÀY NÀY (${dayFests.length})</div>`;
+        dayFests.forEach(f => {
+          html += `<div style="background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.25);border-radius:10px;padding:0.8rem;margin-bottom:0.6rem;">
+            <div style="font-weight:700;color:var(--red-dark);font-size:0.92rem;margin-bottom:0.2rem;">${f.name}</div>
+            <div style="font-size:0.78rem;color:var(--text-light);margin-bottom:0.3rem;">
+              📍 ${f.location} · ${f.duration}
+            </div>
+            <div style="font-size:0.82rem;color:var(--text-mid);line-height:1.5;">${f.desc}</div>
+            <div style="margin-top:0.5rem;display:flex;gap:0.5rem;flex-wrap:wrap;">
+              <a href="lich-le-hoi.html" style="font-size:0.78rem;color:var(--red);font-weight:700;text-decoration:none;">Xem lịch lễ hội ›</a>
+              ${f.province !== 'all' ? `<a href="dia-diem.html?tinh=${f.province}" style="font-size:0.78rem;color:var(--gold-dark);font-weight:700;text-decoration:none;">Xem địa điểm ${f.provinceName} ›</a>` : ''}
+            </div>
+          </div>`;
+        });
+        html += `</div>`;
+      }
+
+      const detail = document.getElementById('dayDetail');
+      detail.innerHTML = html;
+      detail.classList.add('active');
+      detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // Init
+    document.addEventListener('DOMContentLoaded', () => {
+      xnDate = new Date(today.getFullYear(), today.getMonth(), 1);
+      renderXnCalendar();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hướng Dẫn Sử Dụng – Quản Trị Tâm Linh Việt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Noto+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #C0392B; --red-dark: #922B21; --gold: #D4AF37; --gold-light: #F0D060;
+      --brown: #5D4037; --cream: #FDF6E3; --cream-dark: #F5E6C8;
+      --green: #2E7D32; --text-dark: #2C1810; --text-mid: #5D4037; --text-light: #8D6E63;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Serif', serif;
+      background: var(--cream); color: var(--text-dark); line-height: 1.8;
+    }
+
+    /* ===== TOP NAV ===== */
+    .hdsd-nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--red-dark); padding: 0.8rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .hdsd-nav-logo {
+      font-family: 'Playfair Display', serif; font-size: 1.1rem;
+      font-weight: 700; color: var(--gold-light);
+    }
+    .hdsd-nav-links { display: flex; gap: 1rem; }
+    .hdsd-nav-links a {
+      color: rgba(255,255,255,0.7); font-size: 0.82rem; text-decoration: none;
+      font-weight: 700; text-transform: uppercase; transition: color 0.2s;
+    }
+    .hdsd-nav-links a:hover { color: var(--gold-light); }
+    .hdsd-print-btn {
+      background: var(--gold); color: var(--text-dark);
+      font-weight: 700; font-size: 0.8rem; text-transform: uppercase;
+      padding: 0.4rem 1rem; border-radius: 20px; border: none;
+      cursor: pointer; font-family: inherit; transition: background 0.2s;
+    }
+    .hdsd-print-btn:hover { background: var(--gold-light); }
+
+    /* ===== HERO ===== */
+    .hdsd-hero {
+      background: linear-gradient(135deg, var(--red-dark), #6B1E1E, #3E2723);
+      padding: 4rem 2rem 3rem; text-align: center; position: relative; overflow: hidden;
+    }
+    .hdsd-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23D4AF37' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hdsd-hero h1 {
+      font-family: 'Playfair Display', serif; color: var(--gold-light);
+      font-size: clamp(1.8rem, 4vw, 2.8rem); text-transform: uppercase;
+      font-weight: 700; position: relative; margin-bottom: 0.5rem;
+    }
+    .hdsd-hero p { color: rgba(255,255,255,0.7); font-size: 1rem; position: relative; }
+
+    /* ===== LAYOUT ===== */
+    .hdsd-layout {
+      display: flex; max-width: 1200px; margin: 0 auto; min-height: calc(100vh - 200px);
+    }
+
+    /* Sidebar */
+    .hdsd-sidebar {
+      width: 280px; flex-shrink: 0; padding: 1.5rem;
+      background: white; border-right: 1px solid var(--cream-dark);
+      position: sticky; top: 48px; height: calc(100vh - 48px); overflow-y: auto;
+    }
+    .hdsd-sidebar-title {
+      font-family: 'Playfair Display', serif; font-size: 0.95rem;
+      color: var(--red-dark); text-transform: uppercase; font-weight: 700;
+      margin-bottom: 1rem; padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--gold-light);
+    }
+    .hdsd-menu { list-style: none; }
+    .hdsd-menu li { margin-bottom: 0.2rem; }
+    .hdsd-menu a {
+      display: block; padding: 0.5rem 0.8rem; border-radius: 6px;
+      font-size: 0.85rem; color: var(--text-mid); text-decoration: none;
+      transition: all 0.2s; font-weight: 600;
+    }
+    .hdsd-menu a:hover { background: rgba(192,57,43,0.06); color: var(--red); }
+    .hdsd-menu a.active { background: var(--red); color: white; }
+    .hdsd-menu .sub { padding-left: 1.5rem; }
+    .hdsd-menu .sub a { font-size: 0.8rem; font-weight: 400; }
+
+    /* Content */
+    .hdsd-content {
+      flex: 1; padding: 2.5rem 3rem; max-width: 800px;
+    }
+
+    .hdsd-section { margin-bottom: 3rem; }
+    .hdsd-section h2 {
+      font-family: 'Playfair Display', serif; color: var(--red-dark);
+      font-size: 1.5rem; text-transform: uppercase; font-weight: 700;
+      margin-bottom: 1rem; padding-bottom: 0.5rem;
+      border-bottom: 3px solid var(--gold);
+    }
+    .hdsd-section h3 {
+      font-family: 'Playfair Display', serif; color: var(--brown);
+      font-size: 1.15rem; text-transform: uppercase; font-weight: 700;
+      margin: 1.5rem 0 0.8rem;
+    }
+
+    /* Steps */
+    .step-list { counter-reset: step; }
+    .step-item {
+      counter-increment: step;
+      padding: 1rem 1rem 1rem 3.5rem; margin-bottom: 0.8rem;
+      background: white; border-radius: 10px;
+      border: 1px solid var(--cream-dark);
+      position: relative;
+    }
+    .step-item::before {
+      content: counter(step);
+      position: absolute; left: 1rem; top: 1rem;
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--red); color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.85rem;
+    }
+    .step-item strong { color: var(--red-dark); text-transform: uppercase; }
+
+    /* Info boxes */
+    .info-box {
+      padding: 1rem 1.2rem; border-radius: 8px; margin: 1rem 0;
+      font-size: 0.9rem; line-height: 1.6;
+    }
+    .info-box.tip { background: rgba(46,125,50,0.08); border-left: 4px solid var(--green); }
+    .info-box.warn { background: rgba(192,57,43,0.08); border-left: 4px solid var(--red); }
+    .info-box.note { background: rgba(212,175,55,0.1); border-left: 4px solid var(--gold); }
+    .info-box strong { display: block; margin-bottom: 0.3rem; text-transform: uppercase; }
+
+    /* Table */
+    .hdsd-table {
+      width: 100%; border-collapse: collapse; margin: 1rem 0;
+      font-size: 0.88rem;
+    }
+    .hdsd-table th {
+      background: var(--red-dark); color: white; padding: 0.7rem 1rem;
+      text-align: left; text-transform: uppercase; font-weight: 700; font-size: 0.8rem;
+    }
+    .hdsd-table td {
+      padding: 0.6rem 1rem; border-bottom: 1px solid var(--cream-dark);
+    }
+    .hdsd-table tr:hover td { background: rgba(212,175,55,0.06); }
+    .hdsd-table code {
+      background: rgba(0,0,0,0.06); padding: 0.15rem 0.5rem;
+      border-radius: 4px; font-size: 0.82rem; font-family: monospace;
+    }
+
+    /* Screenshot placeholder */
+    .screenshot {
+      background: white; border: 2px dashed var(--cream-dark);
+      border-radius: 10px; padding: 2rem; text-align: center;
+      color: var(--text-light); font-size: 0.85rem; margin: 1rem 0;
+    }
+    .screenshot-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+
+    /* Print */
+    @media print {
+      .hdsd-nav, .hdsd-sidebar, .hdsd-print-btn { display: none !important; }
+      .hdsd-layout { display: block; }
+      .hdsd-content { max-width: 100%; padding: 1rem; }
+      .hdsd-hero { padding: 2rem; }
+      .step-item { break-inside: avoid; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hdsd-sidebar { display: none; }
+      .hdsd-content { padding: 1.5rem; }
+      .hdsd-nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="hdsd-nav">
+    <span class="hdsd-nav-logo">HƯỚNG DẪN SỬ DỤNG</span>
+    <div class="hdsd-nav-links">
+      <a href="index.html">TRANG CHỦ</a>
+      <a href="admin/login.html">TRANG QUẢN TRỊ</a>
+      <a href="kehoach.html">KẾ HOẠCH</a>
+    </div>
+    <button class="hdsd-print-btn" onclick="window.print()">IN TRANG NÀY</button>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hdsd-hero">
+    <h1>HƯỚNG DẪN SỬ DỤNG QUẢN TRỊ NỘI DUNG</h1>
+    <p>Tài liệu dành cho quản trị viên website Tâm Linh Việt – Cập nhật nội dung không cần lập trình</p>
+  </div>
+
+  <!-- LAYOUT -->
+  <div class="hdsd-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="hdsd-sidebar">
+      <div class="hdsd-sidebar-title">MỤC LỤC</div>
+      <ul class="hdsd-menu">
+        <li><a href="#tong-quan" class="active">TỔNG QUAN HỆ THỐNG</a></li>
+        <li><a href="#dang-nhap">ĐĂNG NHẬP QUẢN TRỊ</a></li>
+        <li><a href="#quan-ly-dia-diem">QUẢN LÝ ĐỊA ĐIỂM</a></li>
+        <li class="sub"><a href="#them-dia-diem">Thêm địa điểm mới</a></li>
+        <li class="sub"><a href="#sua-dia-diem">Sửa thông tin</a></li>
+        <li class="sub"><a href="#xoa-dia-diem">Xoá địa điểm</a></li>
+        <li><a href="#quan-ly-le-hoi">QUẢN LÝ LỄ HỘI</a></li>
+        <li class="sub"><a href="#them-le-hoi">Thêm lễ hội mới</a></li>
+        <li class="sub"><a href="#sua-le-hoi">Sửa / Xoá lễ hội</a></li>
+        <li><a href="#tai-khoan">QUẢN LÝ TÀI KHOẢN</a></li>
+        <li><a href="#cau-truc">CẤU TRÚC FILE</a></li>
+        <li><a href="#luu-y">LƯU Ý QUAN TRỌNG</a></li>
+        <li><a href="#faq">CÂU HỎI THƯỜNG GẶP</a></li>
+      </ul>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="hdsd-content">
+
+      <!-- 1. TỔNG QUAN -->
+      <section class="hdsd-section" id="tong-quan">
+        <h2>TỔNG QUAN HỆ THỐNG</h2>
+        <p>
+          Website <strong>Tâm Linh Việt</strong> là phần mềm hướng dẫn thờ cúng và hành hương, được xây dựng bằng HTML/CSS/JavaScript
+          thuần. Hệ thống gồm 2 phần:
+        </p>
+        <div class="info-box note">
+          <strong>CẤU TRÚC HỆ THỐNG</strong>
+          <strong>Phần công khai</strong> (cho người dùng): Các trang index, hướng dẫn, địa điểm, lịch lễ hội, hành trang, xem ngày, sổ nguyện, tìm kiếm.<br>
+          <strong>Phần quản trị</strong> (cho admin): Trang đăng nhập và bảng điều khiển tại thư mục <code>admin/</code>.
+        </div>
+
+        <h3>CÁC TRANG WEBSITE</h3>
+        <table class="hdsd-table">
+          <thead>
+            <tr><th>TRANG</th><th>FILE</th><th>MÔ TẢ</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>TRANG CHỦ</strong></td><td><code>index.html</code></td><td>Trang giới thiệu chính, danh sách tính năng, tỉnh thành</td></tr>
+            <tr><td><strong>NGHI LỄ</strong></td><td><code>huong-dan.html</code></td><td>Hướng dẫn nghi lễ, văn khấn, lễ vật (có nút in PDF)</td></tr>
+            <tr><td><strong>ĐỊA ĐIỂM</strong></td><td><code>dia-diem.html</code></td><td>Bản đồ tương tác + danh sách đền chùa</td></tr>
+            <tr><td><strong>LỊCH LỄ HỘI</strong></td><td><code>lich-le-hoi.html</code></td><td>Lịch theo tháng, lọc theo tỉnh</td></tr>
+            <tr><td><strong>HÀNH TRANG</strong></td><td><code>chuan-bi.html</code></td><td>Checklist chuẩn bị cho 4 loại hình</td></tr>
+            <tr><td><strong>NGÀY TỐT</strong></td><td><code>xem-ngay.html</code></td><td>Tra cứu ngày lành, giờ hoàng đạo, Can Chi</td></tr>
+            <tr><td><strong>SỔ NGUYỆN</strong></td><td><code>so-nguyen.html</code></td><td>Nhật ký hành hương, lời cầu nguyện cá nhân</td></tr>
+            <tr><td><strong>TÌM KIẾM</strong></td><td><code>tim-kiem.html</code></td><td>Tìm kiếm toàn bộ nội dung website</td></tr>
+            <tr><td><strong>QUẢN TRỊ</strong></td><td><code>admin/</code></td><td>Bảng điều khiển dành cho admin</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 2. ĐĂNG NHẬP -->
+      <section class="hdsd-section" id="dang-nhap">
+        <h2>ĐĂNG NHẬP QUẢN TRỊ</h2>
+        <p>Để truy cập trang quản trị, bạn cần đăng nhập bằng tài khoản đã được cấp.</p>
+
+        <div class="step-list">
+          <div class="step-item">
+            Mở trình duyệt web (Chrome, Firefox, Edge, Safari) và truy cập file <code>admin/login.html</code> hoặc nhấn vào liên kết <strong>QUẢN TRỊ</strong> trên trang chủ.
+          </div>
+          <div class="step-item">
+            Nhập <strong>TÊN ĐĂNG NHẬP</strong> và <strong>MẬT KHẨU</strong> vào các ô tương ứng.
+          </div>
+          <div class="step-item">
+            Nhấn nút <strong>ĐĂNG NHẬP</strong>. Nếu thông tin đúng, bạn sẽ được chuyển sang trang quản trị chính.
+          </div>
+        </div>
+
+        <h3>DANH SÁCH TÀI KHOẢN MẶC ĐỊNH</h3>
+        <table class="hdsd-table">
+          <thead>
+            <tr><th>TÊN ĐĂNG NHẬP</th><th>MẬT KHẨU</th><th>VAI TRÒ</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>admin</code></td><td><code>admin123</code></td><td>Quản trị viên cao cấp</td></tr>
+            <tr><td><code>editor</code></td><td><code>editor123</code></td><td>Biên tập viên nội dung</td></tr>
+            <tr><td><code>viewer</code></td><td><code>viewer123</code></td><td>Chỉ xem (không chỉnh sửa)</td></tr>
+          </tbody>
+        </table>
+
+        <div class="info-box warn">
+          <strong>LƯU Ý BẢO MẬT</strong>
+          Sau khi triển khai chính thức, hãy đổi mật khẩu mặc định ngay lập tức. Mật khẩu hiện tại chỉ dành cho mục đích demo và thử nghiệm.
+        </div>
+      </section>
+
+      <!-- 3. QUẢN LÝ ĐỊA ĐIỂM -->
+      <section class="hdsd-section" id="quan-ly-dia-diem">
+        <h2>QUẢN LÝ ĐỊA ĐIỂM</h2>
+        <p>Trang quản trị cho phép bạn thêm, sửa, xoá các đền, đình, chùa trên bản đồ và danh sách.</p>
+
+        <h3 id="them-dia-diem">THÊM ĐỊA ĐIỂM MỚI</h3>
+        <div class="step-list">
+          <div class="step-item">
+            Đăng nhập vào trang quản trị. Chọn tab <strong>ĐỊA ĐIỂM</strong> trên thanh điều hướng.
+          </div>
+          <div class="step-item">
+            Kéo xuống phần <strong>THÊM ĐỊA ĐIỂM MỚI</strong>. Điền đầy đủ thông tin vào biểu mẫu:
+            <ul style="margin-top: 0.5rem; padding-left: 1.5rem; list-style: disc;">
+              <li><strong>Tên địa điểm</strong>: Tên chính thức (ví dụ: "Đền Ngọc Sơn")</li>
+              <li><strong>Loại</strong>: Chọn Đền, Đình hoặc Chùa</li>
+              <li><strong>Tỉnh thành</strong>: Chọn từ danh sách 13 tỉnh</li>
+              <li><strong>Địa chỉ</strong>: Địa chỉ đầy đủ</li>
+              <li><strong>Toạ độ</strong>: Kinh độ (lng) và vĩ độ (lat) – tra cứu trên Google Maps</li>
+              <li><strong>Mô tả</strong>: Giới thiệu ngắn về địa điểm</li>
+              <li><strong>Giờ mở cửa</strong>: Ví dụ "6:00 – 18:00"</li>
+            </ul>
+          </div>
+          <div class="step-item">
+            Nhấn nút <strong>LƯU ĐỊA ĐIỂM</strong>. Địa điểm sẽ xuất hiện ngay trong danh sách và trên bản đồ.
+          </div>
+        </div>
+
+        <div class="info-box tip">
+          <strong>MẸO: CÁCH LẤY TOẠ ĐỘ TỪ GOOGLE MAPS</strong>
+          1. Mở Google Maps → tìm địa điểm → nhấn chuột phải vào vị trí trên bản đồ.<br>
+          2. Nhấn vào dòng toạ độ xuất hiện (ví dụ: 21.0285, 105.8542).<br>
+          3. Số đầu tiên là <strong>vĩ độ (lat)</strong>, số thứ hai là <strong>kinh độ (lng)</strong>.
+        </div>
+
+        <h3 id="sua-dia-diem">SỬA THÔNG TIN ĐỊA ĐIỂM</h3>
+        <div class="step-list">
+          <div class="step-item">
+            Trong danh sách địa điểm, tìm địa điểm cần sửa bằng bộ lọc tỉnh hoặc thanh tìm kiếm.
+          </div>
+          <div class="step-item">
+            Nhấn nút <strong>SỬA</strong> (biểu tượng bút chì) bên phải tên địa điểm.
+          </div>
+          <div class="step-item">
+            Thông tin sẽ được điền vào biểu mẫu. Chỉnh sửa các trường cần thay đổi, rồi nhấn <strong>CẬP NHẬT</strong>.
+          </div>
+        </div>
+
+        <h3 id="xoa-dia-diem">XOÁ ĐỊA ĐIỂM</h3>
+        <div class="step-list">
+          <div class="step-item">
+            Nhấn nút <strong>XOÁ</strong> (biểu tượng thùng rác) bên phải tên địa điểm.
+          </div>
+          <div class="step-item">
+            Xác nhận xoá trong hộp thoại hiện lên. <strong>Lưu ý: thao tác này không thể hoàn tác.</strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. QUẢN LÝ LỄ HỘI -->
+      <section class="hdsd-section" id="quan-ly-le-hoi">
+        <h2>QUẢN LÝ LỄ HỘI</h2>
+        <p>Thêm, sửa, xoá các lễ hội truyền thống hiển thị trên trang Lịch Lễ Hội.</p>
+
+        <h3 id="them-le-hoi">THÊM LỄ HỘI MỚI</h3>
+        <div class="step-list">
+          <div class="step-item">
+            Chọn tab <strong>LỄ HỘI</strong> trên trang quản trị.
+          </div>
+          <div class="step-item">
+            Điền thông tin lễ hội:
+            <ul style="margin-top: 0.5rem; padding-left: 1.5rem; list-style: disc;">
+              <li><strong>Tên lễ hội</strong>: Tên chính thức</li>
+              <li><strong>Ngày âm lịch</strong>: Ví dụ "10/3" (mùng 10 tháng 3 âm lịch)</li>
+              <li><strong>Tỉnh thành</strong>: Nơi diễn ra</li>
+              <li><strong>Địa điểm cụ thể</strong>: Tên đền, chùa hoặc địa danh</li>
+              <li><strong>Mô tả</strong>: Giới thiệu ngắn về lễ hội</li>
+            </ul>
+          </div>
+          <div class="step-item">
+            Nhấn <strong>LƯU LỄ HỘI</strong>. Lễ hội sẽ xuất hiện trên lịch và danh sách.
+          </div>
+        </div>
+
+        <h3 id="sua-le-hoi">SỬA / XOÁ LỄ HỘI</h3>
+        <p>Tương tự như quản lý địa điểm: nhấn nút <strong>SỬA</strong> hoặc <strong>XOÁ</strong> trên từng dòng lễ hội.</p>
+      </section>
+
+      <!-- 5. TÀI KHOẢN -->
+      <section class="hdsd-section" id="tai-khoan">
+        <h2>QUẢN LÝ TÀI KHOẢN</h2>
+        <p>Hệ thống có 3 cấp độ tài khoản với quyền hạn khác nhau:</p>
+        <table class="hdsd-table">
+          <thead>
+            <tr><th>VAI TRÒ</th><th>XEM DỮ LIỆU</th><th>THÊM / SỬA</th><th>XOÁ</th><th>QUẢN LÝ TK</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>ADMIN</strong></td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+            <tr><td><strong>EDITOR</strong></td><td>✅</td><td>✅</td><td>❌</td><td>❌</td></tr>
+            <tr><td><strong>VIEWER</strong></td><td>✅</td><td>❌</td><td>❌</td><td>❌</td></tr>
+          </tbody>
+        </table>
+
+        <div class="info-box note">
+          <strong>ĐĂNG XUẤT</strong>
+          Để đăng xuất, nhấn nút <strong>ĐĂNG XUẤT</strong> ở góc trên bên phải trang quản trị. Dữ liệu phiên làm việc sẽ được xoá khỏi trình duyệt.
+        </div>
+      </section>
+
+      <!-- 6. CẤU TRÚC FILE -->
+      <section class="hdsd-section" id="cau-truc">
+        <h2>CẤU TRÚC FILE</h2>
+        <p>Danh sách các file và thư mục trong dự án:</p>
+        <div style="background: white; border-radius: 10px; padding: 1.5rem; border: 1px solid var(--cream-dark); font-family: monospace; font-size: 0.85rem; line-height: 1.8;">
+          <pre style="white-space: pre-wrap;">
+den-chua/
+├── index.html            ← TRANG CHỦ
+├── huong-dan.html        ← HƯỚNG DẪN NGHI LỄ
+├── dia-diem.html         ← BẢN ĐỒ ĐỊA ĐIỂM
+├── lich-le-hoi.html      ← LỊCH LỄ HỘI
+├── chuan-bi.html         ← CHUẨN BỊ HÀNH TRANG
+├── xem-ngay.html         ← XEM NGÀY TỐT
+├── so-nguyen.html        ← SỔ CẦU NGUYỆN
+├── tim-kiem.html         ← TRANG TÌM KIẾM
+├── kehoach.html          ← KẾ HOẠCH PHÁT TRIỂN
+├── sale.html             ← TRÌNH CHIẾU GIỚI THIỆU
+├── hdsd.html             ← HƯỚNG DẪN SỬ DỤNG (file này)
+├── css/
+│   └── style.css         ← THIẾT KẾ GIAO DIỆN CHUNG
+├── js/
+│   ├── main.js           ← MENU, HIỆU ỨNG
+│   ├── map.js            ← BẢN ĐỒ + DỮ LIỆU ĐỊA ĐIỂM
+│   └── calendar.js       ← LỊCH + DỮ LIỆU LỄ HỘI
+└── admin/
+    ├── login.html        ← TRANG ĐĂNG NHẬP QUẢN TRỊ
+    ├── index.html        ← BẢNG ĐIỀU KHIỂN QUẢN TRỊ
+    └── js/
+        └── admin.js      ← LOGIC QUẢN TRỊ
+          </pre>
+        </div>
+      </section>
+
+      <!-- 7. LƯU Ý -->
+      <section class="hdsd-section" id="luu-y">
+        <h2>LƯU Ý QUAN TRỌNG</h2>
+
+        <div class="info-box warn">
+          <strong>DỮ LIỆU LƯU TRỮ</strong>
+          Dữ liệu do admin thêm/sửa được lưu trong <strong>localStorage</strong> của trình duyệt. Nếu bạn xoá dữ liệu trình duyệt (clear cache/data), các thay đổi sẽ bị mất. Hãy sao lưu thường xuyên.
+        </div>
+
+        <div class="info-box warn">
+          <strong>KHÔNG CHIA SẺ MẬT KHẨU</strong>
+          Không chia sẻ tài khoản admin cho người không có quyền. Mỗi người dùng nên có tài khoản riêng với quyền phù hợp.
+        </div>
+
+        <div class="info-box tip">
+          <strong>TRÌNH DUYỆT KHUYẾN NGHỊ</strong>
+          Sử dụng <strong>Google Chrome</strong> hoặc <strong>Microsoft Edge</strong> phiên bản mới nhất để có trải nghiệm tốt nhất. Tránh sử dụng Internet Explorer.
+        </div>
+
+        <div class="info-box tip">
+          <strong>SAO LƯU DỮ LIỆU</strong>
+          Để sao lưu, mở Console trình duyệt (F12 → Console) và chạy lệnh:
+          <code style="display: block; margin-top: 0.5rem; background: rgba(0,0,0,0.06); padding: 0.5rem; border-radius: 4px;">
+            JSON.stringify(localStorage)
+          </code>
+          Sao chép kết quả và lưu vào file text. Để khôi phục, sử dụng:
+          <code style="display: block; margin-top: 0.5rem; background: rgba(0,0,0,0.06); padding: 0.5rem; border-radius: 4px;">
+            Object.entries(JSON.parse('...')).forEach(([k,v]) => localStorage.setItem(k,v))
+          </code>
+        </div>
+      </section>
+
+      <!-- 8. FAQ -->
+      <section class="hdsd-section" id="faq">
+        <h2>CÂU HỎI THƯỜNG GẶP</h2>
+
+        <h3>KHÔNG ĐĂNG NHẬP ĐƯỢC?</h3>
+        <p>Kiểm tra lại tên đăng nhập và mật khẩu (phân biệt chữ hoa/thường). Nếu vẫn không được, hãy mở file <code>admin/login.html</code> trực tiếp trong trình duyệt thay vì qua liên kết.</p>
+
+        <h3>THÊM ĐỊA ĐIỂM NHƯNG KHÔNG THẤY TRÊN BẢN ĐỒ?</h3>
+        <p>Kiểm tra lại toạ độ kinh vĩ độ đã nhập đúng chưa. Vĩ độ Việt Nam nằm trong khoảng 8 – 23, kinh độ khoảng 102 – 110. Nếu nhập sai thứ tự (kinh trước vĩ), điểm sẽ không hiện đúng trên bản đồ.</p>
+
+        <h3>DỮ LIỆU BỊ MẤT SAU KHI XOÁ CACHE?</h3>
+        <p>Đúng vậy. Hệ thống lưu dữ liệu trong localStorage của trình duyệt. Hãy sao lưu thường xuyên theo hướng dẫn ở mục <a href="#luu-y" style="color: var(--red); font-weight: 600;">LƯU Ý QUAN TRỌNG</a>.</p>
+
+        <h3>LÀM SAO ĐỂ THÊM TỈNH MỚI?</h3>
+        <p>Hiện tại, danh sách tỉnh thành được quản lý trong mã nguồn. Để thêm tỉnh mới, cần liên hệ đội ngũ phát triển để cập nhật vào hệ thống.</p>
+
+        <h3>CÓ THỂ SỬ DỤNG TRÊN ĐIỆN THOẠI KHÔNG?</h3>
+        <p>Có. Website tối ưu cho mọi thiết bị. Tuy nhiên, trang quản trị nên sử dụng trên máy tính để thao tác dễ dàng hơn.</p>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Sidebar active state -->
+  <script>
+    (function() {
+      const LINKS = document.querySelectorAll('.hdsd-menu a');
+      const SECTIONS = document.querySelectorAll('.hdsd-section');
+
+      function UPDATE_ACTIVE() {
+        let current = '';
+        SECTIONS.forEach(function(s) {
+          if (window.scrollY >= s.offsetTop - 100) {
+            current = s.getAttribute('id');
+          }
+        });
+        LINKS.forEach(function(link) {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', UPDATE_ACTIVE);
+      UPDATE_ACTIVE();
+
+      /* Smooth scroll */
+      LINKS.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          const href = this.getAttribute('href');
+          if (href.startsWith('#')) {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>

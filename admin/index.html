@@ -51,8 +51,11 @@
       <div class="nav-item" onclick="window.open('../index.html','_blank')">
         <span class="nav-icon">🌐</span> Xem Website
       </div>
-      <div class="nav-item" onclick="showPage('guide')">
+      <div class="nav-item" onclick="window.open('../hdsd.html','_blank')">
         <span class="nav-icon">📚</span> Hướng Dẫn Sử Dụng
+      </div>
+      <div class="nav-item" onclick="window.open('../kehoach.html','_blank')">
+        <span class="nav-icon">📋</span> Kế Hoạch Phát Triển
       </div>
     </nav>
 
@@ -169,20 +172,62 @@
                 <option value="dinh">Đình</option>
               </select>
               <select class="filter-select" id="filterLocProv" onchange="renderLocations()">
-                <option value="all">Tất cả tỉnh</option>
-                <option value="hanoi">Hà Nội</option>
-                <option value="phutho">Phú Thọ</option>
-                <option value="bacninh">Bắc Ninh</option>
-                <option value="quangninh">Quảng Ninh</option>
-                <option value="haiphong">Hải Phòng</option>
-                <option value="hungyen">Hưng Yên</option>
-                <option value="langson">Lạng Sơn</option>
-                <option value="yenbai">Yên Bái</option>
-                <option value="namdinh">Nam Định</option>
-                <option value="ninhbinh">Ninh Bình</option>
-                <option value="thaibinh">Thái Bình</option>
-                <option value="thanhhoa">Thanh Hóa</option>
-                <option value="hanam">Hà Nam</option>
+                <option value="all">Tất cả tỉnh/TP</option>
+                <optgroup label="Miền Bắc">
+                  <option value="hanoi">Hà Nội</option>
+                  <option value="phutho">Phú Thọ</option>
+                  <option value="bacninh">Bắc Ninh</option>
+                  <option value="bacgiang">Bắc Giang</option>
+                  <option value="quangninh">Quảng Ninh</option>
+                  <option value="haiphong">Hải Phòng</option>
+                  <option value="haiduong">Hải Dương</option>
+                  <option value="hungyen">Hưng Yên</option>
+                  <option value="vinhphuc">Vĩnh Phúc</option>
+                  <option value="thainguyen">Thái Nguyên</option>
+                  <option value="langson">Lạng Sơn</option>
+                  <option value="laocai">Lào Cai</option>
+                  <option value="yenbai">Yên Bái</option>
+                  <option value="hagiang">Hà Giang</option>
+                  <option value="tuyenquang">Tuyên Quang</option>
+                  <option value="dienbien">Điện Biên</option>
+                  <option value="laichau">Lai Châu</option>
+                  <option value="namdinh">Nam Định</option>
+                  <option value="ninhbinh">Ninh Bình</option>
+                  <option value="thaibinh">Thái Bình</option>
+                  <option value="hanam">Hà Nam</option>
+                  <option value="thanhhoa">Thanh Hóa</option>
+                </optgroup>
+                <optgroup label="Miền Trung">
+                  <option value="nghean">Nghệ An</option>
+                  <option value="hatinh">Hà Tĩnh</option>
+                  <option value="quangbinh">Quảng Bình</option>
+                  <option value="hue">Thừa Thiên Huế</option>
+                  <option value="danang">Đà Nẵng</option>
+                  <option value="quangnam">Quảng Nam</option>
+                  <option value="quangngai">Quảng Ngãi</option>
+                  <option value="binhdinh">Bình Định</option>
+                  <option value="phuyen">Phú Yên</option>
+                  <option value="khanhhoa">Khánh Hòa</option>
+                  <option value="ninhthuan">Ninh Thuận</option>
+                  <option value="binhthuan">Bình Thuận</option>
+                </optgroup>
+                <optgroup label="Tây Nguyên">
+                  <option value="gialai">Gia Lai</option>
+                  <option value="daklak">Đắk Lắk</option>
+                  <option value="lamdong">Lâm Đồng</option>
+                </optgroup>
+                <optgroup label="Miền Nam">
+                  <option value="hcm">TP. Hồ Chí Minh</option>
+                  <option value="tayninh">Tây Ninh</option>
+                  <option value="binhduong">Bình Dương</option>
+                  <option value="dongnai">Đồng Nai</option>
+                  <option value="angiang">An Giang</option>
+                  <option value="cantho">Cần Thơ</option>
+                  <option value="soctrang">Sóc Trăng</option>
+                  <option value="travinh">Trà Vinh</option>
+                  <option value="dongthap">Đồng Tháp</option>
+                  <option value="bentre">Bến Tre</option>
+                </optgroup>
               </select>
               <button class="topbar-btn btn-primary" onclick="openAddLocation()">➕ Thêm Mới</button>
             </div>
@@ -220,20 +265,62 @@
                 <input class="search-admin" type="text" id="searchFest" placeholder="Tìm lễ hội..." oninput="renderFestivals()">
               </div>
               <select class="filter-select" id="filterFestProv" onchange="renderFestivals()">
-                <option value="all">Tất cả tỉnh</option>
-                <option value="hanoi">Hà Nội</option>
-                <option value="phutho">Phú Thọ</option>
-                <option value="bacninh">Bắc Ninh</option>
-                <option value="quangninh">Quảng Ninh</option>
-                <option value="haiphong">Hải Phòng</option>
-                <option value="hungyen">Hưng Yên</option>
-                <option value="langson">Lạng Sơn</option>
-                <option value="yenbai">Yên Bái</option>
-                <option value="namdinh">Nam Định</option>
-                <option value="ninhbinh">Ninh Bình</option>
-                <option value="thaibinh">Thái Bình</option>
-                <option value="thanhhoa">Thanh Hóa</option>
-                <option value="hanam">Hà Nam</option>
+                <option value="all">Tất cả tỉnh/TP</option>
+                <optgroup label="Miền Bắc">
+                  <option value="hanoi">Hà Nội</option>
+                  <option value="phutho">Phú Thọ</option>
+                  <option value="bacninh">Bắc Ninh</option>
+                  <option value="bacgiang">Bắc Giang</option>
+                  <option value="quangninh">Quảng Ninh</option>
+                  <option value="haiphong">Hải Phòng</option>
+                  <option value="haiduong">Hải Dương</option>
+                  <option value="hungyen">Hưng Yên</option>
+                  <option value="vinhphuc">Vĩnh Phúc</option>
+                  <option value="thainguyen">Thái Nguyên</option>
+                  <option value="langson">Lạng Sơn</option>
+                  <option value="laocai">Lào Cai</option>
+                  <option value="yenbai">Yên Bái</option>
+                  <option value="hagiang">Hà Giang</option>
+                  <option value="tuyenquang">Tuyên Quang</option>
+                  <option value="dienbien">Điện Biên</option>
+                  <option value="laichau">Lai Châu</option>
+                  <option value="namdinh">Nam Định</option>
+                  <option value="ninhbinh">Ninh Bình</option>
+                  <option value="thaibinh">Thái Bình</option>
+                  <option value="hanam">Hà Nam</option>
+                  <option value="thanhhoa">Thanh Hóa</option>
+                </optgroup>
+                <optgroup label="Miền Trung">
+                  <option value="nghean">Nghệ An</option>
+                  <option value="hatinh">Hà Tĩnh</option>
+                  <option value="quangbinh">Quảng Bình</option>
+                  <option value="hue">Thừa Thiên Huế</option>
+                  <option value="danang">Đà Nẵng</option>
+                  <option value="quangnam">Quảng Nam</option>
+                  <option value="quangngai">Quảng Ngãi</option>
+                  <option value="binhdinh">Bình Định</option>
+                  <option value="phuyen">Phú Yên</option>
+                  <option value="khanhhoa">Khánh Hòa</option>
+                  <option value="ninhthuan">Ninh Thuận</option>
+                  <option value="binhthuan">Bình Thuận</option>
+                </optgroup>
+                <optgroup label="Tây Nguyên">
+                  <option value="gialai">Gia Lai</option>
+                  <option value="daklak">Đắk Lắk</option>
+                  <option value="lamdong">Lâm Đồng</option>
+                </optgroup>
+                <optgroup label="Miền Nam">
+                  <option value="hcm">TP. Hồ Chí Minh</option>
+                  <option value="tayninh">Tây Ninh</option>
+                  <option value="binhduong">Bình Dương</option>
+                  <option value="dongnai">Đồng Nai</option>
+                  <option value="angiang">An Giang</option>
+                  <option value="cantho">Cần Thơ</option>
+                  <option value="soctrang">Sóc Trăng</option>
+                  <option value="travinh">Trà Vinh</option>
+                  <option value="dongthap">Đồng Tháp</option>
+                  <option value="bentre">Bến Tre</option>
+                </optgroup>
               </select>
               <button class="topbar-btn btn-primary" onclick="openAddFestival()">➕ Thêm Mới</button>
             </div>
@@ -492,19 +579,61 @@
         <div class="form-group">
           <label class="form-label">Tỉnh / Thành Phố <span class="required">*</span></label>
           <select class="form-select" id="locProvince">
-            <option value="hanoi">Hà Nội</option>
-            <option value="phutho">Phú Thọ</option>
-            <option value="bacninh">Bắc Ninh</option>
-            <option value="quangninh">Quảng Ninh</option>
-            <option value="haiphong">Hải Phòng</option>
-            <option value="hungyen">Hưng Yên</option>
-            <option value="langson">Lạng Sơn</option>
-            <option value="yenbai">Yên Bái</option>
-            <option value="namdinh">Nam Định</option>
-            <option value="ninhbinh">Ninh Bình</option>
-            <option value="thaibinh">Thái Bình</option>
-            <option value="thanhhoa">Thanh Hóa</option>
-            <option value="hanam">Hà Nam</option>
+            <optgroup label="Miền Bắc">
+              <option value="hanoi">Hà Nội</option>
+              <option value="phutho">Phú Thọ</option>
+              <option value="bacninh">Bắc Ninh</option>
+              <option value="bacgiang">Bắc Giang</option>
+              <option value="quangninh">Quảng Ninh</option>
+              <option value="haiphong">Hải Phòng</option>
+              <option value="haiduong">Hải Dương</option>
+              <option value="hungyen">Hưng Yên</option>
+              <option value="vinhphuc">Vĩnh Phúc</option>
+              <option value="thainguyen">Thái Nguyên</option>
+              <option value="langson">Lạng Sơn</option>
+              <option value="laocai">Lào Cai</option>
+              <option value="yenbai">Yên Bái</option>
+              <option value="hagiang">Hà Giang</option>
+              <option value="tuyenquang">Tuyên Quang</option>
+              <option value="dienbien">Điện Biên</option>
+              <option value="laichau">Lai Châu</option>
+              <option value="namdinh">Nam Định</option>
+              <option value="ninhbinh">Ninh Bình</option>
+              <option value="thaibinh">Thái Bình</option>
+              <option value="hanam">Hà Nam</option>
+              <option value="thanhhoa">Thanh Hóa</option>
+            </optgroup>
+            <optgroup label="Miền Trung">
+              <option value="nghean">Nghệ An</option>
+              <option value="hatinh">Hà Tĩnh</option>
+              <option value="quangbinh">Quảng Bình</option>
+              <option value="hue">Thừa Thiên Huế</option>
+              <option value="danang">Đà Nẵng</option>
+              <option value="quangnam">Quảng Nam</option>
+              <option value="quangngai">Quảng Ngãi</option>
+              <option value="binhdinh">Bình Định</option>
+              <option value="phuyen">Phú Yên</option>
+              <option value="khanhhoa">Khánh Hòa</option>
+              <option value="ninhthuan">Ninh Thuận</option>
+              <option value="binhthuan">Bình Thuận</option>
+            </optgroup>
+            <optgroup label="Tây Nguyên">
+              <option value="gialai">Gia Lai</option>
+              <option value="daklak">Đắk Lắk</option>
+              <option value="lamdong">Lâm Đồng</option>
+            </optgroup>
+            <optgroup label="Miền Nam">
+              <option value="hcm">TP. Hồ Chí Minh</option>
+              <option value="tayninh">Tây Ninh</option>
+              <option value="binhduong">Bình Dương</option>
+              <option value="dongnai">Đồng Nai</option>
+              <option value="angiang">An Giang</option>
+              <option value="cantho">Cần Thơ</option>
+              <option value="soctrang">Sóc Trăng</option>
+              <option value="travinh">Trà Vinh</option>
+              <option value="dongthap">Đồng Tháp</option>
+              <option value="bentre">Bến Tre</option>
+            </optgroup>
           </select>
         </div>
         <div class="form-group full">
@@ -530,11 +659,11 @@
         </div>
         <div class="form-group full">
           <label class="form-label">URL Ảnh Đại Diện</label>
-          <input class="form-input" type="text" id="locImg" placeholder="https://images.unsplash.com/..." oninput="previewImg('locImg','locImgPreview')">
+          <input class="form-input" type="text" id="locImg" placeholder="assets/places/den-generic.svg hoặc URL ảnh" oninput="previewImg('locImg','locImgPreview')">
           <div class="img-preview-wrap">
             <img class="img-preview" id="locImgPreview" alt="Preview">
           </div>
-          <div class="form-hint">Dùng ảnh từ Unsplash, Google Drive (public link), hoặc URL ảnh trực tiếp.</div>
+          <div class="form-hint">Dùng ảnh SVG có sẵn (assets/places/den-generic.svg, chua-generic.svg, dinh-generic.svg) hoặc URL ảnh trực tiếp.</div>
         </div>
         <div class="form-group full">
           <label class="form-label">Mô Tả <span class="required">*</span></label>
@@ -566,19 +695,61 @@
         <div class="form-group">
           <label class="form-label">Tỉnh / Thành Phố <span class="required">*</span></label>
           <select class="form-select" id="festProvince">
-            <option value="hanoi">Hà Nội</option>
-            <option value="phutho">Phú Thọ</option>
-            <option value="bacninh">Bắc Ninh</option>
-            <option value="quangninh">Quảng Ninh</option>
-            <option value="haiphong">Hải Phòng</option>
-            <option value="hungyen">Hưng Yên</option>
-            <option value="langson">Lạng Sơn</option>
-            <option value="yenbai">Yên Bái</option>
-            <option value="namdinh">Nam Định</option>
-            <option value="ninhbinh">Ninh Bình</option>
-            <option value="thaibinh">Thái Bình</option>
-            <option value="thanhhoa">Thanh Hóa</option>
-            <option value="hanam">Hà Nam</option>
+            <optgroup label="Miền Bắc">
+              <option value="hanoi">Hà Nội</option>
+              <option value="phutho">Phú Thọ</option>
+              <option value="bacninh">Bắc Ninh</option>
+              <option value="bacgiang">Bắc Giang</option>
+              <option value="quangninh">Quảng Ninh</option>
+              <option value="haiphong">Hải Phòng</option>
+              <option value="haiduong">Hải Dương</option>
+              <option value="hungyen">Hưng Yên</option>
+              <option value="vinhphuc">Vĩnh Phúc</option>
+              <option value="thainguyen">Thái Nguyên</option>
+              <option value="langson">Lạng Sơn</option>
+              <option value="laocai">Lào Cai</option>
+              <option value="yenbai">Yên Bái</option>
+              <option value="hagiang">Hà Giang</option>
+              <option value="tuyenquang">Tuyên Quang</option>
+              <option value="dienbien">Điện Biên</option>
+              <option value="laichau">Lai Châu</option>
+              <option value="namdinh">Nam Định</option>
+              <option value="ninhbinh">Ninh Bình</option>
+              <option value="thaibinh">Thái Bình</option>
+              <option value="hanam">Hà Nam</option>
+              <option value="thanhhoa">Thanh Hóa</option>
+            </optgroup>
+            <optgroup label="Miền Trung">
+              <option value="nghean">Nghệ An</option>
+              <option value="hatinh">Hà Tĩnh</option>
+              <option value="quangbinh">Quảng Bình</option>
+              <option value="hue">Thừa Thiên Huế</option>
+              <option value="danang">Đà Nẵng</option>
+              <option value="quangnam">Quảng Nam</option>
+              <option value="quangngai">Quảng Ngãi</option>
+              <option value="binhdinh">Bình Định</option>
+              <option value="phuyen">Phú Yên</option>
+              <option value="khanhhoa">Khánh Hòa</option>
+              <option value="ninhthuan">Ninh Thuận</option>
+              <option value="binhthuan">Bình Thuận</option>
+            </optgroup>
+            <optgroup label="Tây Nguyên">
+              <option value="gialai">Gia Lai</option>
+              <option value="daklak">Đắk Lắk</option>
+              <option value="lamdong">Lâm Đồng</option>
+            </optgroup>
+            <optgroup label="Miền Nam">
+              <option value="hcm">TP. Hồ Chí Minh</option>
+              <option value="tayninh">Tây Ninh</option>
+              <option value="binhduong">Bình Dương</option>
+              <option value="dongnai">Đồng Nai</option>
+              <option value="angiang">An Giang</option>
+              <option value="cantho">Cần Thơ</option>
+              <option value="soctrang">Sóc Trăng</option>
+              <option value="travinh">Trà Vinh</option>
+              <option value="dongthap">Đồng Tháp</option>
+              <option value="bentre">Bến Tre</option>
+            </optgroup>
           </select>
         </div>
         <div class="form-group">
